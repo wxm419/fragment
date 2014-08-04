@@ -8,15 +8,19 @@ import android.view.ViewGroup;
 import com.fheebiy.R;
 
 /**
- * Created by bob zhou on 14-7-30.
+ * Created by Administrator on 14-8-4.
  */
-public class TabTwoFragment extends Fragment {
+public class TabFiveFragment  extends Fragment {
 
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-       /* View view = inflater.inflate(R.id.tab2,null);
-        return view;*/
-        return inflater.inflate(R.layout.tab2, container, false);
+        View view = inflater.inflate(R.layout.tab5, container, false);
+        return view;
     }
 }

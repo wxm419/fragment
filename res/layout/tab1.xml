@@ -1,26 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-               android:id="@+id/tab1"
+              android:id="@+id/tab1"
               android:orientation="vertical"
               android:background="#ffffff"
-              android:layout_width="match_parent"
               android:gravity="center"
+              android:layout_width="match_parent"
               android:layout_height="match_parent">
 
 
-   <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:textColor="#FF9994"
-           android:text="you are so beautiful!"/>
-    
-    
-    <Button
+    <LinearLayout
             android:layout_width="fill_parent"
-            android:textColor="#ff0000"
-            android:text="tab1"
-            android:layout_height="50dp"/>
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:layout_weight="1">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffff3252"
+                android:text="This is fragment one!"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        <Button
+                android:id="@+id/tb1_btn1"
+                android:layout_width="fill_parent"
+                android:textColor="#ff0000"
+                android:text="btn"
+                android:layout_height="50dp"/>
+
+
+    </LinearLayout>
 
 
 </LinearLayout>
