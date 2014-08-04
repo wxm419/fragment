@@ -14,15 +14,18 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> list;
 
+    private List<String> titles;
+
     private Context ctx;
 
    /* public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
     }*/
 
-    public ViewPagerAdapter(FragmentManager fm, List<Fragment> list, Context ctx) {
+    public ViewPagerAdapter(FragmentManager fm, List<Fragment> list,List<String> titles, Context ctx) {
         super(fm);
         this.list = list;
+        this.titles = titles;
         this.ctx = ctx;
     }
 
@@ -36,4 +39,9 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         return list.size();
     }
 
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return titles.get(position);
+    }
 }
