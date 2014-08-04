@@ -27,14 +27,22 @@
     <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"
+            android:orientation="vertical"
             android:layout_weight="1">
 
         <Button
                 android:id="@+id/tb1_btn1"
                 android:layout_width="fill_parent"
-                android:textColor="#ff0000"
-                android:text="btn"
+                android:text="to simple vp"
                 android:layout_height="50dp"/>
+
+
+        <Button
+                android:id="@+id/tb1_btn2"
+                android:layout_marginTop="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="to  complex vp"/>
 
 
     </LinearLayout>
