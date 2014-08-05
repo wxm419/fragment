@@ -14,6 +14,7 @@
             android:layout_weight="1">
 
         <TextView
+                android:id="@+id/title1"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:text="one"
@@ -22,6 +23,7 @@
                 android:layout_weight="1"/>
 
         <TextView
+                android:id="@+id/title2"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:text="two"
@@ -30,6 +32,7 @@
                 android:layout_weight="1"/>
 
         <TextView
+                android:id="@+id/title3"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:text="three"
@@ -46,6 +49,7 @@
             android:background="#ffffff">
 
         <View
+                android:id="@+id/tab_strip1"
                 android:layout_width="0dp"
                 android:background="#FF3252"
                 android:layout_height="fill_parent"
@@ -53,14 +57,20 @@
         </View>
 
         <View
+                android:id="@+id/tab_strip2"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
+                android:background="#FF3252"
+                android:visibility="invisible"
                 android:layout_weight="1">
 
         </View>
 
         <View
+                android:id="@+id/tab_strip3"
                 android:layout_width="0dp"
+                android:background="#FF3252"
+                android:visibility="invisible"
                 android:layout_height="fill_parent"
                 android:layout_weight="1">
 
