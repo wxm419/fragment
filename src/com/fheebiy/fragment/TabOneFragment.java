@@ -8,10 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import com.fheebiy.R;
-import com.fheebiy.activity.IndexActivity;
-import com.fheebiy.activity.ThemeStyleActivity;
-import com.fheebiy.activity.VpActivity;
-import com.fheebiy.activity.VpComplexActivity;
+import com.fheebiy.activity.*;
 
 /**
  * Created by bob zhou on 14-7-30.
@@ -24,6 +21,8 @@ public class TabOneFragment extends Fragment {
 
     private Button btn3;
 
+    private Button btn4;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,12 +31,12 @@ public class TabOneFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-       /* View view = inflater.inflate(R.id.tab1,null);
-        return view;*/
         View view = inflater.inflate(R.layout.tab1, container, false);
         btn1 = (Button)view.findViewById(R.id.tb1_btn1);
         btn2 = (Button)view.findViewById(R.id.tb1_btn2);
         btn3 = (Button)view.findViewById(R.id.tb1_btn3);
+        btn4 = (Button)view.findViewById(R.id.tb1_btn4);
+
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +55,14 @@ public class TabOneFragment extends Fragment {
         });
 
         btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), VpAnimationActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ThemeStyleActivity.class);

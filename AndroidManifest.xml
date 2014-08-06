@@ -20,5 +20,6 @@
         <activity android:name=".activity.VpActivity"/>
         <activity android:name=".activity.VpComplexActivity"/>
         <activity android:name=".activity.ThemeStyleActivity"/>
+        <activity android:name=".activity.VpAnimationActivity"/>
     </application>
 </manifest>

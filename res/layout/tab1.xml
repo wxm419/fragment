@@ -13,7 +13,7 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:gravity="center"
-            android:layout_weight="0.5">
+            android:layout_weight="0.2">
 
         <TextView
                 android:layout_width="wrap_content"
@@ -46,6 +46,14 @@
 
         <Button
                 android:id="@+id/tb1_btn3"
+                android:layout_marginTop="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="to animation viewpager"/>
+
+
+        <Button
+                android:id="@+id/tb1_btn4"
                 android:layout_marginTop="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
