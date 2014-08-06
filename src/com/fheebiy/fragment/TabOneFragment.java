@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import com.fheebiy.R;
 import com.fheebiy.activity.IndexActivity;
+import com.fheebiy.activity.ThemeStyleActivity;
 import com.fheebiy.activity.VpActivity;
 import com.fheebiy.activity.VpComplexActivity;
 
@@ -20,6 +21,8 @@ public class TabOneFragment extends Fragment {
     private Button btn1;
 
     private Button btn2;
+
+    private Button btn3;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class TabOneFragment extends Fragment {
         View view = inflater.inflate(R.layout.tab1, container, false);
         btn1 = (Button)view.findViewById(R.id.tb1_btn1);
         btn2 = (Button)view.findViewById(R.id.tb1_btn2);
+        btn3 = (Button)view.findViewById(R.id.tb1_btn3);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +51,14 @@ public class TabOneFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), VpComplexActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ThemeStyleActivity.class);
                 startActivity(intent);
             }
         });

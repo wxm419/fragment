@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="style1">
+        <item name="android:textColor">#ff0000</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+
+    <style name="style1.ddd">
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:dialogTitle">please make it easy!</item>
+        <item name="android:layout_marginLeft">50dp</item>
+    </style>
+
+    <style name="theme1">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@drawable/bz2</item>
+     <!--   <item name="android:windowFrame">@drawable/window_border</item>-->
+    </style>
+</resources>
