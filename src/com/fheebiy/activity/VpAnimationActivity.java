@@ -24,11 +24,11 @@ import java.util.List;
 
 /**
  * Created by bob zhou on 14-8-4.
- *
+ * <p/>
  * title strip 带动画的viewpager
  */
 
-public class VpAnimationActivity extends FragmentActivity{
+public class VpAnimationActivity extends FragmentActivity {
 
     static final String TAG = "VpAnimationActivity";
 
@@ -50,6 +50,9 @@ public class VpAnimationActivity extends FragmentActivity{
 
     private int currIndex;
 
+    private int current_x = 0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,31 +64,45 @@ public class VpAnimationActivity extends FragmentActivity{
     }
 
 
-    private void findViews(){
-        viewPager = (ViewPager)findViewById(R.id.anim_viewpager);
+    private void findViews() {
+        viewPager = (ViewPager) findViewById(R.id.anim_viewpager);
 
-        title1 = (TextView)findViewById(R.id.anim_title1);
-        title2 = (TextView)findViewById(R.id.anim_title2);
-        title3 = (TextView)findViewById(R.id.anim_title3);
+        title1 = (TextView) findViewById(R.id.anim_title1);
+        title2 = (TextView) findViewById(R.id.anim_title2);
+        title3 = (TextView) findViewById(R.id.anim_title3);
 
-        strip = (ImageView)findViewById(R.id.animation_strip);
+        strip = (ImageView) findViewById(R.id.animation_strip);
 
         titles.add(title1);
         titles.add(title2);
         titles.add(title3);
     }
 
-    private void bindListener(){
+    private void bindListener() {
 
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i2) {
-                Log.d(TAG,"i="+i+",v="+v+",i2="+i2);
+            /*  Log.d(TAG, "i=" + i + ",v=" + v + ",i2=" + i2);
+                int next_x = 0;
+                int x = (int)(offset*v);
+                Log.d(TAG,"x="+x+",current_x="+current_x);
+                if (i == currIndex) {
+                    next_x = current_x + x;
+                } else {
+                    next_x = -current_x + x;
+                }
+                Log.d(TAG,"current_x="+current_x+",next_x="+next_x);
+                Animation animation = new TranslateAnimation(current_x, next_x, 0, 0);
+                current_x = next_x;
+                animation.setFillAfter(true);
+                animation.setDuration(100);
+                strip.startAnimation(animation);*/
             }
 
             @Override
             public void onPageSelected(int i) {
-                Animation animation = new TranslateAnimation(currIndex*offset,i*offset, 0, 0);
+                Animation animation = new TranslateAnimation(currIndex * offset, i * offset, 0, 0);
                 currIndex = i;
                 animation.setFillAfter(true);
                 animation.setDuration(300);
@@ -99,7 +116,7 @@ public class VpAnimationActivity extends FragmentActivity{
         });
 
 
-        for(int i = 0; i<titles.size(); i++){
+        for (int i = 0; i < titles.size(); i++) {
             View view = titles.get(i);
             final int index = i;
             view.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +129,7 @@ public class VpAnimationActivity extends FragmentActivity{
     }
 
 
-    private void initUI(){
+    private void initUI() {
 
         Fragment twoFragment = new TabTwoFragment();
         Fragment threeFragment = new TabThreeFragment();
@@ -122,16 +139,16 @@ public class VpAnimationActivity extends FragmentActivity{
         list.add(threeFragment);
         list.add(fourFragment);
 
-        ComplexVpAdapter adapter = new ComplexVpAdapter(getSupportFragmentManager(),list,this);
+        ComplexVpAdapter adapter = new ComplexVpAdapter(getSupportFragmentManager(), list, this);
 
         viewPager.setAdapter(adapter);
     }
 
-    private void initStripImageView(){
+    private void initStripImageView() {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);      //这句，去掉动画就失效了,很神奇，这是为什么了
         int screenWidth = dm.widthPixels;
-        offset = screenWidth/3;
+        offset = screenWidth / 3;
     }
 
 }
