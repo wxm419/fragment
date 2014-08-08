@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+<RelativeLayout
+        android:layout_width="fill_parent"
+        android:background="#ffffff"
+        android:layout_height="60dp">
+
+    <TextView
+            android:id="@+id/hero_name_tv"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:textColor="#FC1CA1"
+            android:layout_marginLeft="20dp"
+            android:layout_height="fill_parent"
+            android:text="姓名"/>
+
+
+    <TextView
+            android:id="@+id/hero_skill_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="skill"
+            android:textColor="#FC8D58"
+            android:layout_centerInParent="true"/>
+
+
+
+    <TextView
+            android:id="@+id/hero_from_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:textColor="#5A9CFC"
+            android:layout_marginRight="20dp"
+            android:text="出处"
+            android:layout_alignParentRight="true"/>
+ </RelativeLayout>
+
+
+</RelativeLayout>

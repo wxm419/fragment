@@ -8,7 +8,14 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import com.fheebiy.R;
+import com.fheebiy.adapter.HeroLvAdapter;
+import com.fheebiy.model.Hero;
+import com.fheebiy.view.PullToRefreshListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by bob zhou on 14-8-4.
@@ -17,6 +24,10 @@ public class TabThreeFragment extends Fragment {
 
 
     public static final String TAG = "TabThreeFragment";
+
+    private ListView listView;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,6 +39,10 @@ public class TabThreeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab3, container, false);
+        listView = (PullToRefreshListView)view.findViewById(R.id.listView);
+        List<Hero> list = getInitData();
+        HeroLvAdapter adapter = new HeroLvAdapter(getActivity(), list);
+        listView.setAdapter(adapter);
         Log.d(TAG, "onCreateView");
         return view;
     }
@@ -93,4 +108,19 @@ public class TabThreeFragment extends Fragment {
         Log.d(TAG, "onDetach");
     }
 
+
+    public List<Hero> getInitData(){
+        List<Hero> list = new ArrayList<Hero>();
+
+        for(int i = 0; i< 10; i++){
+            Hero hero = new Hero();
+            hero.setName("杨过"+i);
+            hero.setSkill("黯然销魂掌");
+            hero.setFrom("神雕侠侣");
+            list.add(hero);
+        }
+
+        return list;
+
+    }
 }
