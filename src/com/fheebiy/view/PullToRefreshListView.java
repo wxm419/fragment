@@ -44,6 +44,10 @@ public class PullToRefreshListView extends ListView {
 
     private float start_y;              //触摸到listView时初始的Y坐标
 
+    private float distance_y;           //拖动的距离
+
+    private boolean isRefreshing = false;
+
     /*下拉刷新*/
 
     /*上拉加载更多*/
@@ -96,13 +100,13 @@ public class PullToRefreshListView extends ListView {
         tipsTv = (TextView) headerView.findViewById(R.id.head_tipsTextView);
         lastUpdateTv = (TextView) headerView.findViewById(R.id.head_lastUpdatedTextView);
 
-        animation = new RotateAnimation(90, -90, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        animation = new RotateAnimation(0, -180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         animation.setInterpolator(new LinearInterpolator());
         animation.setDuration(250);
         animation.setFillAfter(true);
 
 
-        reverseAnimation = new RotateAnimation(-90, 90, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        reverseAnimation = new RotateAnimation(180, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         reverseAnimation.setInterpolator(new LinearInterpolator());
         reverseAnimation.setDuration(250);
         animation.setFillAfter(true);
@@ -116,6 +120,7 @@ public class PullToRefreshListView extends ListView {
         current_state = STATE_DONE;
         last_state = STATE_DONE;
 
+        headerView.setPadding(0, -headerViewHeight, 0, 0);
 
         loadMoreView = inflater.inflate(R.layout.ent_refresh_footer, null);
 
@@ -165,25 +170,135 @@ public class PullToRefreshListView extends ListView {
                 start_y = ev.getY();
                 break;
             case MotionEvent.ACTION_MOVE:
-                float distance_y = ev.getY() - start_y;
-                if (distance_y > 0 && distance_y < 2*headerViewHeight) {        //下拉刷新，此时，拉动的具体小于headerViewHeight
-                    int y = (int) distance_y;
-                    headerView.setPadding(0, y, 0, 0);
-                    if(y == headerViewHeight){
-                        arrowIv.startAnimation(animation);
-                    }
-
+                distance_y = ev.getY() - start_y;
+                if (distance_y > 0 && distance_y < headerViewHeight) {        //此时状态显示"下拉即可刷新"
+                    last_state = current_state;
+                    current_state = STATE_PULL_REFRESH;
                 }
-                if (distance_y > 2*headerViewHeight) {      //也在下拉，但是此时，拉动的距离已经大于headerViewHeight了
-                    headerView.setPadding(0, 2*headerViewHeight, 0, 0);
+                if (distance_y > headerViewHeight) {                        //拖动距离大于,则显示'松手刷新'
+                    last_state = current_state;
+                    current_state = STATE_RELEASE_REFRESH;
                 }
+                onHeaderViewStateChanged();
                 break;
             case MotionEvent.ACTION_UP:
-                headerView.setPadding(0,0,0,0);
-                arrowIv.startAnimation(reverseAnimation);
+                if (distance_y >= headerViewHeight) {
+                    last_state = current_state;
+                    current_state = STATE_LOADING;
+                    onHeaderViewStateChanged();
+                    this.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                        }
+                    }, 500);
+                } else {
+                    last_state = current_state;
+                    current_state = STATE_DONE;
+
+                }
+                onHeaderViewStateChanged();
                 break;
         }
 
         return super.onTouchEvent(ev);
+    }
+
+
+    private void onHeaderViewStateChanged() {
+        switch (current_state) {
+            case STATE_DONE:        //完成
+                headerView.setPadding(0, -headerViewHeight, 0, 0);
+                invalidate();
+                break;
+
+            case STATE_LOADING:     //正在加载
+                headerView.setPadding(0, 0, 0, 0);
+                refresh();
+                break;
+
+            case STATE_PULL_REFRESH:    //下拉刷新
+                headerView.setPadding(0, -headerViewHeight + (int) distance_y, 0, 0);
+                pullToRefresh();
+                break;
+
+            case STATE_RELEASE_REFRESH:     //松手刷新
+                headerView.setPadding(0, -headerViewHeight+(int)(distance_y*0.5), 0, 0);
+                releaseToRefresh();
+                break;
+        }
+
+    }
+
+
+    //下拉即可刷新
+    private void pullToRefresh() {
+        progressbar_layout.setVisibility(View.GONE);
+        tipsTv.setVisibility(View.VISIBLE);
+        arrowIv.clearAnimation();
+        arrow_layout.setVisibility(View.VISIBLE);
+        tipsTv.setText("下拉即可刷新");
+
+        if (last_state == STATE_RELEASE_REFRESH) {
+            arrowIv.clearAnimation();
+            arrowIv.startAnimation(reverseAnimation);
+        }
+        isRefreshing = false;
+    }
+
+
+    //松开即可刷新
+    private void releaseToRefresh() {
+        arrow_layout.setVisibility(View.VISIBLE);
+        progressbar_layout.setVisibility(View.GONE);
+        tipsTv.setVisibility(View.VISIBLE);
+        tipsTv.setText("松手即可刷新");
+
+        if (last_state == STATE_PULL_REFRESH) {
+            arrowIv.clearAnimation();
+            arrowIv.startAnimation(animation);
+        }
+
+        isRefreshing = false;
+    }
+
+
+
+    //loading...
+    private void refresh(){
+        progressbar_layout.setVisibility(View.VISIBLE);
+        arrowIv.clearAnimation();
+        arrow_layout.setVisibility(View.GONE);
+        tipsTv.setText("正在刷新");
+
+        //如果上拉加载进行中，则取消下拉刷新
+     /*   if (isLoadingMore) {
+            isRefreshing = false;
+            state = STATE_DONE;
+            onHeaderViewStateChanged();
+            return;
+        }*/
+/*
+        if (refreshListener != null && !isRefreshing) {
+            refreshListener.refresh();
+        }*/
+        this.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                goneRefreshLoading();
+            }
+        }, 3000);
+
+        isRefreshing = true;
+
+    }
+
+
+    /**
+     * 取消加载状态
+     */
+    public void goneRefreshLoading(){
+        reset();
+        current_state = STATE_DONE;
+        onHeaderViewStateChanged();
     }
 }
