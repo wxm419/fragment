@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,6 +35,9 @@ public class PullToRefreshListView extends ListView {
         }
     };
 
+
+
+    static final String TAG = "PullToRefreshListView";
 
     private Context ctx;
 
@@ -195,6 +199,7 @@ public class PullToRefreshListView extends ListView {
                 start_y = ev.getY();
                 break;
             case MotionEvent.ACTION_MOVE:
+                Log.d(TAG, "ACTION_MOVE");
                 if(current_state != STATE_LOADING){
                     distance_y = ev.getY() - start_y;
                     if (distance_y > 0 && distance_y < headerViewHeight) {        //此时状态显示"下拉即可刷新"

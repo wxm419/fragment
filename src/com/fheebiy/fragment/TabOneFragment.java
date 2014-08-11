@@ -23,6 +23,8 @@ public class TabOneFragment extends Fragment {
 
     private Button btn4;
 
+    private Button btn5;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +38,7 @@ public class TabOneFragment extends Fragment {
         btn2 = (Button)view.findViewById(R.id.tb1_btn2);
         btn3 = (Button)view.findViewById(R.id.tb1_btn3);
         btn4 = (Button)view.findViewById(R.id.tb1_btn4);
-
+        btn5 = (Button)view.findViewById(R.id.tb1_btn5);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +71,13 @@ public class TabOneFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SlideToDelLvActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

@@ -8,7 +8,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.List;
 
 /**
- * Created by Administrator on 14-8-4.
+ * Created by bob zhou on 14-8-4.
+ * 最基础的ViewPager adapter
  */
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 

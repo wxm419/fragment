@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+    <LinearLayout
+            android:id="@+id/view_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="match_parent">
+
+    </LinearLayout>
+
+   <!-- <RelativeLayout
+            android:layout_width="120dp"
+           android:background="#696969"
+           android:clickable="true"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="#FFFAF0"
+                android:gravity="center"
+                android:background="@drawable/del_icon_normal"
+                android:text="删除"/>
+
+
+    </RelativeLayout>-->
+
+    <RelativeLayout
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:background="#696969"
+           >
+<!--
+        <TextView
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/del_icon_normal"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:textColor="#FFFAF0"
+                android:text="删除" />-->
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="#FFFAF0"
+                android:gravity="center"
+                android:drawableLeft="@drawable/del_icon_normal"
+                android:text="删除"/>
+
+    </RelativeLayout>
+
+
+
+</merge>
