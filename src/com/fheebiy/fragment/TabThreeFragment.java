@@ -2,13 +2,13 @@ package com.fheebiy.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import com.fheebiy.R;
 import com.fheebiy.adapter.HeroLvAdapter;
 import com.fheebiy.model.Hero;
@@ -16,6 +16,8 @@ import com.fheebiy.view.PullToRefreshListView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by bob zhou on 14-8-4.
@@ -25,8 +27,20 @@ public class TabThreeFragment extends Fragment {
 
     public static final String TAG = "TabThreeFragment";
 
-    private ListView listView;
+    private PullToRefreshListView listView;
 
+    List<Hero> list = new ArrayList<Hero>();
+
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            if(msg.what == 12){
+                list.addAll(getInitData());
+                listView.deferNotifyDataSetChanged();
+                listView.goneRefreshLoading();
+            }
+        }
+    };
 
 
     @Override
@@ -39,8 +53,9 @@ public class TabThreeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab3, container, false);
-        listView = (PullToRefreshListView)view.findViewById(R.id.listView);
-        List<Hero> list = getInitData();
+        listView = (PullToRefreshListView) view.findViewById(R.id.listView);
+        bindListener();
+        list = getInitData();
         HeroLvAdapter adapter = new HeroLvAdapter(getActivity(), list);
         listView.setAdapter(adapter);
         Log.d(TAG, "onCreateView");
@@ -109,18 +124,45 @@ public class TabThreeFragment extends Fragment {
     }
 
 
-    public List<Hero> getInitData(){
-        List<Hero> list = new ArrayList<Hero>();
+    public List<Hero> getInitData() {
+        List<Hero> heros = new ArrayList<Hero>();
 
-        for(int i = 0; i< 10; i++){
+        for (int i = 0; i < 10; i++) {
             Hero hero = new Hero();
-            hero.setName("杨过"+i);
+            hero.setName("杨过" + i);
             hero.setSkill("黯然销魂掌");
             hero.setFrom("神雕侠侣");
-            list.add(hero);
+            heros.add(hero);
         }
 
-        return list;
+        return heros;
+    }
+
+    private void bindListener() {
+        listView.setRefreshListener(new PullToRefreshListView.PullRefreshListener() {
+
+            @Override
+            public void refresh() {
+               Timer timer = new Timer();
+               TimerTask task = new TimerTask() {
+                   @Override
+                   public void run() {
+                        handler.sendEmptyMessage(12);
+                   }
+               };
+                timer.schedule(task, 2000);
+            }
+        });
+
 
     }
+
+
+    private void doThread(){
+
+
+
+    }
+
+
 }

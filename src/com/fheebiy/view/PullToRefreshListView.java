@@ -1,6 +1,8 @@
 package com.fheebiy.view;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -19,6 +21,19 @@ import com.fheebiy.R;
  * Created by bob zhou on 14-8-7.
  */
 public class PullToRefreshListView extends ListView {
+
+
+    Handler handler = new Handler(){
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if(msg.what == 12){
+                goneRefreshLoading();
+            }
+        }
+    };
+
 
     private Context ctx;
 
@@ -47,6 +62,8 @@ public class PullToRefreshListView extends ListView {
     private float distance_y;           //拖动的距离
 
     private boolean isRefreshing = false;
+
+    private PullRefreshListener refreshListener;    //下拉刷新监听
 
     /*下拉刷新*/
 
@@ -158,7 +175,15 @@ public class PullToRefreshListView extends ListView {
 
     private void reset() {
 
+        arrow_layout.setVisibility(View.VISIBLE);
+        progressbar_layout.setVisibility(View.GONE);
+        arrowIv.setImageResource(R.drawable.arrow);
+        arrowIv.clearAnimation();
+       // arrowIv.startAnimation(animation);
+        tipsTv.setText("下拉刷新");
+        tipsTv.setPadding(0, 0, 0, 0);
 
+        isRefreshing = false;
     }
 
 
@@ -170,18 +195,26 @@ public class PullToRefreshListView extends ListView {
                 start_y = ev.getY();
                 break;
             case MotionEvent.ACTION_MOVE:
-                distance_y = ev.getY() - start_y;
-                if (distance_y > 0 && distance_y < headerViewHeight) {        //此时状态显示"下拉即可刷新"
-                    last_state = current_state;
-                    current_state = STATE_PULL_REFRESH;
+                if(current_state != STATE_LOADING){
+                    distance_y = ev.getY() - start_y;
+                    if (distance_y > 0 && distance_y < headerViewHeight) {        //此时状态显示"下拉即可刷新"
+                        last_state = current_state;
+                        current_state = STATE_PULL_REFRESH;
+                    }
+                    if (distance_y > headerViewHeight) {                        //拖动距离大于,则显示'松手刷新'
+                        last_state = current_state;
+                        current_state = STATE_RELEASE_REFRESH;
+                    }
+                    onHeaderViewStateChanged();
                 }
-                if (distance_y > headerViewHeight) {                        //拖动距离大于,则显示'松手刷新'
-                    last_state = current_state;
-                    current_state = STATE_RELEASE_REFRESH;
-                }
-                onHeaderViewStateChanged();
+
+
                 break;
             case MotionEvent.ACTION_UP:
+                if(current_state == STATE_LOADING){
+                    return super.onTouchEvent(ev);
+                }
+
                 if (distance_y >= headerViewHeight) {
                     last_state = current_state;
                     current_state = STATE_LOADING;
@@ -206,9 +239,15 @@ public class PullToRefreshListView extends ListView {
 
     private void onHeaderViewStateChanged() {
         switch (current_state) {
-            case STATE_DONE:        //完成
-                headerView.setPadding(0, -headerViewHeight, 0, 0);
-                invalidate();
+
+            case STATE_PULL_REFRESH:    //下拉刷新
+                headerView.setPadding(0, -headerViewHeight + (int) distance_y, 0, 0);
+                pullToRefresh();
+                break;
+
+            case STATE_RELEASE_REFRESH:    //松手刷新
+                headerView.setPadding(0, -headerViewHeight+(int)(distance_y*0.5), 0, 0);
+                releaseToRefresh();
                 break;
 
             case STATE_LOADING:     //正在加载
@@ -216,14 +255,9 @@ public class PullToRefreshListView extends ListView {
                 refresh();
                 break;
 
-            case STATE_PULL_REFRESH:    //下拉刷新
-                headerView.setPadding(0, -headerViewHeight + (int) distance_y, 0, 0);
-                pullToRefresh();
-                break;
-
-            case STATE_RELEASE_REFRESH:     //松手刷新
-                headerView.setPadding(0, -headerViewHeight+(int)(distance_y*0.5), 0, 0);
-                releaseToRefresh();
+            case STATE_DONE:        //完成
+                headerView.setPadding(0, -headerViewHeight, 0, 0);
+                invalidate();
                 break;
         }
 
@@ -268,7 +302,7 @@ public class PullToRefreshListView extends ListView {
         progressbar_layout.setVisibility(View.VISIBLE);
         arrowIv.clearAnimation();
         arrow_layout.setVisibility(View.GONE);
-        tipsTv.setText("正在刷新");
+        tipsTv.setText("正在刷新...");
 
         //如果上拉加载进行中，则取消下拉刷新
      /*   if (isLoadingMore) {
@@ -280,17 +314,25 @@ public class PullToRefreshListView extends ListView {
 /*
         if (refreshListener != null && !isRefreshing) {
             refreshListener.refresh();
-        }*/
+      /*  }*//*
         this.postDelayed(new Runnable() {
             @Override
             public void run() {
-                goneRefreshLoading();
+                handler.sendEmptyMessage(12);
             }
-        }, 3000);
+        }, 3000);*/
+
+     /*   reset();*/
+
+        if (refreshListener != null && !isRefreshing) {
+            refreshListener.refresh();
+        }
 
         isRefreshing = true;
 
     }
+
+
 
 
     /**
@@ -301,4 +343,28 @@ public class PullToRefreshListView extends ListView {
         current_state = STATE_DONE;
         onHeaderViewStateChanged();
     }
+
+
+
+    public boolean isRefreshing(){
+        return isRefreshing;
+    }
+
+
+    //刷新监听
+    public  interface PullRefreshListener {
+
+        public void refresh();
+    }
+
+
+    /**
+     * 设置下拉刷新监听
+     * @param refreshListener
+     */
+    public void setRefreshListener(PullRefreshListener refreshListener) {
+        this.refreshListener = refreshListener;
+    }
+
+
 }
