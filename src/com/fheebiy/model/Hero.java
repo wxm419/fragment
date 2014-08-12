@@ -1,5 +1,7 @@
 package com.fheebiy.model;
 
+import com.fheebiy.view.MySlideView;
+
 /**
  * Created by Administrator on 14-8-8.
  */
@@ -12,6 +14,8 @@ public class Hero {
     private String skill;
 
     private String from;
+
+    private MySlideView mySlideView;
 
     public String getName() {
         return name;
@@ -35,5 +39,13 @@ public class Hero {
 
     public void setFrom(String from) {
         this.from = from;
+    }
+
+    public MySlideView getMySlideView() {
+        return mySlideView;
+    }
+
+    public void setMySlideView(MySlideView mySlideView) {
+        this.mySlideView = mySlideView;
     }
 }

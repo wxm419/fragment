@@ -22,6 +22,7 @@ public class SlideToDelLvAdapter extends BaseAdapter {
 
     private Context context;
 
+    private MySlideView mLastSlideViewWithStatusOn;
 
     public SlideToDelLvAdapter(List<Hero> list, Context context) {
         this.list = list;
@@ -53,12 +54,25 @@ public class SlideToDelLvAdapter extends BaseAdapter {
             View itemView = inflater.inflate(R.layout.heroitem, null);
             slideView.setContentView(itemView);
             viewHolder = new ViewHolder(slideView);
+            slideView.setOnSlideListener(new MySlideView.OnSlideListener() {
+                @Override
+                public void onSlide(View view, int status) {
+                    if (mLastSlideViewWithStatusOn != null && mLastSlideViewWithStatusOn != view) {
+                        mLastSlideViewWithStatusOn.shrink();
+                    }
+
+                    if (status == SLIDE_STATUS_ON) {
+                        mLastSlideViewWithStatusOn = (MySlideView) view;
+                    }
+                }
+            });
             slideView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) slideView.getTag();
         }
 
         Hero hero = list.get(i);
+        hero.setMySlideView(slideView);
         if(hero != null){
             viewHolder.nameTv.setText(hero.getName());
             viewHolder.fromTv.setText(hero.getFrom());
@@ -74,6 +88,8 @@ public class SlideToDelLvAdapter extends BaseAdapter {
         public TextView nameTv;
         public TextView skillTv;
         public TextView fromTv;
+
+        public MySlideView mySlideView;
 
         public ViewHolder(View view) {
             nameTv = (TextView) view.findViewById(R.id.hero_name_tv);

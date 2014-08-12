@@ -6,6 +6,7 @@ import com.fheebiy.R;
 import com.fheebiy.adapter.HeroLvAdapter;
 import com.fheebiy.adapter.SlideToDelLvAdapter;
 import com.fheebiy.model.Hero;
+import com.fheebiy.view.ComplexListView;
 import com.fheebiy.view.PullToRefreshListView;
 
 import java.util.ArrayList;
@@ -16,11 +17,11 @@ import java.util.List;
  */
 public class SlideToDelLvActivity extends FragmentActivity {
 
-    private PullToRefreshListView listView;
+    private ComplexListView listView;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.slidetodellv);
-        listView = (PullToRefreshListView)findViewById(R.id.del_listView);
+        listView = (ComplexListView)findViewById(R.id.del_listView);
         List<Hero> list = getInitData();
         SlideToDelLvAdapter adapter = new SlideToDelLvAdapter(list,this);
         listView.setAdapter(adapter);
