@@ -1,75 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:background="#ffffff"
-              android:layout_height="fill_parent">
-
-<!--
-    <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:background="#ffffff"
-            android:orientation="horizontal">
-
-        <Button
-                android:id="@+id/btn1"
-                android:layout_width="0dp"
-                android:text="btn1"
-                android:textColor="#ff0000"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"/>
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
 
 
-        <Button
-                android:id="@+id/btn2"
-                android:text="btn2"
-                android:textColor="#00ff00"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"/>
+    <FrameLayout
+            android:id="@+id/main_frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8.5">
 
-
-    </LinearLayout>-->
-
-
-    <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical">
-
-        <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_weight="4">
-
-        <fragment
+        <!--<fragment
                 android:id="@+id/fragment1"
-                android:name="com.fheebiy.fragment.TabOneFragment"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1">
-        </fragment>
-        </LinearLayout>
-
-        <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="#9F406F"/>
-
-        <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-        <fragment
-                android:id="@+id/fragment2"
                 android:name="com.fheebiy.fragment.TabTwoFragment"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="1">
+               >
         </fragment>
-       </LinearLayout>
+
+
+
+        <fragment
+                android:id="@+id/fragment2"
+                android:name="com.fheebiy.fragment.TabThreeFragment"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+               >
+        </fragment>
+
+
+        <fragment
+                android:id="@+id/fragment3"
+                android:name="com.fheebiy.fragment.TabFourFragment"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+               >
+        </fragment>
+-->
+     </FrameLayout>
+
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:background="#486285"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+        <TextView
+                android:id="@+id/main_btn1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="tab1"
+                android:textColor="#FC8D58"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+        <View
+                android:layout_width="1dp"
+                android:background="@color/white"
+                android:layout_height="match_parent"/>
+
+        <TextView
+                android:id="@+id/main_btn2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="tab2"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+        <View
+                android:layout_width="1dp"
+                android:background="@color/white"
+                android:layout_height="match_parent"/>
+
+        <TextView
+                android:id="@+id/main_btn3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="tab3"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+
+        <View
+                android:layout_width="1dp"
+                android:background="@color/white"
+                android:layout_height="match_parent"/>
+
+        <TextView
+                android:id="@+id/main_btn4"
+                android:layout_width="0dp"
+                android:text="tab4"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
 
     </LinearLayout>
-</LinearLayout>
 
+
+</LinearLayout>

@@ -22,5 +22,6 @@
         <activity android:name=".activity.ThemeStyleActivity"/>
         <activity android:name=".activity.VpAnimationActivity"/>
         <activity android:name=".activity.SlideToDelLvActivity"/>
+        <activity android:name=".activity.MainActivity"/>
     </application>
 </manifest>

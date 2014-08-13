@@ -68,6 +68,13 @@
                 android:text="to del list view"/>
 
 
+        <Button
+                android:id="@+id/tb1_btn6"
+                android:layout_marginTop="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="to main"/>
+
     </LinearLayout>
 
 

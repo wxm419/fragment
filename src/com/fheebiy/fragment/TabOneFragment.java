@@ -25,6 +25,8 @@ public class TabOneFragment extends Fragment {
 
     private Button btn5;
 
+    private Button btn6;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,7 @@ public class TabOneFragment extends Fragment {
         btn3 = (Button)view.findViewById(R.id.tb1_btn3);
         btn4 = (Button)view.findViewById(R.id.tb1_btn4);
         btn5 = (Button)view.findViewById(R.id.tb1_btn5);
+        btn6 = (Button)view.findViewById(R.id.tb1_btn6);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +81,14 @@ public class TabOneFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        btn6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         return view;
     }
