@@ -23,5 +23,6 @@
         <activity android:name=".activity.VpAnimationActivity"/>
         <activity android:name=".activity.SlideToDelLvActivity"/>
         <activity android:name=".activity.MainActivity"/>
+        <activity android:name=".activity.VpStripActivity"/>
     </application>
 </manifest>
