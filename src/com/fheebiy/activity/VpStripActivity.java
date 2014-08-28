@@ -36,6 +36,8 @@ public class VpStripActivity extends FragmentActivity{
         viewPager = (ViewPager)findViewById(R.id.vpstrip_vp);
         pagerSlidingTabStrip = (PagerSlidingTabStrip)findViewById(R.id.vpstrips_strips);
         pagerSlidingTabStrip.setIndicatorColorResource(R.color.strip_color);
+        pagerSlidingTabStrip.setTextSize(40);
+        //pagerSlidingTabStrip.setTabPaddingLeftRight(40);
         pagerSlidingTabStrip.setIndicatorHeight(10);
         pagerSlidingTabStrip.setShouldExpand(true);
         initUI();
@@ -49,10 +51,21 @@ public class VpStripActivity extends FragmentActivity{
         Fragment twoFragment = new TabTwoFragment();
         Fragment threeFragment = new TabThreeFragment();
         Fragment fourFragment = new TabFourFragment();
+        Fragment fourFragment0 = new TabFourFragment();
+        Fragment fourFragment1 = new TabFourFragment();
+        Fragment fourFragment2 = new TabFourFragment();
+        Fragment fourFragment3 = new TabFourFragment();
+        Fragment fourFragment4 = new TabFourFragment();
 
         list.add(twoFragment);
         list.add(threeFragment);
         list.add(fourFragment);
+        list.add(fourFragment0);
+        list.add(fourFragment1);
+        list.add(fourFragment2);
+        list.add(fourFragment3);
+        list.add(fourFragment4);
+
 
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager(),list,this);
 
@@ -74,7 +87,7 @@ public class VpStripActivity extends FragmentActivity{
         }
 
 
-        private final String[] TITLES = { "首页", "评论", "发现"};
+        private final String[] TITLES = { "精华区", "圈吧", "图片搜索","论坛搜索","价格行情","求购信息","相关网页","求购信息"};
 
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);

@@ -29,10 +29,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.view.WindowManager;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -43,6 +45,8 @@ import java.util.Locale;
 
 
 public class PagerSlidingTabStrip extends HorizontalScrollView {
+
+    static final String TAG = "PagerSlidingTabStrip";
 
     public interface IconTabProvider {
         public int getPageIconResId(int position);
@@ -67,6 +71,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
     private int tabCount;
 
     private int currentPosition = 0;
+    private int lastPosition = 0;
     private float currentPositionOffset = 0f;
 
     private Paint rectPaint;
@@ -96,6 +101,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
     private int tabBackgroundResId = R.drawable.background_tab;
 
     private Locale locale;
+
+    private int displayWidth ;
 
     public PagerSlidingTabStrip(Context context) {
         this(context, null);
@@ -128,6 +135,9 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
         // get system attrs (android:textSize and android:textColor)
 
+
+
+
         TypedArray a = context.obtainStyledAttributes(attrs, ATTRS);
 
         tabTextSize = a.getDimensionPixelSize(0, tabTextSize);
@@ -152,6 +162,12 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
         textAllCaps = a.getBoolean(R.styleable.PagerSlidingTabStrip_pstsTextAllCaps, textAllCaps);
 
         a.recycle();
+
+
+        WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics metric = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(metric);
+        displayWidth = metric.widthPixels;              // 屏幕宽度（像素）
 
         rectPaint = new Paint();
         rectPaint.setAntiAlias(true);
@@ -217,7 +233,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
                 }
 
                 currentPosition = pager.getCurrentItem();
-                scrollToChild(currentPosition, 0);
+               // scrollToChild(currentPosition, 0);
             }
         });
 
@@ -284,7 +300,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
     }
 
-    private void scrollToChild(int position, int offset) {
+   /* private void scrollToChild(int position, int offset) {
 
         if (tabCount == 0) {
             return;
@@ -298,10 +314,10 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
         if (newScrollX != lastScrollX) {
             lastScrollX = newScrollX;
-            scrollTo(newScrollX, 0);
+            //scrollTo(newScrollX, 0);
         }
 
-    }
+    }*/
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -357,7 +373,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
             currentPosition = position;
             currentPositionOffset = positionOffset;
 
-            scrollToChild(position, (int) (positionOffset * tabsContainer.getChildAt(position).getWidth()));
+           // scrollToChild(position, (int) (positionOffset * tabsContainer.getChildAt(position).getWidth()));
 
             invalidate();
 
@@ -369,7 +385,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
         @Override
         public void onPageScrollStateChanged(int state) {
             if (state == ViewPager.SCROLL_STATE_IDLE) {
-                scrollToChild(pager.getCurrentItem(), 0);
+                //scrollToChild(pager.getCurrentItem(), 0);
             }
 
             if (delegatePageListener != null) {
@@ -382,9 +398,35 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
             if (delegatePageListener != null) {
                 delegatePageListener.onPageSelected(position);
             }
+            scrollToChild(position);
         }
 
     }
+
+    private void scrollToChild(int position) {
+        View child = tabsContainer.getChildAt(position);
+        int left = child.getLeft();
+        int parentWidth = tabsContainer.getWidth();
+        if(position > lastPosition){    //右边滑动
+            int childWidth = child.getWidth();
+            if(left + childWidth/3 >= displayWidth){      //容错,这点很重要，有可能某个tab的右边缘屏幕的右边缘有一定的距离
+                scrollToVisible(childWidth, 0);
+            }
+        }else {                                 //向左滑
+            if(parentWidth-left > displayWidth){
+                int childWidth = child.getWidth();
+                scrollToVisible(-childWidth, 0);
+            }
+        }
+        lastPosition = position;
+    }
+
+
+    private void scrollToVisible(int x, int y){
+        int lastWidth = getScrollX();
+        scrollTo(lastWidth+x,y);
+    }
+
 
     public void setIndicatorColor(int indicatorColor) {
         this.indicatorColor = indicatorColor;

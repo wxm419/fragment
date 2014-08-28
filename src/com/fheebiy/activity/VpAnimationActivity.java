@@ -83,7 +83,8 @@ public class VpAnimationActivity extends FragmentActivity {
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i2) {
-            /*  Log.d(TAG, "i=" + i + ",v=" + v + ",i2=" + i2);
+                Log.d(TAG, "i=" + i + ",v=" + v + ",i2=" + i2);
+            /*
                 int next_x = 0;
                 int x = (int)(offset*v);
                 Log.d(TAG,"x="+x+",current_x="+current_x);
