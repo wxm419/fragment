@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import com.fheebiy.R;
 import com.fheebiy.adapter.ComplexVpAdapter;
 import com.fheebiy.fragment.TabFourFragment;
@@ -21,7 +22,7 @@ import java.util.List;
  * Created by Administrator on 14-8-13.
  */
 public class VpStripActivity extends FragmentActivity{
-
+    static final String TAG = "VpStripActivity";
 
     private ViewPager viewPager;
 
@@ -42,6 +43,24 @@ public class VpStripActivity extends FragmentActivity{
         pagerSlidingTabStrip.setShouldExpand(true);
         initUI();
         pagerSlidingTabStrip.setViewPager(viewPager);
+        pagerSlidingTabStrip.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i2) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                Log.d(TAG,"i====="+i);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
+
+
     }
 
 

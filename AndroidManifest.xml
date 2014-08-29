@@ -24,5 +24,6 @@
         <activity android:name=".activity.SlideToDelLvActivity"/>
         <activity android:name=".activity.MainActivity"/>
         <activity android:name=".activity.VpStripActivity"/>
+        <activity android:name=".activity.Main2Activity"/>
     </application>
 </manifest>
