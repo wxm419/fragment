@@ -4,7 +4,23 @@
           android:versionCode="1"
           android:versionName="1.0">
 
-    <uses-sdk android:minSdkVersion="17"/>
+    <uses-sdk android:minSdkVersion="16"/>
+
+
+    <!-- 使用网络功能所需权限 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" >
+    </uses-permission>
+    <!-- SDK离线地图和cache功能需要读写外部存储器 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" >
+    </uses-permission>
     <application
             android:label="@string/app_name"
             android:theme="@style/AppTheme"
@@ -25,5 +41,6 @@
         <activity android:name=".activity.MainActivity"/>
         <activity android:name=".activity.VpStripActivity"/>
         <activity android:name=".activity.Main2Activity"/>
+        <activity android:name=".activity.DownLoadActivity"/>
     </application>
 </manifest>

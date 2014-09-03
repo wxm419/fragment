@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 import com.fheebiy.R;
 import com.fheebiy.adapter.ComplexVpAdapter;
+import com.fheebiy.fragment.DownloadFragment;
 import com.fheebiy.fragment.TabFourFragment;
 import com.fheebiy.fragment.TabThreeFragment;
 import com.fheebiy.fragment.TabTwoFragment;
@@ -116,7 +117,7 @@ public class VpComplexActivity extends FragmentActivity{
 
     private void initUI(){
 
-        Fragment twoFragment = new TabTwoFragment();
+        Fragment twoFragment = new DownloadFragment();
         Fragment threeFragment = new TabThreeFragment();
         Fragment fourFragment = new TabFourFragment();
 
