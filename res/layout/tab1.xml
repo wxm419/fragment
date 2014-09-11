@@ -75,6 +75,13 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="to main2"/>
+
+        <Button
+                android:id="@+id/tb1_btn9"
+                android:layout_marginTop="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="to main3"/>
     </LinearLayout>
 
 

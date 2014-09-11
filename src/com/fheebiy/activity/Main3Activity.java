@@ -54,7 +54,7 @@ public class Main3Activity extends FragmentActivity {
         layoutInflater = LayoutInflater.from(this);
 
         //实例化TabHost对象，得到TabHost
-        mTabHost = (FragmentTabHost)findViewById(android.R.id.tabhost);
+        mTabHost = (FragmentTabHost)findViewById(R.id.tabhost);
         mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 
         //得到fragment的个数
