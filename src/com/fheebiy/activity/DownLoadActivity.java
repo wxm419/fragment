@@ -9,8 +9,10 @@ import android.webkit.WebView;
 import android.widget.Button;
 import com.fheebiy.R;
 import com.fheebiy.http.Http;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.http.NameValuePair;
 
+import javax.xml.transform.Templates;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -97,6 +99,7 @@ public class DownLoadActivity extends Activity {
 
     private String downloadFile(String url, File file) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
+        CollectionUtils.isEmpty(params);
         String contents = Http.postData(url, params).toString();
         FileOutputStream fos = null;
         try {
@@ -173,5 +176,6 @@ public class DownLoadActivity extends Activity {
             downloadFile(this.downUrl, this.templateFile);
         }
     }
+
 
 }

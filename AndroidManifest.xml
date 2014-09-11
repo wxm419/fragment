@@ -42,5 +42,7 @@
         <activity android:name=".activity.VpStripActivity"/>
         <activity android:name=".activity.Main2Activity"/>
         <activity android:name=".activity.DownLoadActivity"/>
+        <activity android:name=".activity.Main3Activity"/>
+        <activity android:name=".activity.MainTabActivity"/>
     </application>
 </manifest>
