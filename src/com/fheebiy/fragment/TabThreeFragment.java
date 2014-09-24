@@ -31,10 +31,12 @@ public class TabThreeFragment extends Fragment {
 
     List<Hero> list = new ArrayList<Hero>();
 
-    Handler handler = new Handler(){
+    HeroLvAdapter adapter;
+
+    Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if(msg.what == 12){
+            if (msg.what == 12) {
                 list.addAll(getInitData());
                 listView.deferNotifyDataSetChanged();
                 listView.goneRefreshLoading();
@@ -56,7 +58,7 @@ public class TabThreeFragment extends Fragment {
         listView = (PullToRefreshListView) view.findViewById(R.id.listView);
         bindListener();
         list = getInitData();
-        HeroLvAdapter adapter = new HeroLvAdapter(getActivity(), list);
+        adapter = new HeroLvAdapter(getActivity(), list);
         listView.setAdapter(adapter);
         Log.d(TAG, "onCreateView");
         return view;
@@ -143,13 +145,13 @@ public class TabThreeFragment extends Fragment {
 
             @Override
             public void refresh() {
-               Timer timer = new Timer();
-               TimerTask task = new TimerTask() {
-                   @Override
-                   public void run() {
+                Timer timer = new Timer();
+                TimerTask task = new TimerTask() {
+                    @Override
+                    public void run() {
                         handler.sendEmptyMessage(12);
-                   }
-               };
+                    }
+                };
                 timer.schedule(task, 2000);
             }
         });
@@ -157,12 +159,17 @@ public class TabThreeFragment extends Fragment {
 
     }
 
-
-    private void doThread(){
-
-
+    private void doThread() {
 
     }
 
+    public void addOne(Hero hero) {
+        list.add(0, hero);
+        adapter.notifyDataSetChanged();
+    }
 
+    public void subOne(int position){
+        list.remove(position);
+        adapter.notifyDataSetChanged();
+    }
 }

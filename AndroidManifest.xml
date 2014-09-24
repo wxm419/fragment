@@ -44,5 +44,6 @@
         <activity android:name=".activity.DownLoadActivity"/>
         <activity android:name=".activity.Main3Activity"/>
         <activity android:name=".activity.MainTabActivity"/>
+        <activity android:name=".activity.CommunicateActivity"/>
     </application>
 </manifest>
