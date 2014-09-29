@@ -23,6 +23,8 @@ public class CommFragment2 extends Fragment {
     }
 
     public void changeText(String text){
-        textView.setText(text);
+        if(textView != null){
+            textView.setText(text);
+        }
     }
 }

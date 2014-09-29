@@ -12,6 +12,8 @@ import com.fheebiy.model.Hero;
 
 /**
  * Created by bob zhou on 14-9-24.
+ *
+ * 采用接口的方式实现Fragment Activity 之间通信
  */
 public class CommFragment1 extends Fragment implements View.OnClickListener {
 
@@ -26,6 +28,8 @@ public class CommFragment1 extends Fragment implements View.OnClickListener {
     private AddOrSubListViewListener callBack;
 
     private ChangeTextListener changeTextListener;
+
+    private SwitchFragListener switchFragListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,6 +46,7 @@ public class CommFragment1 extends Fragment implements View.OnClickListener {
         switchBtn = (Button) view.findViewById(R.id.switch_frag_btn);
         callBack = (AddOrSubListViewListener) getActivity();
         changeTextListener = (ChangeTextListener)getActivity();
+        switchFragListener = (SwitchFragListener)getActivity();
     }
 
     private void bindListener() {
@@ -69,6 +74,7 @@ public class CommFragment1 extends Fragment implements View.OnClickListener {
                 changeTextListener.changeText("love you, xie");
                 break;
             case R.id.switch_frag_btn:
+                switchFragListener.switchFrag(2);
                 break;
             default:
                 break;
@@ -86,6 +92,10 @@ public class CommFragment1 extends Fragment implements View.OnClickListener {
 
     public interface  ChangeTextListener{
         public void changeText(String text);
+    }
+
+    public interface SwitchFragListener{
+        public void switchFrag(int position);
     }
 
 }

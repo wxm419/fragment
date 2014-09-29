@@ -45,5 +45,6 @@
         <activity android:name=".activity.Main3Activity"/>
         <activity android:name=".activity.MainTabActivity"/>
         <activity android:name=".activity.CommunicateActivity"/>
+        <activity android:name=".activity.Communicate2Activity"/>
     </application>
 </manifest>
