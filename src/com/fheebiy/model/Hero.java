@@ -2,10 +2,12 @@ package com.fheebiy.model;
 
 import com.fheebiy.view.MySlideView;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 14-8-8.
  */
-public class Hero {
+public class Hero implements Serializable{
 
 
     private String name;
