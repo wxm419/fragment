@@ -13,7 +13,9 @@ import com.fheebiy.model.Hero;
 /**
  * Created by bob zhou on 14-9-24.
  *
- * 采用接口的方式实现Fragment Activity 之间通信
+ * 采用接口的方式实现Fragment Activity 之间通信,采用Interface方式
+ * Fragment之间通信，无论采用Broadcast还是Interface方式都必须通过Activity中转，不可直接通信
+ *
  */
 public class CommFragment1 extends Fragment implements View.OnClickListener {
 

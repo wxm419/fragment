@@ -20,6 +20,7 @@ import java.util.List;
  *
  * 引入PagerSlidingTabStrip
  * 采用接口的方式实现Fragment Activity 之间通信
+ * Fragment之间通信，无论采用Broadcast还是Interface方式都必须通过Activity中转，不可直接通信
  */
 public class Communicate2Activity extends FragmentActivity implements CommFragment1.AddOrSubListViewListener,CommFragment1.ChangeTextListener,CommFragment1.SwitchFragListener{
 

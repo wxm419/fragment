@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentManager;
  *
  * Activity fragment 之间的通信
  * Created by bob zhou on 14-9-24.
+ * Fragment之间通信，无论采用Broadcast还是Interface方式都必须通过Activity中转，不可直接通信
  */
 public class CommunicateActivity extends FragmentActivity implements CommFragment1.AddOrSubListViewListener,CommFragment1.ChangeTextListener {
 

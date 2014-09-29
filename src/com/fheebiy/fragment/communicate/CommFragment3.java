@@ -18,9 +18,10 @@ import java.util.List;
 
 /**
  *
- * Fragment Activity之间的通信,采用Broadcast方式
- *
  * Created by bob zhou on 14-9-24.
+ * Fragment Activity之间的通信,采用Broadcast方式
+ * Fragment之间通信，无论采用Broadcast还是Interface方式都必须通过Activity中转，不可直接通信
+ *
  */
 public class CommFragment3 extends Fragment implements View.OnClickListener {
 
