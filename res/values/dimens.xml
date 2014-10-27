@@ -2,4 +2,6 @@
 <resources>
     <dimen name="titlesize">18sp</dimen>
     <dimen name="titlewidth">20dp</dimen>
+    <dimen name="space_180">180dip</dimen>
+    <dimen name="space_w">-15dip</dimen>
 </resources>
