@@ -134,7 +134,7 @@ public class PullToRefreshListView extends ListView {
 
         measureView(headerView);
 
-        headerViewHeight = headerView.getMeasuredHeight();
+        headerViewHeight = headerView.getMeasuredHeight()/2;
 
         this.addHeaderView(headerView);
 
