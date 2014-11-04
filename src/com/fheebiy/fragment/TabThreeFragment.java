@@ -9,11 +9,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import com.fheebiy.R;
 import com.fheebiy.adapter.HeroLvAdapter;
 import com.fheebiy.model.Hero;
+import com.fheebiy.util.PullToRefreshListView;
 import com.fheebiy.view.PullListView;
-import com.fheebiy.view.PullToRefreshListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +31,7 @@ public class TabThreeFragment extends Fragment {
 
     public static final String TAG = "TabThreeFragment";
 
-    private PullListView listView;
+    private PullToRefreshListView listView;
 
     List<Hero> list = new ArrayList<Hero>();
 
@@ -56,7 +59,10 @@ public class TabThreeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab3, container, false);
-        listView = (PullListView) view.findViewById(R.id.listView);
+        listView = (PullToRefreshListView) view.findViewById(R.id.listView);
+       /* LinearLayout headerView = (LinearLayout)inflater.inflate(R.layout.percenter_headerview,null);
+        listView.addHeaderView(headerView);
+        headerView.setPadding(0,-400,0,0);*/
         bindListener();
         list = getInitData();
         adapter = new HeroLvAdapter(getActivity(), list);
