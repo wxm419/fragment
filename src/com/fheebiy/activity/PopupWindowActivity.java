@@ -32,4 +32,9 @@ public class PopupWindowActivity extends Activity {
     }
 
 
+    public void onBackPressClick(){
+        this.finish();
+    }
+
+
 }

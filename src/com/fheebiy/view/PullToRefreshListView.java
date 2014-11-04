@@ -46,7 +46,7 @@ public class PullToRefreshListView extends ListView {
 
     private View headerView;
 
-    private ImageView arrowIv;  //箭头
+ /*   private ImageView arrowIv;  //箭头
 
     private LinearLayout progressbar_layout;    //小菊花layout
 
@@ -57,7 +57,7 @@ public class PullToRefreshListView extends ListView {
     private TextView lastUpdateTv;      //最后更新时间: 刚刚
 
     private RotateAnimation animation;          //箭头向上的旋转动画
-    private RotateAnimation reverseAnimation;   //箭头恢复的旋转动画
+    private RotateAnimation reverseAnimation;   //箭头恢复的旋转动画*/
 
     private int headerViewHeight;       //header的高度
 
@@ -109,8 +109,8 @@ public class PullToRefreshListView extends ListView {
 
     private void init() {
         LayoutInflater inflater = LayoutInflater.from(ctx);
-        headerView = inflater.inflate(R.layout.header, null);
-        arrowIv = (ImageView) headerView.findViewById(R.id.head_arrowImageView);
+        headerView = inflater.inflate(R.layout.percenter_headerview, null);
+      /*  arrowIv = (ImageView) headerView.findViewById(R.id.head_arrowImageView);
         arrow_layout = (LinearLayout) headerView.findViewById(R.id.head_arrow_layout);
 
         arrowIv.setMinimumWidth(50);
@@ -130,7 +130,7 @@ public class PullToRefreshListView extends ListView {
         reverseAnimation = new RotateAnimation(180, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         reverseAnimation.setInterpolator(new LinearInterpolator());
         reverseAnimation.setDuration(250);
-        animation.setFillAfter(true);
+        animation.setFillAfter(true);*/
 
         measureView(headerView);
 
@@ -179,14 +179,14 @@ public class PullToRefreshListView extends ListView {
 
     private void reset() {
 
-        arrow_layout.setVisibility(View.VISIBLE);
+     /*   arrow_layout.setVisibility(View.VISIBLE);
         progressbar_layout.setVisibility(View.GONE);
         arrowIv.setImageResource(R.drawable.arrow);
         arrowIv.clearAnimation();
        // arrowIv.startAnimation(animation);
         tipsTv.setText("下拉刷新");
         tipsTv.setPadding(0, 0, 0, 0);
-
+*/
         isRefreshing = false;
     }
 
@@ -271,7 +271,7 @@ public class PullToRefreshListView extends ListView {
 
     //下拉即可刷新
     private void pullToRefresh() {
-        progressbar_layout.setVisibility(View.GONE);
+      /*  progressbar_layout.setVisibility(View.GONE);
         tipsTv.setVisibility(View.VISIBLE);
         arrowIv.clearAnimation();
         arrow_layout.setVisibility(View.VISIBLE);
@@ -280,14 +280,14 @@ public class PullToRefreshListView extends ListView {
         if (last_state == STATE_RELEASE_REFRESH) {
             arrowIv.clearAnimation();
             arrowIv.startAnimation(reverseAnimation);
-        }
+        }*/
         isRefreshing = false;
     }
 
 
     //松开即可刷新
     private void releaseToRefresh() {
-        arrow_layout.setVisibility(View.VISIBLE);
+      /*  arrow_layout.setVisibility(View.VISIBLE);
         progressbar_layout.setVisibility(View.GONE);
         tipsTv.setVisibility(View.VISIBLE);
         tipsTv.setText("松手即可刷新");
@@ -296,7 +296,7 @@ public class PullToRefreshListView extends ListView {
             arrowIv.clearAnimation();
             arrowIv.startAnimation(animation);
         }
-
+*/
         isRefreshing = false;
     }
 
@@ -304,11 +304,11 @@ public class PullToRefreshListView extends ListView {
 
     //loading...
     private void refresh(){
-        progressbar_layout.setVisibility(View.VISIBLE);
+     /*   progressbar_layout.setVisibility(View.VISIBLE);
         arrowIv.clearAnimation();
         arrow_layout.setVisibility(View.GONE);
         tipsTv.setText("正在刷新...");
-
+*/
         //如果上拉加载进行中，则取消下拉刷新
      /*   if (isLoadingMore) {
             isRefreshing = false;

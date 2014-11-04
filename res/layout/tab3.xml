@@ -9,13 +9,13 @@
               android:weightSum="1">
 
 
-<com.fheebiy.view.PullToRefreshListView
+<com.fheebiy.view.PullListView
         android:id="@+id/listView"
         android:layout_width="fill_parent"
         android:layout_height="500dp"
         >
 
-        </com.fheebiy.view.PullToRefreshListView>
+        </com.fheebiy.view.PullListView>
 
 
 

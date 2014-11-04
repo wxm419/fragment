@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.fheebiy.R;
 import com.fheebiy.adapter.HeroLvAdapter;
 import com.fheebiy.model.Hero;
+import com.fheebiy.view.PullListView;
 import com.fheebiy.view.PullToRefreshListView;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class TabThreeFragment extends Fragment {
 
     public static final String TAG = "TabThreeFragment";
 
-    private PullToRefreshListView listView;
+    private PullListView listView;
 
     List<Hero> list = new ArrayList<Hero>();
 
@@ -38,8 +39,8 @@ public class TabThreeFragment extends Fragment {
         public void handleMessage(Message msg) {
             if (msg.what == 12) {
                 list.addAll(getInitData());
-                listView.deferNotifyDataSetChanged();
-                listView.goneRefreshLoading();
+              //  listView.deferNotifyDataSetChanged();
+              //  listView.goneRefreshLoading();
             }
         }
     };
@@ -55,7 +56,7 @@ public class TabThreeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab3, container, false);
-        listView = (PullToRefreshListView) view.findViewById(R.id.listView);
+        listView = (PullListView) view.findViewById(R.id.listView);
         bindListener();
         list = getInitData();
         adapter = new HeroLvAdapter(getActivity(), list);
@@ -141,7 +142,7 @@ public class TabThreeFragment extends Fragment {
     }
 
     private void bindListener() {
-        listView.setRefreshListener(new PullToRefreshListView.PullRefreshListener() {
+     /*   listView.setRefreshListener(new PullToRefreshListView.PullRefreshListener() {
 
             @Override
             public void refresh() {
@@ -154,7 +155,7 @@ public class TabThreeFragment extends Fragment {
                 };
                 timer.schedule(task, 2000);
             }
-        });
+        });*/
 
 
     }
