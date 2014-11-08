@@ -43,6 +43,8 @@ public class TabOneFragment extends Fragment {
 
     private Button btn14;
 
+    private Button btn15;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +68,7 @@ public class TabOneFragment extends Fragment {
         btn12 = (Button)view.findViewById(R.id.tb1_btn12);
         btn13 = (Button)view.findViewById(R.id.tb1_btn13);
         btn14 = (Button)view.findViewById(R.id.tb1_btn14);
+        btn15 = (Button)view.findViewById(R.id.tb1_btn15);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +81,7 @@ public class TabOneFragment extends Fragment {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ScrollTestActivity.class);
+                Intent intent = new Intent(getActivity(), VpComplexActivity.class);
                 startActivity(intent);
             }
         });
@@ -171,7 +174,13 @@ public class TabOneFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+        btn15.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ScrollTestActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         return view;
