@@ -3,6 +3,14 @@ package com.fheebiy.util;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import com.fheebiy.model.Hero;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 14-10-22.
@@ -33,4 +41,38 @@ public class CommonUtil {
     }
 
 
+
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
+
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+    }
+
+
+    public static List<Hero> getInitData() {
+        List<Hero> heros = new ArrayList<Hero>();
+
+        for (int i = 0; i < 10; i++) {
+            Hero hero = new Hero();
+            hero.setName("杨过" + i);
+            hero.setSkill("黯然销魂掌");
+            hero.setFrom("神雕侠侣");
+            heros.add(hero);
+        }
+
+        return heros;
+    }
 }

@@ -41,6 +41,8 @@ public class TabOneFragment extends Fragment {
 
     private Button btn13;
 
+    private Button btn14;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,11 +65,12 @@ public class TabOneFragment extends Fragment {
         btn11 = (Button)view.findViewById(R.id.tb1_btn11);
         btn12 = (Button)view.findViewById(R.id.tb1_btn12);
         btn13 = (Button)view.findViewById(R.id.tb1_btn13);
+        btn14 = (Button)view.findViewById(R.id.tb1_btn14);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), VpActivity.class);
+                Intent intent = new Intent(getActivity(), PersonalCenterActivity.class);
                 startActivity(intent);
             }
         });
@@ -75,7 +78,7 @@ public class TabOneFragment extends Fragment {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), VpComplexActivity.class);
+                Intent intent = new Intent(getActivity(), ScrollTestActivity.class);
                 startActivity(intent);
             }
         });
@@ -161,6 +164,14 @@ public class TabOneFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        btn14.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SwipeRefreshLayoutActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 
         return view;
