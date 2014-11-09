@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import com.fheebiy.R;
 import com.fheebiy.activity.*;
+import com.fheebiy.activity.pulltorefresh.LauncherActivity;
 
 /**
  * Created by bob zhou on 14-7-30.
@@ -45,6 +46,8 @@ public class TabOneFragment extends Fragment {
 
     private Button btn15;
 
+    private Button btn16;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +57,7 @@ public class TabOneFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab1, container, false);
-        btn1 = (Button)view.findViewById(R.id.tb1_btn1);
+       // btn1 = (Button)view.findViewById(R.id.tb1_btn1);
         btn2 = (Button)view.findViewById(R.id.tb1_btn2);
         btn3 = (Button)view.findViewById(R.id.tb1_btn3);
         btn4 = (Button)view.findViewById(R.id.tb1_btn4);
@@ -69,14 +72,15 @@ public class TabOneFragment extends Fragment {
         btn13 = (Button)view.findViewById(R.id.tb1_btn13);
         btn14 = (Button)view.findViewById(R.id.tb1_btn14);
         btn15 = (Button)view.findViewById(R.id.tb1_btn15);
+        btn16 = (Button)view.findViewById(R.id.tb1_btn16);
 
-        btn1.setOnClickListener(new View.OnClickListener() {
+    /*    btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), PersonalCenterActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,7 +185,13 @@ public class TabOneFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+        btn16.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), LauncherActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

@@ -1,42 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <com.fheebiy.view.OverScrollView
-            android:id="@+id/scrollview"
+
+
+
+    <LinearLayout
             android:layout_width="match_parent"
+            android:orientation="vertical"
             android:layout_height="match_parent">
 
-        <LinearLayout
-                android:orientation="vertical"
+        <com.fheebiy.view.OverScrollView
+                android:id="@+id/scrollview"
                 android:layout_width="match_parent"
-                android:layout_marginTop="-65dp"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
-            <include layout="@layout/percenter_headerview"/>
-
-
-           <!-- <com.fheebiy.view.MyLinearLayoutForListView
-                    android:id="@+id/listview_layout"
+            <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
+                    android:layout_marginTop="-65dp"
                     android:layout_height="wrap_content">
 
-            </com.fheebiy.view.MyLinearLayoutForListView>-->
-
-             <com.fheebiy.widget.LinearLayoutForListView
-                    android:id="@+id/listview_layout"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-            </com.fheebiy.widget.LinearLayoutForListView>
+                <include layout="@layout/percenter_headerview"/>
 
 
-        </LinearLayout>
-    </com.fheebiy.view.OverScrollView>
-     <include layout="@layout/ent_refresh_footer"/>
-</LinearLayout>
+                <!-- <com.fheebiy.view.MyLinearLayoutForListView
+                         android:id="@+id/listview_layout"
+                         android:orientation="vertical"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content">
+
+                 </com.fheebiy.view.MyLinearLayoutForListView>-->
+
+                <com.fheebiy.widget.LinearLayoutForListView
+                        android:id="@+id/listview_layout"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                </com.fheebiy.widget.LinearLayoutForListView>
+
+
+            </LinearLayout>
+        </com.fheebiy.view.OverScrollView>
+
+        <include layout="@layout/ent_refresh_footer"/>
+    </LinearLayout>
+
+    <ImageButton
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:scaleType="center"
+            android:src="@drawable/btn_percenter_back_normal"/>
+
+
+
+    <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@null"
+            android:scaleType="center"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/btn_percenter_refresh_bg"/>
+
+    <ImageView
+            android:id="@+id/percenter_refresh_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16.5dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/btn_percenter_refresh"/>
+
+</RelativeLayout>

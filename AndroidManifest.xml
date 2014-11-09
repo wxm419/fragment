@@ -58,5 +58,16 @@
         </activity>
         <activity android:name=".activity.ScrollTestActivity"/>
         <activity android:name=".activity.SwipeRefreshLayoutActivity"/>
+
+        <activity android:name=".activity.pulltorefresh.LauncherActivity"/>
+        <activity android:name=".activity.pulltorefresh.PullToRefreshExpandableListActivity"/>
+        <activity android:name=".activity.pulltorefresh.PullToRefreshGridActivity"/>
+        <activity android:name=".activity.pulltorefresh.PullToRefreshHorizontalScrollViewActivity"/>
+        <activity android:name=".activity.pulltorefresh.PullToRefreshListActivity"/>
+        <activity android:name=".activity.pulltorefresh.PullToRefreshListInViewPagerActivity"/>
+        <activity android:name=".activity.pulltorefresh.PullToRefreshScrollViewActivity"/>
+        <activity android:name=".activity.pulltorefresh.PullToRefreshViewPagerActivity"/>
+        <activity android:name=".activity.pulltorefresh.PullToRefreshWebView2Activity"/>
+        <activity android:name=".activity.pulltorefresh.PullToRefreshWebViewActivity"/>
     </application>
 </manifest>
