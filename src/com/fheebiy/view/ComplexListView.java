@@ -205,7 +205,7 @@ public class ComplexListView extends ListView {
                 toSlide(ev);
                 break;
             case MotionEvent.ACTION_MOVE:
-                Log.d(TAG, "ACTION_MOVE");
+                Log.d(TAG, "ACTION_MOVE,and current_state="+current_state);
                 if (current_state != STATE_LOADING) {
                     distance_y = ev.getY() - start_y;
                     float distance_x = ev.getX() - start_x;
@@ -255,24 +255,24 @@ public class ComplexListView extends ListView {
 
 
     private void onHeaderViewStateChanged() {
+        Log.d(TAG, "current_state=" + current_state+",distance_y="+distance_y);
         switch (current_state) {
-
-            case STATE_PULL_REFRESH:    //下拉刷新
+            case STATE_PULL_REFRESH:    //下拉刷新1
                 headerView.setPadding(0, -headerViewHeight + (int) distance_y, 0, 0);
                 pullToRefresh();
                 break;
 
-            case STATE_RELEASE_REFRESH:    //松手刷新
+            case STATE_RELEASE_REFRESH:    //松手刷新2
                 headerView.setPadding(0, -headerViewHeight + (int) (distance_y * 0.5), 0, 0);
                 releaseToRefresh();
                 break;
 
-            case STATE_LOADING:     //正在加载
+            case STATE_LOADING:     //正在加载3
                 headerView.setPadding(0, 0, 0, 0);
                 refresh();
                 break;
 
-            case STATE_DONE:        //完成
+            case STATE_DONE:        //完成0
                 headerView.setPadding(0, -headerViewHeight, 0, 0);
                 invalidate();
                 break;

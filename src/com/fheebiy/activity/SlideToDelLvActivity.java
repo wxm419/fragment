@@ -33,7 +33,7 @@ public class SlideToDelLvActivity extends FragmentActivity {
     public List<Hero> getInitData() {
         List<Hero> heros = new ArrayList<Hero>();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 30; i++) {
             Hero hero = new Hero();
             hero.setName("杨过" + i);
             hero.setSkill("黯然销魂掌");

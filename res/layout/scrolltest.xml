@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res/com.fheebiy"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
-
-
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -25,28 +23,18 @@
 
                 <include layout="@layout/percenter_headerview"/>
 
-
-                <!-- <com.fheebiy.view.MyLinearLayoutForListView
-                         android:id="@+id/listview_layout"
-                         android:orientation="vertical"
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content">
-
-                 </com.fheebiy.view.MyLinearLayoutForListView>-->
-
-                <com.fheebiy.widget.LinearLayoutForListView
+                <com.fheebiy.view.ExpandLinearLayout
                         android:id="@+id/listview_layout"
                         android:orientation="vertical"
+                        app:divideHeight="1dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+                </com.fheebiy.view.ExpandLinearLayout>
 
-                </com.fheebiy.widget.LinearLayoutForListView>
-
-
+                <include layout="@layout/ent_refresh_footer"/>
             </LinearLayout>
         </com.fheebiy.view.OverScrollView>
 
-        <include layout="@layout/ent_refresh_footer"/>
     </LinearLayout>
 
     <ImageButton
@@ -74,6 +62,7 @@
     <ImageView
             android:id="@+id/percenter_refresh_img"
             android:layout_width="wrap_content"
+            android:scaleType="matrix"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16.5dp"

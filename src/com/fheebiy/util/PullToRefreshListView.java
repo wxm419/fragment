@@ -14,7 +14,7 @@ import com.fheebiy.R;
  * Created by wlong on 14-5-21.
  */
 public class PullToRefreshListView extends ListView implements AbsListView.OnScrollListener,
-        AdapterView.OnItemClickListener{
+        AdapterView.OnItemClickListener {
 
     //-------------------下拉刷新--------------------------------------------------
 
@@ -29,11 +29,11 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
     private Context context;
 
     private View headerView;            //下拉刷新的View
-  /*  private ImageView arrowIv;          //箭头
-    private TextView tipsTv,            //提示信息
-            lastUpdateTv;       //最后更新时间
-    private LinearLayout progressLl,    //进度条
-            arrowLl;    */     //箭头
+    /*  private ImageView arrowIv;          //箭头
+      private TextView tipsTv,            //提示信息
+              lastUpdateTv;       //最后更新时间
+      private LinearLayout progressLl,    //进度条
+              arrowLl;    */     //箭头
     private RotateAnimation animation,  //
             reverseAnimation;   //
 
@@ -83,7 +83,7 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
         init();
     }
 
-    private void init(){
+    private void init() {
         headerView = View.inflate(context, R.layout.percenter_headerview, null);
      /*   arrowIv = (ImageView) headerView.findViewById(R.id.head_arrowImageView);
         arrowIv.setMinimumWidth(50);
@@ -104,8 +104,8 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
         reverseAnimation.setFillAfter(true);
 
         mesureView(headerView);
-        headerViewHeight = headerView.getMeasuredHeight()/8;
-       // headerViewHeight = (int)(headerView.getMeasuredHeight()*0.36);
+        headerViewHeight = headerView.getMeasuredHeight() / 8;
+        // headerViewHeight = (int)(headerView.getMeasuredHeight()*0.36);
 
         this.addHeaderView(headerView);
         setOnScrollListener(this);
@@ -122,25 +122,25 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
     }
 
     //headerView状态改变时调用的方法，更新headerView的高度和显示子控件
-    private void onHeaderViewStateChanged(){
-        switch (state){
+    private void onHeaderViewStateChanged() {
+        switch (state) {
             case STATE_DONE:
                 headerView.setPadding(0, -headerViewHeight, 0, 0);
                 reset();
                 invalidate();
                 break;
             case STATE_LOADING:
-                headerView.setPadding(0, -headerViewHeight+(int)distanceY, 0, 0);
+                headerView.setPadding(0, -headerViewHeight + (int) distanceY, 0, 0);
                 refresh();
                 invalidate();
                 break;
             case STATE_PULL_REFRESH:
-                headerView.setPadding(0, -headerViewHeight+(int)distanceY, 0, 0);
+                headerView.setPadding(0, -headerViewHeight + (int) distanceY, 0, 0);
                 pullToRefresh();
                 invalidate();
                 break;
             case STATE_RELESE_REFRESH:
-                headerView.setPadding(0, -headerViewHeight+(int)distanceY, 0, 0);
+                headerView.setPadding(0, -headerViewHeight + (int) distanceY, 0, 0);
                 releaseToRefresh();
                 invalidate();
                 break;
@@ -168,7 +168,7 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
     }
 
     //最初的状态
-    private void reset(){
+    private void reset() {
        /* arrowLl.setVisibility(View.VISIBLE);
         progressLl.setVisibility(View.GONE);
         arrowIv.clearAnimation();
@@ -210,8 +210,9 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
 
         isRefreshing = false;
     }
+
     //loading...
-    private void refresh(){
+    private void refresh() {
       /*  progressLl.setVisibility(View.VISIBLE);
         arrowIv.clearAnimation();
         arrowLl.setVisibility(View.GONE);
@@ -234,9 +235,10 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
 
     /**
      * 设置上次刷新的时间
+     *
      * @param text
      */
-    public void setRefreshTime(String text){
+    public void setRefreshTime(String text) {
        /* if (null !=  lastUpdateTv){
             lastUpdateTv.setText(text);
             lastUpdateTv.setVisibility(View.VISIBLE);
@@ -246,7 +248,7 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
     /**
      * 取消加载状态
      */
-    public void goneRefreshLoading(){
+    public void goneRefreshLoading() {
         reset();
         state = STATE_DONE;
         onHeaderViewStateChanged();
@@ -256,14 +258,14 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
         this.canRefresh = canRefresh;
     }
 
-    public void setCanLoadMore(boolean canLoadMore){
+    public void setCanLoadMore(boolean canLoadMore) {
 
         canLoad = canLoadMore;
         isLoadingMore = false;
 
         removeFooterView(loadMoreView);
 
-        if ( canLoadMore ) {
+        if (canLoadMore) {
             this.addFooterView(loadMoreView);
         }
 
@@ -275,14 +277,16 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
 
     /**
      * 当前是否处于正在刷新的状态
+     *
      * @return
      */
-    public boolean isRefreshing(){
+    public boolean isRefreshing() {
         return isRefreshing;
     }
 
     /**
      * 当前是否处于加载更多的状态
+     *
      * @return
      */
     public boolean isLoadingMore() {
@@ -292,6 +296,7 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
 
     /**
      * 设置下拉刷新监听
+     *
      * @param refreshListener
      */
     public void setRefreshListener(PullRefreshListener refreshListener) {
@@ -300,6 +305,7 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
 
     /**
      * 设置上拉加载更多的监听
+     *
      * @param loadMoreListener
      */
     public void setLoadMoreListener(LoadMoreListener loadMoreListener) {
@@ -309,7 +315,7 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
 
-        if ( canPull ) {
+        if (canPull) {
 
             int action = ev.getAction();
 
@@ -325,18 +331,17 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
 
                         distanceY = ev.getY() - startY;
                         //根据拉动的距离判断显示“下拉刷新”或者"松开刷新"
-                        if (distanceY < headerViewHeight && distanceY > 0){
+                        if (distanceY < headerViewHeight && distanceY > 0) { //滑动距离小于h,大于0时，此时继续上滑
                             last_state = state;
                             state = STATE_PULL_REFRESH;
 
                         }
 
-                        if (distanceY > headerViewHeight) {
+                        if (distanceY > headerViewHeight) {             //大于h的时候，显示松手刷新,此时继续上滑
                             if (state != STATE_LOADING) {
                                 last_state = state;
                                 state = STATE_RELESE_REFRESH;
                             }
-
                         }
                     } else {
                         distanceY = ev.getY() - startY + headerViewHeight;
@@ -361,7 +366,7 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
                             @Override
                             public void run() {
                                 canPull = true;
-                                goneRefreshLoading();
+                                // goneRefreshLoading();
                             }
                         }, 10);
 
@@ -382,8 +387,10 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+
         int itemsLastIndex = getAdapter().getCount();
-        if(itemsLastIndex < 0) {
+        if (itemsLastIndex < 0) {
             return;
         }
 
@@ -391,8 +398,8 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
         //  System.out.println( "lastIndex :" + lastIndex);
         if (scrollState == OnScrollListener.SCROLL_STATE_IDLE && visibleLast == lastIndex &&
                 !isLoadingMore && canLoad) {
-            if (isRefreshing){
-                setSelection(visibleLast- visibleCount - 1);
+            if (isRefreshing) {
+                setSelection(visibleLast - visibleCount - 1);
                 return;
             }
 
@@ -427,7 +434,7 @@ public class PullToRefreshListView extends ListView implements AbsListView.OnScr
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
         if (position >= 1 && onItemClickListener != null)
-            onItemClickListener.onItemClick(adapterView, view,position-1, l);
+            onItemClickListener.onItemClick(adapterView, view, position - 1, l);
     }
 
     public static interface LoadMoreListener {

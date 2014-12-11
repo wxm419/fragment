@@ -96,4 +96,8 @@
         <attr name="ptrDrawableBottom" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="ExpandLinearLayout">
+        <attr name="divide" format="reference" />
+        <attr name="divideHeight" format="dimension" />
+    </declare-styleable>
 </resources>

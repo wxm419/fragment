@@ -19,6 +19,7 @@ import com.fheebiy.R;
 import com.fheebiy.adapter.HeroLvAdapter;
 import com.fheebiy.model.Hero;
 import com.fheebiy.util.CommonUtil;
+import com.fheebiy.view.ExpandLinearLayout;
 import com.fheebiy.view.OverScrollView;
 import com.fheebiy.widget.LinearLayoutForListView;
 
@@ -27,7 +28,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by Administrator on 14-11-8.
+ * Created by bob zhou on 14-11-8.
  */
 public class ScrollTestActivity extends Activity {
 
@@ -35,7 +36,7 @@ public class ScrollTestActivity extends Activity {
 
     public static final String TAG = "ScrollTestActivity";
 
-    private LinearLayoutForListView listView;
+    private ExpandLinearLayout listView;
 
     private List<Hero> list;
 
@@ -47,34 +48,27 @@ public class ScrollTestActivity extends Activity {
 
     private LayoutInflater inflater;
 
-    private RelativeLayout footer;
-
     private ImageView refreshImg;
 
     private float mRotationPivotX, mRotationPivotY;
 
-    private  Matrix mHeaderImageMatrix;
+    private Matrix mHeaderImageMatrix;
 
     private RotateAnimation rotateAnimation;
 
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if(msg.what == 12){
+            if (msg.what == 12) {     //上拉加载更多
                 list.addAll(CommonUtil.getInitData());
-               // adapter.notifyDataSetChanged();
-                listView.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
                 isLoading = false;
-                footer.setVisibility(View.GONE);
-
             }
 
-            if(msg.what == 11){
-                list = CommonUtil.getInitData();
-               // adapter.notifyDataSetChanged();
-                listView.removeAllViews();
-                adapter = new HeroLvAdapter(ScrollTestActivity.this,list);
-                listView.setAdapter(adapter);
+            if (msg.what == 11) {     //刷新
+                list.clear();
+                list.addAll(CommonUtil.getInitData());
+                adapter.notifyDataSetChanged();
                 isRefreshing = false;
                 refreshImg.clearAnimation();
             }
@@ -86,84 +80,60 @@ public class ScrollTestActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scrolltest);
         inflater = LayoutInflater.from(this);
-        listView = (LinearLayoutForListView)findViewById(R.id.listview_layout);
-        refreshImg = (ImageView)findViewById(R.id.percenter_refresh_img);
+        listView = (ExpandLinearLayout) findViewById(R.id.listview_layout);
+        refreshImg = (ImageView) findViewById(R.id.percenter_refresh_img);
 
-        refreshImg.setScaleType(ImageView.ScaleType.MATRIX);
-        mHeaderImageMatrix = new Matrix();
-        refreshImg.setImageMatrix(mHeaderImageMatrix);
-        onLoadingDrawableSet(refreshImg.getDrawable());
+        initAnimation();
 
-        rotateAnimation = new RotateAnimation(0f,360f,Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,0.5f);
-        rotateAnimation.setDuration(600);
-        rotateAnimation.setRepeatCount(-1);
-        rotateAnimation.setInterpolator(new LinearInterpolator());
-
-        View footerView = inflater.inflate(R.layout.ent_refresh_footer,null);
-        footer = (RelativeLayout)findViewById(R.id.footerview);
-        footer.setVisibility(View.GONE);
-       // listView.addFooterView(footerView);
         list = CommonUtil.getInitData();
-        adapter = new HeroLvAdapter(this,list);
+        adapter = new HeroLvAdapter(this, list);
         listView.setAdapter(adapter);
-        scrollView = (OverScrollView)findViewById(R.id.scrollview);
+        scrollView = (OverScrollView) findViewById(R.id.scrollview);
         scrollView.setOnScrollChangedListener(new OverScrollView.OnScrollChangedListener() {
             @Override
             public void onScrollChanged(int x, int y, int oldx, int oldy) {
-                Log.d(TAG,"y === " + y+" |||||,&oldy === "+oldy);
-                if(oldy < 1500 && y< 1500){
-                    if(oldy > y){       //下拉
+                Log.d(TAG, "y === " + y + " |||||,&oldy === " + oldy);
+                if (oldy < 1500 && y < 1500) {
+                    if (oldy > y) {       //下拉
 
                     }
 
-                    if(oldy < y){       //回弹
+                    if (oldy < y) {       //回弹
 
                     }
-                    float scale = Math.abs(oldy-1500) / (float) 160;
+                    float scale = Math.abs(oldy - 1500) / (float) 160;
                     onPullImpl(scale);
                 }
 
-                if(scrollView.isBottom()){
-                   // Log.d(TAG,"BOTTOM,BOTTOM,BOTTOM,BOTTOM,BOTTOM,");
-                    if(!isLoading){
-                       /* new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                list.addAll(CommonUtil.getInitData());
-                                handler.postDelayed(this,2000);
-                            }
-                        }).start();*/
-                        footer.setVisibility(View.VISIBLE);
+                if (scrollView.isBottom()) {
+                    if (!isLoading) {
                         isLoading = true;
                         new Timer().schedule(new TimerTask() {
                             @Override
                             public void run() {
                                 handler.sendEmptyMessage(12);
                             }
-                        },3000);
+                        }, 3000);
                     }
                 }
             }
 
             @Override
             public void refresh() {
-                Toast.makeText(ScrollTestActivity.this,"下拉刷新",Toast.LENGTH_SHORT).show();
-                //Log.d(TAG,"刷新,刷新,刷新,刷新");
-                if(!isRefreshing){
+                Toast.makeText(ScrollTestActivity.this, "下拉刷新", Toast.LENGTH_SHORT).show();
+                if (!isRefreshing) {
                     refreshImg.startAnimation(rotateAnimation);
                     new Timer().schedule(new TimerTask() {
                         @Override
                         public void run() {
                             handler.sendEmptyMessage(11);
                         }
-                    },3000);
+                    }, 3000);
                 }
-
-
             }
 
             @Override
-            public void loadMore(){
+            public void loadMore() {
 
             }
         });
@@ -171,14 +141,22 @@ public class ScrollTestActivity extends Activity {
 
     }
 
+    private void initAnimation() {
+        refreshImg.setScaleType(ImageView.ScaleType.MATRIX);
+        mHeaderImageMatrix = new Matrix();
+        refreshImg.setImageMatrix(mHeaderImageMatrix);
+        onLoadingDrawableSet(refreshImg.getDrawable());
+
+        rotateAnimation = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        rotateAnimation.setDuration(600);
+        rotateAnimation.setRepeatCount(-1);
+        rotateAnimation.setInterpolator(new LinearInterpolator());
+    }
+
 
     protected void onPullImpl(float scaleOfLayout) {
-        float angle;
-
-            angle = scaleOfLayout * 90f;
-
-       // Log.d(MYTAG,"scaleOfLayout ="+scaleOfLayout+", and angle="+angle+"and mRotateDrawableWhilePulling="+ mRotateDrawableWhilePulling);
-        Log.d(TAG,"angle="+angle);
+        float angle = scaleOfLayout * 90f;
+        Log.d(TAG, "angle=" + angle);
         mHeaderImageMatrix.setRotate(angle, mRotationPivotX, mRotationPivotY);
         refreshImg.setImageMatrix(mHeaderImageMatrix);
     }

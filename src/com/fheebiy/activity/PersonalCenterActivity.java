@@ -48,20 +48,6 @@ public class PersonalCenterActivity extends Activity {
 
         adapter = new HeroLvAdapter(this, list);
         listView.setAdapter(adapter);
-        //CommonUtil.setListViewHeightBasedOnChildren(listView);
-
-/*
-      */
-/*  bgImg = (ImageView)findViewById(R.id.center_bgImg);
-        scrollView = (MyScrollView)findViewById(R.id.myscrollview);
-        scrollView.setHeader(bgImg);
-*/
-
-
-       /* bgImg = (ImageView)headerView.findViewById(R.id.center_bgImg);
-        scrollView = (MyScrollView)headerView.findViewById(R.id.myscrollview);
-        scrollView.setHeader(bgImg);*/
-
     }
 
 
