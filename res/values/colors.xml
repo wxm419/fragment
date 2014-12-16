@@ -9,4 +9,5 @@
     <color name="background_tab_pressed">#6633B5E5</color>
     <color name="strip_color">#FF7B7C</color>
     <color name="transparent">#00000000</color>
+    <color name="list_bg_color">#ffe4e4e4</color>
 </resources>
