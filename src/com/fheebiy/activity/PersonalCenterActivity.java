@@ -34,8 +34,6 @@ public class PersonalCenterActivity extends Activity {
 
     HeroLvAdapter adapter;
 
-    private MyScrollView scrollView;
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.percenter);
