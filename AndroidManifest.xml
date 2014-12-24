@@ -69,5 +69,6 @@
         <activity android:name=".activity.pulltorefresh.PullToRefreshViewPagerActivity"/>
         <activity android:name=".activity.pulltorefresh.PullToRefreshWebView2Activity"/>
         <activity android:name=".activity.pulltorefresh.PullToRefreshWebViewActivity"/>
+        <activity android:name=".activity.LiteHttpActivity"/>
     </application>
 </manifest>

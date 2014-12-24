@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+
+    <TextView
+            android:id="@+id/lite_http_name"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_weight="2"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:text="index"
+            android:layout_height="50dp"/>
+
+    <TextView
+            android:id="@+id/lite_http_url"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#ED7958"
+            android:gravity="center"
+            android:text="http://pc.huochepiao.360.cn/?src=ext11111111111111111111111111111111111111111"
+            android:layout_height="50dp"/>
+
+</LinearLayout>
