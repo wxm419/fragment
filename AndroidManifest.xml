@@ -4,7 +4,8 @@
           android:versionCode="1"
           android:versionName="1.0">
 
-    <uses-sdk android:minSdkVersion="16"/>
+    <uses-sdk android:minSdkVersion="8"
+              android:targetSdkVersion="16"/>
 
 
     <!-- 使用网络功能所需权限 -->
@@ -33,33 +34,32 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.VpActivity"/>
-        <activity android:name=".activity.VpComplexActivity"/>
-        <activity android:name=".activity.ThemeStyleActivity"/>
-        <activity android:name=".activity.VpAnimationActivity"/>
-        <activity android:name=".activity.SlideToDelLvActivity"/>
-        <activity android:name=".activity.MainActivity"/>
-        <activity android:name=".activity.VpStripActivity"/>
-        <activity android:name=".activity.Main2Activity"/>
-        <activity android:name=".activity.DownLoadActivity"/>
-        <activity android:name=".activity.Main3Activity"/>
-        <activity android:name=".activity.MainTabActivity"/>
-        <activity android:name=".activity.CommunicateActivity"/>
-        <activity android:name=".activity.Communicate2Activity"/>
-        <activity android:name=".activity.Communicate3Activity"/>
-        <activity android:name=".activity.PopupWindowActivity"/>
+        <activity android:name=".activity.vp.VpActivity"/>
+        <activity android:name=".activity.vp.VpComplexActivity"/>
+        <activity android:name=".activity.other.ThemeStyleActivity"/>
+        <activity android:name=".activity.vp.VpAnimationActivity"/>
+        <activity android:name=".activity.other.SlideToDelLvActivity"/>
+        <activity android:name=".activity.main.MainActivity"/>
+        <activity android:name=".activity.vp.VpStripActivity"/>
+        <activity android:name=".activity.main.Main2Activity"/>
+        <activity android:name=".activity.other.DownLoadActivity"/>
+        <activity android:name=".activity.main.Main3Activity"/>
+        <activity android:name=".activity.communicate.CommunicateActivity"/>
+        <activity android:name=".activity.communicate.Communicate2Activity"/>
+        <activity android:name=".activity.communicate.Communicate3Activity"/>
+        <activity android:name=".activity.other.PopupWindowActivity"/>
         <activity
-                android:name=".activity.PersonalCenterActivity"
+                android:name=".activity.overscroll.PersonalCenterActivity"
                 android:label="percenter">
            <!-- <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>-->
         </activity>
-        <activity android:name=".activity.ScrollTestActivity"/>
-        <activity android:name=".activity.SwipeRefreshLayoutActivity"/>
+        <activity android:name=".activity.overscroll.ScrollTestActivity"/>
+        <activity android:name=".activity.lite.SwipeRefreshLayoutActivity"/>
 
-        <activity android:name=".activity.pulltorefresh.LauncherActivity"/>
+        <activity android:name=".activity.pulltorefresh.PullMainActivity"/>
         <activity android:name=".activity.pulltorefresh.PullToRefreshExpandableListActivity"/>
         <activity android:name=".activity.pulltorefresh.PullToRefreshGridActivity"/>
         <activity android:name=".activity.pulltorefresh.PullToRefreshHorizontalScrollViewActivity"/>
@@ -69,6 +69,11 @@
         <activity android:name=".activity.pulltorefresh.PullToRefreshViewPagerActivity"/>
         <activity android:name=".activity.pulltorefresh.PullToRefreshWebView2Activity"/>
         <activity android:name=".activity.pulltorefresh.PullToRefreshWebViewActivity"/>
-        <activity android:name=".activity.LiteHttpActivity"/>
+        <activity android:name=".activity.lite.LiteHttpActivity"/>
+        <activity android:name=".activity.aquery.AQueryActivity"/>
+        <activity android:name=".activity.aquery.AqImageLoadActivity"/>
+        <activity android:name=".activity.service.ServiceMainActivity"/>
+
+        <service android:name=".service.MyService"/>
     </application>
 </manifest>

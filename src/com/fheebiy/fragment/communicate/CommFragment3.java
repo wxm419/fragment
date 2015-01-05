@@ -2,19 +2,15 @@ package com.fheebiy.fragment.communicate;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import com.alibaba.fastjson.JSONObject;
 import com.fheebiy.R;
-import com.fheebiy.activity.Communicate3Activity;
+import com.fheebiy.activity.communicate.Communicate3Activity;
 import com.fheebiy.model.Hero;
-
-import java.util.List;
 
 /**
  *

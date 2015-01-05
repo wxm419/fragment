@@ -7,9 +7,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import com.androidquery.AQuery;
 import com.fheebiy.R;
-import com.fheebiy.activity.*;
-import com.fheebiy.activity.pulltorefresh.LauncherActivity;
+import com.fheebiy.activity.aquery.AQueryActivity;
+import com.fheebiy.activity.communicate.Communicate2Activity;
+import com.fheebiy.activity.communicate.Communicate3Activity;
+import com.fheebiy.activity.communicate.CommunicateActivity;
+import com.fheebiy.activity.lite.LiteHttpActivity;
+import com.fheebiy.activity.lite.SwipeRefreshLayoutActivity;
+import com.fheebiy.activity.main.*;
+import com.fheebiy.activity.other.PopupWindowActivity;
+import com.fheebiy.activity.other.SlideToDelLvActivity;
+import com.fheebiy.activity.other.ThemeStyleActivity;
+import com.fheebiy.activity.overscroll.ScrollTestActivity;
+import com.fheebiy.activity.pulltorefresh.PullMainActivity;
+import com.fheebiy.activity.vp.VpAnimationActivity;
+import com.fheebiy.activity.vp.VpComplexActivity;
+import com.fheebiy.activity.vp.VpStripActivity;
 
 /**
  * Created by bob zhou on 14-7-30.
@@ -50,6 +64,10 @@ public class TabOneFragment extends Fragment {
 
     private Button btn17;
 
+    private Button btn18;
+
+    private AQuery aq;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +78,7 @@ public class TabOneFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab1, container, false);
        // btn1 = (Button)view.findViewById(R.id.tb1_btn1);
+        aq = new AQuery(view);
         btn2 = (Button)view.findViewById(R.id.tb1_btn2);
         btn3 = (Button)view.findViewById(R.id.tb1_btn3);
         btn4 = (Button)view.findViewById(R.id.tb1_btn4);
@@ -76,6 +95,8 @@ public class TabOneFragment extends Fragment {
         btn15 = (Button)view.findViewById(R.id.tb1_btn15);
         btn16 = (Button)view.findViewById(R.id.tb1_btn16);
         btn17 = (Button)view.findViewById(R.id.tb1_btn17);
+        //btn18 = (Button)view.findViewById(R.id.tb1_btn18);
+        btn18 = aq.id(R.id.tb1_btn18).getButton();
 
     /*    btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -191,19 +212,29 @@ public class TabOneFragment extends Fragment {
         btn16.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), LauncherActivity.class);
+                Intent intent = new Intent(getActivity(), PullMainActivity.class);
                 startActivity(intent);
             }
         });
-        btn17.setOnClickListener(new View.OnClickListener() {
+
+
+        aq.id(R.id.tb1_btn17).clicked(this, "gotoLiteHttpActivity");
+
+
+        aq.id(R.id.tb1_btn18).clicked(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), LiteHttpActivity.class);
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AQueryActivity.class);
                 startActivity(intent);
             }
         });
-
-
         return view;
     }
+
+
+    public void gotoLiteHttpActivity(){
+        Intent intent = new Intent(getActivity(), LiteHttpActivity.class);
+        startActivity(intent);
+    }
+
 }

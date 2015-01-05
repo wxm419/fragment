@@ -1,34 +1,96 @@
 package com.fheebiy.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import com.androidquery.AQuery;
 import com.fheebiy.R;
+import com.fheebiy.activity.aquery.AQueryActivity;
+import com.fheebiy.activity.communicate.Communicate2Activity;
+import com.fheebiy.activity.communicate.Communicate3Activity;
+import com.fheebiy.activity.communicate.CommunicateActivity;
+import com.fheebiy.activity.lite.LiteHttpActivity;
+import com.fheebiy.activity.lite.SwipeRefreshLayoutActivity;
+import com.fheebiy.activity.main.Main2Activity;
+import com.fheebiy.activity.main.Main3Activity;
+import com.fheebiy.activity.main.MainActivity;
+import com.fheebiy.activity.other.PopupWindowActivity;
+import com.fheebiy.activity.other.SlideToDelLvActivity;
+import com.fheebiy.activity.overscroll.ScrollTestActivity;
+import com.fheebiy.activity.pulltorefresh.PullMainActivity;
+import com.fheebiy.activity.vp.VpActivity;
+import com.fheebiy.activity.vp.VpAnimationActivity;
+import com.fheebiy.activity.vp.VpComplexActivity;
+import com.fheebiy.activity.vp.VpStripActivity;
+import com.fheebiy.adapter.IndexAdapter;
+import com.fheebiy.model.UIModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * created by bob zhou 2014.08.01
- *
+ * <p/>
  * 用于测试fragment
  */
 public class IndexActivity extends FragmentActivity {
 
-  /*  private Button btn1;
+    private AQuery aq;
 
-    private Button btn2;
+    private ListView listView;
 
-    private TabOneFragment oneFragment;
-
-    private TabTwoFragment twoFragment;
-
-    private FragmentManager fragmentManager;
-
-    private FragmentTransaction fragmentTransaction;
-*/
+    private IndexAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.index);
+        aq = new AQuery(this);
+        listView = aq.id(R.id.listView).getListView();
+        adapter = new IndexAdapter(this);
+        listView.setAdapter(adapter);
+        adapter.setList(getUIList());
+        bindListener();
+    }
+
+
+    public List<UIModel> getUIList() {
+        List<UIModel> list = new ArrayList<UIModel>();
+        list.add(new UIModel("to aquery", AQueryActivity.class));
+        list.add(new UIModel("to lite http", LiteHttpActivity.class));
+        list.add(new UIModel("to OverScrollView", ScrollTestActivity.class));
+        list.add(new UIModel("to SwipeRefreshLayout", SwipeRefreshLayoutActivity.class));
+        list.add(new UIModel("to window", PopupWindowActivity.class));
+        list.add(new UIModel("to del list view", SlideToDelLvActivity.class));
+        list.add(new UIModel("to communicate3", Communicate3Activity.class));
+        list.add(new UIModel("to communicate2", Communicate2Activity.class));
+        list.add(new UIModel("to communicate1", CommunicateActivity.class));
+        list.add(new UIModel("to main3", Main3Activity.class));
+        list.add(new UIModel("to main2", Main2Activity.class));
+        list.add(new UIModel("to main1", MainActivity.class));
+        list.add(new UIModel("to vp strip", VpStripActivity.class));
+        list.add(new UIModel("to animation vp", VpAnimationActivity.class));
+        list.add(new UIModel("to complex vp", VpComplexActivity.class));
+        list.add(new UIModel("to simple vp", VpActivity.class));
+        list.add(new UIModel("to pull main", PullMainActivity.class));
+
+        return list;
+    }
+
+
+    public void bindListener() {
+        aq.id(listView).itemClicked(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                UIModel model = (UIModel) parent.getAdapter().getItem(position);
+                Intent intent = new Intent(IndexActivity.this,model.getCls());
+                startActivity(intent);
+            }
+        });
     }
 
 
