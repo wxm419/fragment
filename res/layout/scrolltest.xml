@@ -28,6 +28,7 @@
                         android:orientation="vertical"
                         app:divideHeight="1dp"
                         app:divider="@color/orange"
+                        app:itemSelector="@drawable/list_item_selector2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                 </com.fheebiy.view.ExpandLinearLayout>

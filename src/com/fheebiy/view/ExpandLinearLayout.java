@@ -24,6 +24,7 @@ public class ExpandLinearLayout extends LinearLayout {
     };
     private int divider;
     private int divideHeight;
+    private int itemSelector;
 
     public ExpandLinearLayout(Context context) {
         super(context);
@@ -38,6 +39,7 @@ public class ExpandLinearLayout extends LinearLayout {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ExpandLinearLayout);
         divider = a.getResourceId(R.styleable.ExpandLinearLayout_divider,R.drawable.listview_divider);            // <!-- format="color|reference" 如果写两个的话，代码里写getDrawable -->
         divideHeight = (int) a.getDimension(R.styleable.ExpandLinearLayout_divideHeight, 1f);
+        itemSelector = a.getResourceId(R.styleable.ExpandLinearLayout_itemSelector, R.drawable.list_item_selector);
         a.recycle();
     }
 
@@ -77,16 +79,19 @@ public class ExpandLinearLayout extends LinearLayout {
 
     private void addItemView(int i) {
         View view = adapter.getView(i, null, this);
-        this.addView(view);
-        final int tmp = i;
-        view.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (onItemClickListener != null) {
-                    onItemClickListener.onItemClick(view, tmp);
+        if (view != null) {
+            view.setBackgroundResource(itemSelector);
+            this.addView(view);
+            final int tmp = i;
+            view.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onItemClickListener != null) {
+                        onItemClickListener.onItemClick(view, tmp);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     public void addDivider() {
