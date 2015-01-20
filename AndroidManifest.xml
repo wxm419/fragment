@@ -57,7 +57,7 @@
             </intent-filter>-->
         </activity>
         <activity android:name=".activity.overscroll.ScrollTestActivity"/>
-        <activity android:name=".activity.lite.SwipeRefreshLayoutActivity"/>
+        <activity android:name=".activity.other.SwipeRefreshLayoutActivity"/>
 
         <activity android:name=".activity.pulltorefresh.PullMainActivity"/>
         <activity android:name=".activity.pulltorefresh.PullToRefreshExpandableListActivity"/>

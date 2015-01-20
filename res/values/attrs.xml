@@ -97,7 +97,8 @@
     </declare-styleable>
 
     <declare-styleable name="ExpandLinearLayout">
-        <attr name="divide" format="reference" />
+        <attr name="divider" format="reference" />    <!-- format="color|reference" 如果写两个的话，代码里写getDrawable -->
         <attr name="divideHeight" format="dimension" />
+        <attr name="selector" format="reference"/>
     </declare-styleable>
 </resources>

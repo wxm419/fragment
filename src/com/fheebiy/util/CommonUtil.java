@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 import com.fheebiy.model.Hero;
 
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public class CommonUtil {
     }
 
 
-    public static List<Hero> getInitData() {
+    public static List<Hero> getHeroListData() {
         List<Hero> heros = new ArrayList<Hero>();
 
         for (int i = 0; i < 10; i++) {
@@ -75,4 +76,24 @@ public class CommonUtil {
 
         return heros;
     }
+
+
+    public static void toast(Context ctx, String msg){
+        Toast.makeText(ctx,msg,Toast.LENGTH_SHORT).show();
+    }
+
+
+
+    public static List<String> getStringList(){
+        List<String> list = new ArrayList<String>();
+
+        for (int i = 0; i < 10; i++) {
+            list.add("像风一样自由"+i);
+        }
+
+        return list;
+    }
+
+
+
 }

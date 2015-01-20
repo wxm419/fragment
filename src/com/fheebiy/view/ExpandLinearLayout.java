@@ -3,6 +3,7 @@ package com.fheebiy.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.BaseAdapter;
@@ -35,7 +36,7 @@ public class ExpandLinearLayout extends LinearLayout {
 
     private void initWithStyle(Context context, AttributeSet attrs) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ExpandLinearLayout);
-        divider = a.getResourceId(R.styleable.ExpandLinearLayout_divide, R.drawable.listview_divider);
+        divider = a.getResourceId(R.styleable.ExpandLinearLayout_divider,R.drawable.listview_divider);            // <!-- format="color|reference" 如果写两个的话，代码里写getDrawable -->
         divideHeight = (int) a.getDimension(R.styleable.ExpandLinearLayout_divideHeight, 1f);
         a.recycle();
     }
@@ -72,26 +73,6 @@ public class ExpandLinearLayout extends LinearLayout {
                 addDivider();
             }
         }
-
-
-      /*  for (int i = 0; i < adapter.getCount(); i++) {
-            View root = adapter.getView(i, null, this);
-            final int j = i;
-            if (onItemClickListener != null)
-                root.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        onItemClickListener.onItemClick(view, j);
-                    }
-                });
-            this.addView(root);
-            if (i != (adapter.getCount() - 1)) {//不是最后一个
-                View div = new View(getContext());
-                div.setBackgroundResource(divider);
-                LayoutParams params = new LayoutParams(-1, divideHeight);
-                addView(div, params);
-            }
-        }*/
     }
 
     private void addItemView(int i) {
@@ -120,9 +101,7 @@ public class ExpandLinearLayout extends LinearLayout {
     }
 
     public interface OnItemClickListener {
-
         public void onItemClick(View view, int index);
-
     }
 
 }

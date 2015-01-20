@@ -19,11 +19,11 @@ public class AqImageLoadActivity extends Activity {
 
         aq = new AQuery(this);
 
-        aq.id(R.id.img1).image("http://img1.gtimg.com/11/1144/114402/11440280_980x1200_0.jpg");
-        aq.id(R.id.img2).image("http://img1.gtimg.com/11/1144/114402/11440277_980x1200_0.jpg");
-        aq.id(R.id.img3).image("http://img1.gtimg.com/11/1144/114402/11440284_980x1200_0.jpg");
-        aq.id(R.id.img4).image("http://img1.gtimg.com/11/1144/114419/11441977_980x1200_0.jpg");
-        aq.id(R.id.img5).image("http://img1.gtimg.com/11/1144/114419/11441978_980x1200_0.jpg");
-        aq.id(R.id.img6).image("http://img1.gtimg.com/11/1144/114419/11441979_980x1200_0.jpg");
+        aq.id(R.id.img1).image("http://souyue-image.b0.upaiyun.com/user/0004/15063854.jpg");
+        aq.id(R.id.img2).image("http://souyue-image.b0.upaiyun.com/user/0004/15069728.jpg");
+        aq.id(R.id.img3).image("http://souyue-image.b0.upaiyun.com/user/0004/15066483.jpg");
+        aq.id(R.id.img4).image("http://souyue-image.b0.upaiyun.com/user/0004/15065031.jpg");
+        aq.id(R.id.img5).image("http://souyue-image.b0.upaiyun.com/user/0004/15067594.jpg");
+        aq.id(R.id.img6).image("http://souyue-image.b0.upaiyun.com/user/0004/15068947.jpg");
     }
 }

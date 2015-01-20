@@ -60,7 +60,7 @@ public class HeroLvAdapter extends BaseAdapter{
             skillTv.setText(hero.getSkill());
             fromTv.setText(hero.getFrom());
         }
-
+        view.setBackgroundResource(R.drawable.list_item_selector);
         return view;
     }
 }

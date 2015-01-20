@@ -65,14 +65,14 @@ public class ScrollTestActivity extends Activity {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 12) {     //上拉加载更多
-                list.addAll(CommonUtil.getInitData());
+                list.addAll(CommonUtil.getHeroListData());
                 adapter.notifyDataSetChanged();
                 isLoading = false;
             }
 
             if (msg.what == 11) {     //刷新
                 list.clear();
-                list.addAll(CommonUtil.getInitData());
+                list.addAll(CommonUtil.getHeroListData());
                 adapter.notifyDataSetChanged();
                 isRefreshing = false;
                 refreshImg.clearAnimation();
@@ -90,7 +90,7 @@ public class ScrollTestActivity extends Activity {
 
         initAnimation();
 
-        list = CommonUtil.getInitData();
+        list = CommonUtil.getHeroListData();
         adapter = new HeroLvAdapter(this, list);
         listView.setAdapter(adapter);
         scrollView = (OverScrollView) findViewById(R.id.scrollview);

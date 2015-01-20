@@ -27,6 +27,7 @@
                         android:id="@+id/listview_layout"
                         android:orientation="vertical"
                         app:divideHeight="1dp"
+                        app:divider="@color/orange"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                 </com.fheebiy.view.ExpandLinearLayout>

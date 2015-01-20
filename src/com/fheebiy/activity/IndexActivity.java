@@ -13,7 +13,7 @@ import com.fheebiy.activity.communicate.Communicate2Activity;
 import com.fheebiy.activity.communicate.Communicate3Activity;
 import com.fheebiy.activity.communicate.CommunicateActivity;
 import com.fheebiy.activity.lite.LiteHttpActivity;
-import com.fheebiy.activity.lite.SwipeRefreshLayoutActivity;
+import com.fheebiy.activity.other.SwipeRefreshLayoutActivity;
 import com.fheebiy.activity.main.Main2Activity;
 import com.fheebiy.activity.main.Main3Activity;
 import com.fheebiy.activity.main.MainActivity;
