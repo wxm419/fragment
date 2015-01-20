@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.fheebiy.R;
 import com.fheebiy.model.Hero;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,16 +20,16 @@ public class HeroLvAdapter extends BaseAdapter{
     private Context context;
 
 
-    private List<Hero> list;
+    private List<Hero> list = new ArrayList<Hero>();
 
-
-    public HeroLvAdapter(Context context) {
-        this.context = context;
-    }
 
     public HeroLvAdapter(Context context, List<Hero> list) {
         this.context = context;
         this.list = list;
+    }
+
+    public HeroLvAdapter(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -62,5 +63,18 @@ public class HeroLvAdapter extends BaseAdapter{
         }
         view.setBackgroundResource(R.drawable.list_item_selector);
         return view;
+    }
+
+
+    public void setList(List<Hero> list){       //第一次加载或者下拉刷新
+        this.list.clear();
+        this.list.addAll(list);
+        notifyDataSetChanged();
+    }
+
+
+    public void addList(List<Hero> list){       //加载更多
+        this.list.addAll(list);
+        notifyDataSetChanged();
     }
 }

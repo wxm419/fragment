@@ -43,8 +43,6 @@ public class ScrollTestActivity extends Activity {
 
     private ExpandLinearLayout listView;
 
-    private List<Hero> list;
-
     private HeroLvAdapter adapter;
 
     private boolean isLoading;
@@ -65,15 +63,13 @@ public class ScrollTestActivity extends Activity {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 12) {     //上拉加载更多
-                list.addAll(CommonUtil.getHeroListData());
+                adapter.addList(CommonUtil.getHeroListData());
                 adapter.notifyDataSetChanged();
                 isLoading = false;
             }
 
             if (msg.what == 11) {     //刷新
-                list.clear();
-                list.addAll(CommonUtil.getHeroListData());
-                adapter.notifyDataSetChanged();
+                adapter.setList(CommonUtil.getHeroListData());
                 isRefreshing = false;
                 refreshImg.clearAnimation();
             }
@@ -90,9 +86,9 @@ public class ScrollTestActivity extends Activity {
 
         initAnimation();
 
-        list = CommonUtil.getHeroListData();
-        adapter = new HeroLvAdapter(this, list);
+        adapter = new HeroLvAdapter(this);
         listView.setAdapter(adapter);
+        adapter.setList(CommonUtil.getHeroListData());
         scrollView = (OverScrollView) findViewById(R.id.scrollview);
         scrollView.setOnScrollChangedListener(new OverScrollView.OnScrollChangedListener() {
             @Override
