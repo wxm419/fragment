@@ -37,8 +37,10 @@ public class SwipeRefreshLayoutActivity extends Activity implements SwipeRefresh
                 android.R.color.holo_orange_light, android.R.color.holo_red_light);
         listView = (ListView)findViewById(R.id.listView);
         list = getInitData();
-        adapter = new HeroLvAdapter(this, list);
+        adapter = new HeroLvAdapter(this);
         listView.setAdapter(adapter);
+
+        adapter.setList(list);
     }
 
     public void onRefresh() { if(!isRefresh){ isRefresh = true;

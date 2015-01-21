@@ -23,11 +23,6 @@ public class HeroLvAdapter extends BaseAdapter{
     private List<Hero> list = new ArrayList<Hero>();
 
 
-    public HeroLvAdapter(Context context, List<Hero> list) {
-        this.context = context;
-        this.list = list;
-    }
-
     public HeroLvAdapter(Context context) {
         this.context = context;
     }
@@ -61,7 +56,7 @@ public class HeroLvAdapter extends BaseAdapter{
             skillTv.setText(hero.getSkill());
             fromTv.setText(hero.getFrom());
         }
-        //view.setBackgroundResource(R.drawable.list_item_selector);
+       // view.setBackgroundResource(R.drawable.list_item_selector);
         return view;
     }
 

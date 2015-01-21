@@ -46,8 +46,9 @@ public class PersonalCenterActivity extends Activity {
         listView.addHeaderView(headerView);
         list = getInitData();
 
-        adapter = new HeroLvAdapter(this, list);
+        adapter = new HeroLvAdapter(this);
         listView.setAdapter(adapter);
+        adapter.setList(list);
     }
 
 

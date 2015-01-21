@@ -65,8 +65,9 @@ public class TabThreeFragment extends Fragment {
         headerView.setPadding(0,-400,0,0);*/
         bindListener();
         list = getInitData();
-        adapter = new HeroLvAdapter(getActivity(), list);
+        adapter = new HeroLvAdapter(getActivity());
         listView.setAdapter(adapter);
+        adapter.setList(list);
         Log.d(TAG, "onCreateView");
         return view;
     }
