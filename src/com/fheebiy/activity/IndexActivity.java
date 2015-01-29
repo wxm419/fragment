@@ -21,6 +21,7 @@ import com.fheebiy.activity.other.PopupWindowActivity;
 import com.fheebiy.activity.other.SlideToDelLvActivity;
 import com.fheebiy.activity.overscroll.ScrollTestActivity;
 import com.fheebiy.activity.pulltorefresh.PullMainActivity;
+import com.fheebiy.activity.service.ServiceMainActivity;
 import com.fheebiy.activity.vp.VpActivity;
 import com.fheebiy.activity.vp.VpAnimationActivity;
 import com.fheebiy.activity.vp.VpComplexActivity;
@@ -60,6 +61,7 @@ public class IndexActivity extends FragmentActivity {
 
     public List<UIModel> getUIList() {
         List<UIModel> list = new ArrayList<UIModel>();
+        list.add(new UIModel("to service", ServiceMainActivity.class));
         list.add(new UIModel("to aquery", AQueryActivity.class));
         list.add(new UIModel("to lite http", LiteHttpActivity.class));
         list.add(new UIModel("to OverScrollView", ScrollTestActivity.class));
