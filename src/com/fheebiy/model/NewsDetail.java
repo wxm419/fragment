@@ -1,11 +1,12 @@
 package com.fheebiy.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Lenovo on 14-12-24.
  */
-public class NewsDetail {
+public class NewsDetail implements Serializable{
 
     public String category;
     public String title;

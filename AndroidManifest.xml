@@ -4,7 +4,7 @@
           android:versionCode="1"
           android:versionName="1.0">
 
-    <uses-sdk android:minSdkVersion="8"
+    <uses-sdk android:minSdkVersion="10"
               android:targetSdkVersion="16"/>
 
 
@@ -73,7 +73,14 @@
         <activity android:name=".activity.aquery.AQueryActivity"/>
         <activity android:name=".activity.aquery.AqImageLoadActivity"/>
         <activity android:name=".activity.service.ServiceMainActivity"/>
+        <activity android:name=".activity.service.RemoteServiceActivity"/>
+        <activity android:name=".activity.async.AsyncActivity"/>
 
         <service android:name=".service.MyService"/>
+        <service android:name=".service.MyRemoteService" android:process=":remote">
+            <intent-filter>
+                <action android:name="com.fheebiy.service.MyRemoteService"/>
+            </intent-filter>
+        </service>
     </application>
 </manifest>

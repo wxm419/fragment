@@ -2,7 +2,13 @@ package com.fheebiy.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Rect;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Environment;
+import android.util.*;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
@@ -10,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import com.fheebiy.model.Hero;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,6 +101,48 @@ public class CommonUtil {
         return list;
     }
 
+
+    /**
+     * 获取sdcard下缓存文件夹
+     *
+     * @param context ctx
+     * @param uniqueName 文件夹的名字
+     * @return
+     */
+
+    public File getDiskCacheDir(Context context, String uniqueName) {
+        String cachePath;
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+                || !Environment.isExternalStorageRemovable()) {
+            cachePath = context.getExternalCacheDir().getPath();
+        } else {
+            cachePath = context.getCacheDir().getPath();
+        }
+        return new File(cachePath + File.separator + uniqueName);
+    }
+
+
+    public int getAppVersion(Context context) {
+        try {
+            PackageInfo info = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            return info.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return 1;
+    }
+
+
+    public static boolean isNetworkAvailable(Context context) {
+        try {
+            ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            return networkInfo != null && networkInfo.isAvailable() && networkInfo.isConnected();
+        } catch (Exception e) {
+            android.util.Log.v("connectivity", e.toString());
+        }
+        return false;
+    }
 
 
 }

@@ -1,9 +1,13 @@
 package com.fheebiy.service;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import com.fheebiy.R;
+import com.fheebiy.activity.main.MainActivity;
 import com.fheebiy.util.Log;
 
 /**
@@ -20,6 +24,22 @@ public class MyService extends Service {
     @Override
     public void onCreate() {
         Log.d(TAG, "onCreate");
+        //前台service start
+        Notification notification = new Notification();
+        notification.icon = R.drawable.ic_launcher;
+        notification.tickerText = "你有一条新的短信";
+        notification.when = System.currentTimeMillis();
+        notification.flags |= Notification.FLAG_AUTO_CANCEL;
+
+
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
+                notificationIntent, 0);
+        notification.setLatestEventInfo(this, "将军百战死", "壮士十年归",
+                pendingIntent);
+        startForeground(1, notification);
+        //Thread.currentThread().getId();
+        //前台service end
         super.onCreate();
     }
 

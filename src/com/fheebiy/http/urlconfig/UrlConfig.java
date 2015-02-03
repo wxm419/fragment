@@ -12,4 +12,6 @@ public class UrlConfig {
     public static final String HOMEPAGE_NEWS = HOST + "webdata/homepage.news.groovy";
 
 
+    public static final String CIRCLE_MENU = HOST + "interest/interest.menu.info.groovy";
+
 }
