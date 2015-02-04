@@ -75,6 +75,7 @@
         <activity android:name=".activity.service.ServiceMainActivity"/>
         <activity android:name=".activity.service.RemoteServiceActivity"/>
         <activity android:name=".activity.async.AsyncActivity"/>
+        <activity android:name=".activity.basic.EventDispatcherActivity"/>
 
         <service android:name=".service.MyService"/>
         <service android:name=".service.MyRemoteService" android:process=":remote">

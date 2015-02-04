@@ -10,6 +10,7 @@ import com.androidquery.AQuery;
 import com.fheebiy.R;
 import com.fheebiy.activity.aquery.AQueryActivity;
 import com.fheebiy.activity.async.AsyncActivity;
+import com.fheebiy.activity.basic.EventDispatcherActivity;
 import com.fheebiy.activity.communicate.Communicate2Activity;
 import com.fheebiy.activity.communicate.Communicate3Activity;
 import com.fheebiy.activity.communicate.CommunicateActivity;
@@ -63,6 +64,7 @@ public class IndexActivity extends FragmentActivity {
 
     public List<UIModel> getUIList() {
         List<UIModel> list = new ArrayList<UIModel>();
+        list.add(new UIModel("to event dispatcher", EventDispatcherActivity.class));
         list.add(new UIModel("to async http", AsyncActivity.class));
         list.add(new UIModel("to remote service", RemoteServiceActivity.class));
         list.add(new UIModel("to service", ServiceMainActivity.class));

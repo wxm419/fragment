@@ -18,6 +18,7 @@ import com.fheebiy.util.Log;
  * Created by bob zhou on 15-1-29.
  * <p/>
  * 远程服务
+ * 需要另外一个应用程序，已经在git仓库里了，叫做RemoteClient
  */
 public class RemoteServiceActivity extends Activity implements View.OnClickListener {
 

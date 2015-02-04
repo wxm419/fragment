@@ -1,0 +1,39 @@
+具体，请看EventDispatcherActivity，代码和两篇博客
+
+我个人理解如下:
+1.点击Button的时候，首先调用的是ViewGroup的dispatchTouchEvent(依次向上查找，比如Button在一个LinearLayout中，向上依次查找，
+LinearLayout--->ViewGroup),然后在ViewGroup内部，有一次遍历，判断你点击的区域是否是某个子view，这里点击的是Button，所以必然
+是点击的子View，这时候后调用子View(此处是Button,也就是View类的)的dispatchTouchEvent方法，子View如果有设置了OnTouchListener,则先执行onTouch
+方法，如果onTouch返回true，则直接返回true了，事件被onTouche消费了，此时Button的Click事件不被执行。如果返回false,则继续调用View
+onTouchEvent方法，在其中执行了performClick()来执行子View的click事件。不论上面哪种情况(子view的事件是否被onTouch消费)，此子View
+dispatchEvent方法都会返回true， 回到ViewGroup的dispatchTouchEvent中，有个判断，会直接返回true,这方法就走完了，此时以后的代码不
+不会执行，也就是说点击子View时，事件被消费了，ViewGroup就不会响应onTouch事件。
+
+
+
+2.点击空白区域的时候，还是先调用ViewGroup的dispatchTouchEvent，只是，遍历的时候，没有通过坐标找到子View，自然也不存在子View
+的dispatchTouchEvent，方法继续执行，然后调用了return super.dispatchTouchEvent(ev);  此时这个super就是View类(因为ViewGroup的
+父类就是View)，然后又像上面一样，调用View的dispatchTouchEvent,和上面第一个情况就一样了。
+
+
+看起来很生涩难懂，也许过一段时间再看此文字描述就看不懂了(需要借助源码分析，请看csdn博客即可)，但是，需要记住几点:
+1.点击屏幕时首先肯定是调用ViewGroup的dispatchTouchEvent方法，然后遍历子View，调用子View的dispatchTouchEvent方法。
+2.所有子View都是View的子类，归根结底还是调用View的dispatchTouchEvent方法。包括，ViewGroup点击子View(不用说，被子View消费了)
+和空白区(调用ViewGroup的父类的dispatchTouchEvent，还是View).
+3.onTouch和onTouchEvent方法的区别.
+    从源码中可以看出，这两个方法都是在View的dispatchTouchEvent中调用的，onTouch优先于onTouchEvent执行。
+    如果在onTouch方法中通过返回true将事件消费掉，onTouchEvent将不会再执行。
+
+    enable 和clickable(能否点击)是两个不同的概念，切不可混为一谈，一般一个View都是enable的，但是clickable就不一定了.
+    比如ImageView clickable = false，你对ImageView设置setOnTouchListener,回调中你会发现，只有ACTION_DOWN这种状态，
+    这是因为ImageView默认是clickable = false，调用了onTouch方法之后，调用onTouchEvent时，判断clickable == false
+    就直接返回了，所以没有ACTION_UP,ACTION_MOVE之类的了。
+
+    但是如果你设置了对ImageView设置了onClickListener，ACTION_DOWN,ACTION_UP,ACTION_MOVE都有了，这是因为你设置onClickListener
+    的时候，ImageView的clickable 也设置成了true.
+
+
+
+
+
+
