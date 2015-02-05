@@ -41,7 +41,7 @@ public class MenuPopupWindow extends PopupWindow{
 
     private void init(Context context){
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View contentView = inflater.inflate(R.layout.popmenu,null);
+        View contentView = inflater.inflate(R.layout.popmenu1,null);
         setContentView(contentView);
         /**
          * 这个地方，有个很有意思的事情，如果去掉这设置contentView高度或宽度的代码，发现，根本看不到window弹出了
@@ -68,9 +68,17 @@ public class MenuPopupWindow extends PopupWindow{
          *
          * 自此我也有些感悟，比如以前在做这个window的时候，只是在做而已，至于上述疑惑，没有去理解，更没有去研究，这实在
          * 是肤浅至极。应用只能是从表面上解决问题，只有扎实的理论基础与实践结合才能做到无往不利，事半功倍.
+         *
+         * 至于此PopupWindow，必须设置高度和宽度，但是，如果用R.layout.popmenu，要想显示的设置， android:layout_width="xxdp"
+         * android:layout_height="xxdp"在R.layout.popmenu设置是没用的，必须用
+         *  this.setWidth(ctx.getResources().getDimensionPixelSize(R.dimen.space_180));
+         *  this.setHeight(ctx.getResources().getDimensionPixelSize(R.dimen.space_180));
+         * 但是用R.layout.popmenu1，则设置即可
+         *   this.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+         *   this.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
          */
 
-        this.setWidth(ctx.getResources().getDimensionPixelSize(R.dimen.space_180)); //这两句代码缺一不可，必须同时存在
+        this.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT); //这两句代码缺一不可，必须同时存在
         this.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         this.setAnimationStyle(R.style.AnimationPreview);
         // 设置SelectPicPopupWindow弹出窗体可点击
