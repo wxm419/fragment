@@ -25,6 +25,10 @@ import java.util.List;
  */
 public class CommonUtil {
 
+
+    public static final String LOG_TAG = "COMMON_TAG";
+
+
     /**
      * 将dp转化为px
      * @param context
