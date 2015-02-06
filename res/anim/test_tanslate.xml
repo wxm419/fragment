@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  
+平移动画  
+       android:fromXDelta="0"  从x轴点的坐标  
+       android:toXDelta="200"  移动到x轴点的坐标  
+       android:fromYDelta="0"  
+       android:toYDelta="200"  
+100%p p相当于Parent  
+-->
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+        android:fromXDelta="0"
+        android:toXDelta="500"
+        android:fromYDelta="0"
+        android:toYDelta="0"
+        android:duration="2000">
+</translate>

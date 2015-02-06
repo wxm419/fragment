@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+缩放动画
+       android:fromXScale="1.0" 从x轴缩放的倍数
+       android:toXScale="2.0" 到x轴缩放的倍数
+       android:fromYScale="1.0" 从y轴缩放的倍数
+       android:toYScale="0.5" 到y轴缩放的倍数
+       android:pivotX="50%"  以图片自己的中心为中心点缩放
+       android:pivotY="50%"
+-->
+<scale xmlns:android="http://schemas.android.com/apk/res/android"
+       android:fromXScale="1.0"
+       android:toXScale="2.0"
+       android:fromYScale="1.0"
+       android:toYScale="2.0"
+       android:pivotX="50%"
+       android:pivotY="50%"
+       android:duration="2000">
+</scale>

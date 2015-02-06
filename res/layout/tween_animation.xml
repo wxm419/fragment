@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:weightSum="1">
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:paddingTop="30dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:layout_height="100dp"
+            >
+
+        <RelativeLayout
+                android:id="@+id/arrow_layout"
+                android:layout_width="0dp"
+                android:background="@color/orange"
+                android:layout_weight="1"
+                android:layout_height="50dp">
+
+
+            <ImageView
+                    android:layout_centerInParent="true"
+                    android:id="@+id/arrow_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/arrow"/>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1">
+
+
+            <ImageView
+                    android:id="@+id/purple_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ball2"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1">
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1">
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:paddingTop="30dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:layout_height="100dp">
+
+
+        <ImageView
+                android:id="@+id/green_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ball7"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:paddingTop="30dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:layout_weight="0.50">
+
+
+        <ImageView
+                android:id="@+id/red_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:src="@drawable/ball1"
+                android:layout_gravity="center_vertical"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

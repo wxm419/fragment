@@ -8,6 +8,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import com.androidquery.AQuery;
 import com.fheebiy.R;
+import com.fheebiy.activity.animation.FrameAnimationActivity;
+import com.fheebiy.activity.animation.TweenAnimationActivity;
 import com.fheebiy.activity.aquery.AQueryActivity;
 import com.fheebiy.activity.async.AsyncActivity;
 import com.fheebiy.activity.basic.EventDispatcherActivity;
@@ -64,6 +66,8 @@ public class IndexActivity extends FragmentActivity {
 
     public List<UIModel> getUIList() {
         List<UIModel> list = new ArrayList<UIModel>();
+        list.add(new UIModel("to tween animation", TweenAnimationActivity.class));
+        list.add(new UIModel("to frame animation", FrameAnimationActivity.class));
         list.add(new UIModel("to event dispatcher", EventDispatcherActivity.class));
         list.add(new UIModel("to async http", AsyncActivity.class));
         list.add(new UIModel("to remote service", RemoteServiceActivity.class));
