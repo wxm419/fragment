@@ -79,6 +79,7 @@
         <activity android:name=".activity.animation.TweenAnimationActivity"/>
         <activity android:name=".activity.animation.FrameAnimationActivity"/>
         <activity android:name=".activity.basic.SelfDrawViewActivity"/>
+        <activity android:name=".activity.basic.CombinationViewActivity"/>
 
         <service android:name=".service.MyService"/>
         <service android:name=".service.MyRemoteService" android:process=":remote">

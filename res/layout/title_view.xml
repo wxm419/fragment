@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#383838"
+        android:gravity="center_vertical">
+
+    <ImageButton
+            android:id="@+id/titleview_back_imgBtn"
+            style="@style/HoloButton.Borderless.Back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:scaleType="center"
+            android:onClick="onBackPressClick"
+            android:src="@drawable/goback_button_selector">
+    </ImageButton>
+
+    <TextView
+            android:id="@+id/titleview_text_tv"
+            android:layout_centerInParent="true"
+            android:textSize="18sp"
+            android:gravity="center_vertical"
+            android:text="test"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#FFFFFF"/>
+
+
+    <ImageButton
+            android:id="@+id/titleview_menu_imgBtn"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:scaleType="center"
+            android:layout_marginRight="10dp"
+            style="@style/HoloButton.Borderless.Back"
+            android:src="@drawable/title_bar_menu_selector">
+    </ImageButton>
+
+
+</RelativeLayout>
