@@ -78,6 +78,7 @@
         <activity android:name=".activity.basic.EventDispatcherActivity"/>
         <activity android:name=".activity.animation.TweenAnimationActivity"/>
         <activity android:name=".activity.animation.FrameAnimationActivity"/>
+        <activity android:name=".activity.basic.SelfDrawViewActivity"/>
 
         <service android:name=".service.MyService"/>
         <service android:name=".service.MyRemoteService" android:process=":remote">

@@ -13,6 +13,7 @@ import com.fheebiy.activity.animation.TweenAnimationActivity;
 import com.fheebiy.activity.aquery.AQueryActivity;
 import com.fheebiy.activity.async.AsyncActivity;
 import com.fheebiy.activity.basic.EventDispatcherActivity;
+import com.fheebiy.activity.basic.SelfDrawViewActivity;
 import com.fheebiy.activity.communicate.Communicate2Activity;
 import com.fheebiy.activity.communicate.Communicate3Activity;
 import com.fheebiy.activity.communicate.CommunicateActivity;
@@ -66,6 +67,7 @@ public class IndexActivity extends FragmentActivity {
 
     public List<UIModel> getUIList() {
         List<UIModel> list = new ArrayList<UIModel>();
+        list.add(new UIModel("to self draw view", SelfDrawViewActivity.class));
         list.add(new UIModel("to tween animation", TweenAnimationActivity.class));
         list.add(new UIModel("to frame animation", FrameAnimationActivity.class));
         list.add(new UIModel("to event dispatcher", EventDispatcherActivity.class));
