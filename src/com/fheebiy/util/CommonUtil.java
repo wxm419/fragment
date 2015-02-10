@@ -28,6 +28,7 @@ public class CommonUtil {
 
     public static final String LOG_TAG = "COMMON_TAG";
 
+    public static final String LOG_TAG_S = "COMMON_TAG_S";
 
     /**
      * 将dp转化为px

@@ -72,4 +72,16 @@ public class HeroLvAdapter extends BaseAdapter{
         this.list.addAll(list);
         notifyDataSetChanged();
     }
+
+    public void addOne(Hero hero){
+        this.list.add(0, hero);
+        notifyDataSetChanged();
+    }
+
+    public void subOne(int index){
+        this.list.remove(index);
+        notifyDataSetChanged();
+    }
+
+
 }
