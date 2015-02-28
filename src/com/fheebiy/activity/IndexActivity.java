@@ -12,9 +12,7 @@ import com.fheebiy.activity.animation.FrameAnimationActivity;
 import com.fheebiy.activity.animation.TweenAnimationActivity;
 import com.fheebiy.activity.aquery.AQueryActivity;
 import com.fheebiy.activity.async.AsyncActivity;
-import com.fheebiy.activity.basic.CombinationViewActivity;
-import com.fheebiy.activity.basic.EventDispatcherActivity;
-import com.fheebiy.activity.basic.SelfDrawViewActivity;
+import com.fheebiy.activity.basic.*;
 import com.fheebiy.activity.communicate.Communicate2Activity;
 import com.fheebiy.activity.communicate.Communicate3Activity;
 import com.fheebiy.activity.communicate.CommunicateActivity;
@@ -23,7 +21,6 @@ import com.fheebiy.activity.other.SwipeRefreshLayoutActivity;
 import com.fheebiy.activity.main.Main2Activity;
 import com.fheebiy.activity.main.Main3Activity;
 import com.fheebiy.activity.main.MainActivity;
-import com.fheebiy.activity.other.PopupWindowActivity;
 import com.fheebiy.activity.other.SlideToDelLvActivity;
 import com.fheebiy.activity.overscroll.ScrollTestActivity;
 import com.fheebiy.activity.pulltorefresh.PullMainActivity;
@@ -68,6 +65,7 @@ public class IndexActivity extends FragmentActivity {
 
     public List<UIModel> getUIList() {
         List<UIModel> list = new ArrayList<UIModel>();
+        list.add(new UIModel("to async task activity", AsyncTaskActivity.class));
         list.add(new UIModel("to combination view", CombinationViewActivity.class));
         list.add(new UIModel("to self draw view", SelfDrawViewActivity.class));
         list.add(new UIModel("to tween animation", TweenAnimationActivity.class));

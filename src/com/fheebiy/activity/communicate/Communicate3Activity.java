@@ -124,6 +124,17 @@ public class Communicate3Activity extends FragmentActivity {
         Log.d(CommonUtil.LOG_TAG_S, "onRestart");
     }
 
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        switch (level) {
+            case TRIM_MEMORY_UI_HIDDEN:
+                // 进行资源释放操作
+                break;
+        }
+    }
+
     class MyBroadCastReceiver extends BroadcastReceiver {
 
         @Override

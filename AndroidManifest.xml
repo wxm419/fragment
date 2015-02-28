@@ -47,7 +47,6 @@
         <activity android:name=".activity.communicate.CommunicateActivity"/>
         <activity android:name=".activity.communicate.Communicate2Activity"/>
         <activity android:name=".activity.communicate.Communicate3Activity"/>
-        <activity android:name=".activity.other.PopupWindowActivity"/>
         <activity
                 android:name=".activity.overscroll.PersonalCenterActivity"
                 android:label="percenter">
@@ -80,6 +79,8 @@
         <activity android:name=".activity.animation.FrameAnimationActivity"/>
         <activity android:name=".activity.basic.SelfDrawViewActivity"/>
         <activity android:name=".activity.basic.CombinationViewActivity"/>
+        <activity android:name=".activity.basic.AsyncTaskActivity"/>
+        <activity android:name=".activity.basic.PopupWindowActivity"/>
 
         <service android:name=".service.MyService"/>
         <service android:name=".service.MyRemoteService" android:process=":remote">
