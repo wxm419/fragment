@@ -65,6 +65,7 @@ public class IndexActivity extends FragmentActivity {
 
     public List<UIModel> getUIList() {
         List<UIModel> list = new ArrayList<UIModel>();
+        list.add(new UIModel("to handler activity", HandlerActivity.class));
         list.add(new UIModel("to async task activity", AsyncTaskActivity.class));
         list.add(new UIModel("to combination view", CombinationViewActivity.class));
         list.add(new UIModel("to self draw view", SelfDrawViewActivity.class));

@@ -1,0 +1,41 @@
+Android单线程模型，就是不允许在非UI线程中直接操作UI组件，所以需要异步消息处理机制.
+
+一般做法为，子线程发送消息，主线程接收消息，并处理消息(更新UI)。
+
+创建(new)一个handler，需要先调用Looper.prepare()(不调用会报错),这样就会产生一个Lopper对象，和一个MessageQueue.
+
+也就是说一个Handler必须对应一个Looper对象，和一个MessageQueue。UI线程中会默认调用Looper.prepare()，不用显式的调用。
+
+Handler总是依附于创建时其所在的线程.
+
+    这是由于Handler总是依附于创建时所在的线程，比如我们的Handler是在主线程中创建的，而在子线程中又无法直接对UI进行操作，
+于是我们就通过一系列的发送消息、入队、出队等环节，最后调用到了Handler的handleMessage()方法中，这时的handleMessage()
+方法已经是在主线程中运行的，因而我们当然可以在这里进行UI操作了
+
+MessageQueue的实例是在Looper的构造函数中创建的，因此一个Looper也就对应了一个MessageQueue。
+
+Handler---Looper---MessageQueue(一一对应)
+
+Looper.loop(),MessageQueue消息出队列的操作.
+
+    Handler除了sendMessage的方式，还有post(Runnable r)的方式，其原理是一样的，还是经过进出队列，来达到在UI线程执行操作的(处理数据的)
+其中handler的消息队列出的操作在Looper.loop()方法中。出队列过程中会调用 msg.target.dispatchMessage(msg);  其中msg.target就是对应的
+handler，在dispatchMessage(msg)中，如果用sendMessage的话，就是调用handler.的handleMessage(msg),这正是UI线程中的handler的handleMessage(msg),
+如果是用post(Runnable r)的话，则会在UI线程中调用Runnable的run方法.
+
+最后再来看一下Activity中的runOnUiThread()方法，代码如下所示：
+
+    public final void runOnUiThread(Runnable action) {
+        if (Thread.currentThread() != mUiThread) {
+            mHandler.post(action);
+        } else {
+            action.run();
+        }
+    }
+
+如果当前的线程不等于UI线程(主线程)，就去调用Handler的post()方法，否则就直接调用Runnable对象的run()方法。还有什么会比这更清晰明了的吗？
+
+
+参考博客：http://blog.csdn.net/guolin_blog/article/details/9991569, http://www.cnblogs.com/plokmju/p/android_handler.html
+
+看博客1可以从源码上，非常清楚的看到整个流程，还是比较简单和容易理解的.
