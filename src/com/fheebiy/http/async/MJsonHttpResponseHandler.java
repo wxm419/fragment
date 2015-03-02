@@ -10,7 +10,7 @@ import org.json.JSONObject;
 /**
  * Created by Lenovo on 15-2-3.
  *
- * 感觉，此种方式有点别扭，但是始终还是实现onFailure的正确回调
+ * 感觉，此种方式有点别扭，但是始终还是实现onSuccess的正确回调
  *
  * 此依赖于SUCCESS_STATUS = 200，
  * 猜测可能将返回结果中head字段，改为header字段，应该就能正确判断是回调onSuccess， 还是onFailure
