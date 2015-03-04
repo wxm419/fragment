@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--关于布局的总结，可以查看文布局基础文档-->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
-
-
+              android:layout_height="match_parent"
+              android:weightSum="1">
 
 
     <TextView
@@ -20,6 +21,123 @@
             android:layout_height="wrap_content"
             style="@style/style1.ddd"
             android:text="this is the style1.ddd"/>
+
+
+    <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+        <TextView
+                android:id="@+id/textview1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="上边word word word word word"/>
+
+        <!--RelativeLayout 中有些对齐方式，很重要，比如下面这个-->
+        <TextView
+                android:id="@+id/textview2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/textview1"
+                android:layout_below="@id/textview1"
+                android:text="下边与上边右对齐"/>
+
+    </RelativeLayout>
+
+
+    <!--这个地方，要想android:layout_gravity="right"有效果，必须android:orientation="vertical"，否则，会没有效果-->
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="50dp"
+            android:orientation="vertical">
+
+        <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="hello"
+                android:gravity="right"
+                android:layout_gravity="right"/>
+
+
+    </LinearLayout>
+
+
+    <!--同上面一样，要想 android:layout_gravity="bottom"生效，必须是 android:orientation="horizontal"，否则没有效果-->
+    <!--LinearLayout默认是horizontal的-->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp">
+
+        <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="hello"
+                android:gravity="right"
+                android:layout_gravity="bottom"/>
+
+        <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="hello"
+                android:gravity="right"
+                android:layout_gravity="bottom"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp">
+
+        <!--TextView 如果文本内容超过了layout_width，会自动换行(自动加高),此时如果外层的Layout的width高度为wrap_content，
+        则此Layout的layout_height会自适应的增高-->
+
+        <!--归纳起来就是，TextView，只要文本足够长就会出现换行的问题(除非限制singleLine = true，或者设置其height为一个固定高度),外层
+        layout的高度会随之发生自适应的变化-->
+        <TextView
+                android:id="@+id/textview3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="hello_hello_hello_hello_hello_hello_hello_hello_hello_hello_hello_hello_hello_hello_hello_hello"
+                android:gravity="right"
+                android:layout_gravity="bottom"/>
+
+
+        <!--可以看到的是当TextView3已经足够宽到让TextView4无法显示时，此时TextView4并没有换行显示，这点很重要-->
+
+        <TextView
+                android:id="@+id/textview4"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="hello"
+                android:gravity="right"
+                android:layout_gravity="bottom"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp">
+
+
+        <Button
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:text="button1"/>
+
+        <!--此Button并没有因为显示不下而换行-->
+        <Button
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:text="button1"/>
+    </LinearLayout>
 
 
 </LinearLayout>

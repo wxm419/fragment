@@ -22,6 +22,7 @@ import com.fheebiy.activity.main.Main2Activity;
 import com.fheebiy.activity.main.Main3Activity;
 import com.fheebiy.activity.main.MainActivity;
 import com.fheebiy.activity.other.SlideToDelLvActivity;
+import com.fheebiy.activity.other.ThemeStyleActivity;
 import com.fheebiy.activity.overscroll.ScrollTestActivity;
 import com.fheebiy.activity.pulltorefresh.PullMainActivity;
 import com.fheebiy.activity.service.RemoteServiceActivity;
@@ -30,6 +31,7 @@ import com.fheebiy.activity.vp.VpActivity;
 import com.fheebiy.activity.vp.VpAnimationActivity;
 import com.fheebiy.activity.vp.VpComplexActivity;
 import com.fheebiy.activity.vp.VpStripActivity;
+import com.fheebiy.activity.webview.WebViewActivity;
 import com.fheebiy.adapter.IndexAdapter;
 import com.fheebiy.model.UIModel;
 
@@ -66,6 +68,8 @@ public class IndexActivity extends FragmentActivity {
     public List<UIModel> getUIList() {
         List<UIModel> list = new ArrayList<UIModel>();
         list.add(new UIModel("to handler activity", HandlerActivity.class));
+        list.add(new UIModel("to webview activity", WebViewActivity.class));
+        list.add(new UIModel("to layout basic activity", ThemeStyleActivity.class));
         list.add(new UIModel("to async task activity", AsyncTaskActivity.class));
         list.add(new UIModel("to combination view", CombinationViewActivity.class));
         list.add(new UIModel("to self draw view", SelfDrawViewActivity.class));

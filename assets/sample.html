@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          name="viewport"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <link href="css/gb.css" rel="stylesheet">
+    <script src="js/jquery.min.js"></script>
+    <title>加载本地HTML测试</title>
+
+</head>
+<body>
+<div style="margin-bottom: 50px;">
+
+    <span>加载本地的图片</span>
+</div>
+
+<img id="img1" src="img/beauty.jpg">
+<img id="img2" src="gif/g_s003.gif">
+
+
+<script>
+    var browser = {    versions: function () {
+        var u = navigator.userAgent, app = navigator.appVersion;
+        return {            trident: u.indexOf('Trident') > -1, presto: u.indexOf('Presto') > -1, webKit: u.indexOf('AppleWebKit') > -1, gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, mobile: !!u.match(/AppleWebKit.*Mobile.*/), ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, iPhone: u.indexOf('iPhone') > -1, iPad: u.indexOf('iPad') > -1, webApp: u.indexOf('Safari') == -1        }
+    }(), language: (navigator.browserLanguage || navigator.language).toLowerCase()};
+
+
+    var obj1 = {name: 'img1'};
+    var obj2 = {category: 'img2',index:5};
+    var str1 = JSON.stringify(obj1);
+    var str2 = JSON.stringify(obj2);
+
+
+    var getElem = document.getElementById('img1');
+
+    addEvent(getElem, "click", closeCurrentPage, false);
+    //alert(str1);
+   /* $("#img1").click(function () {
+        goToNative(str1);
+        alert(str1);
+    });*/
+
+    $("#img2").click(function () {
+        if (browser.versions.android) {
+            window.JsInterface.toDataTest(str2);
+        } else if (browser.versions.ios) {
+            window.location.href = "souyue.onclick://" + charTranslation(encodeURIComponent(str));
+        }
+    });
+
+    function closeCurrentPage() {
+        if (browser.versions.android) {
+            alert("close current native page");
+            window.JsInterface.closeCurPage();
+        } else if (browser.versions.ios) {
+            window.location.href = "souyue.onclick://" + charTranslation(encodeURIComponent(str));
+        }
+    }
+
+
+
+
+
+    function addEvent(elm, evType, fn, useCapture) {
+        if (elm.addEventListener) {
+            elm.addEventListener(evType, fn, useCapture);//DOM2.0
+        } else if (elm.attachEvent) {
+            var r = elm.attachEvent('on' + evType, fn);//IE5+
+            return r;
+        } else {
+            elm['on' + evType] = fn;//DOM 0
+        }
+    }
+
+</script>
+</body>
+</html>
