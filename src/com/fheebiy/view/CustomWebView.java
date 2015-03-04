@@ -13,9 +13,6 @@ import com.fheebiy.model.JsModel;
 import com.fheebiy.util.CommonUtil;
 import com.google.gson.Gson;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
 /**
  * Created by Lenovo on 15-3-4.
  */
