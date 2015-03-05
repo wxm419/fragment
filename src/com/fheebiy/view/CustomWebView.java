@@ -11,6 +11,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import com.fheebiy.model.JsModel;
 import com.fheebiy.util.CommonUtil;
+import com.fheebiy.util.Log;
 import com.google.gson.Gson;
 
 /**
@@ -102,13 +103,18 @@ public class CustomWebView extends WebView{
 //              + APP_CACAHE_DIRNAME;
 //      Log.i("CustomWebView", "cacheDirPath=" + cacheDirPath);
 
+
+
+
         // 应用可以有数据库
         settings.setDatabaseEnabled(true);
         String dbPath = context.getApplicationContext().getDir("database", Context.MODE_PRIVATE).getPath();
+        Log.d(CommonUtil.LOG_TAG,dbPath);
         settings.setDatabasePath(dbPath);
         // 应用可以有缓存
         settings.setAppCacheEnabled(true);
         String appCaceDir = context.getApplicationContext().getDir("cache", Context.MODE_PRIVATE).getPath();
+        Log.d(CommonUtil.LOG_TAG,appCaceDir);
         settings.setAppCachePath(appCaceDir);
 //      // 设置数据库缓存路径
 //      settings.setDatabasePath(cacheDirPath);
@@ -143,7 +149,6 @@ public class CustomWebView extends WebView{
             JsModel jsc = new Gson().fromJson(json, JsModel.class);
             CommonUtil.toast(context,jsc.getCategory());
         }
-
 
     }
 

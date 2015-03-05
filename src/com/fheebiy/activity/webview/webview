@@ -1,0 +1,7 @@
+其实也没什么很难得，都比较简单。需要注意的是，javascript interface的调用方法,其命名空间要和页面JS的命名空间一致.
+方法的传入参与要一致，包括类型一致.
+
+WebChromeClient和WebViewClient的区别:
+    WebChromeClient主要是配合webview对js的调用，如console,JSAlert等，title，icon等.
+    WebViewClient主要是对webview一些加载状态的回调.
+
