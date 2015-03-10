@@ -84,6 +84,7 @@
         <activity android:name=".activity.basic.PopupWindowActivity"/>
         <activity android:name=".activity.basic.HandlerActivity"/>
         <activity android:name=".activity.webview.WebViewActivity"/>
+        <activity android:name=".activity.basic.DirPathActivity"/>
 
         <service android:name=".service.MyService"/>
         <service android:name=".service.MyRemoteService" android:process=":remote">

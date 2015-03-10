@@ -1,0 +1,2 @@
+Java基础，由于在Android项目中，不方便使用@Test来快速测试，只能用main方法，来查看测试结果，很不方便，故将Java基础
+放在了MySpringMVC中的Test下，学习时请查看.

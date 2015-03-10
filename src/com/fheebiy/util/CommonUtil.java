@@ -26,7 +26,7 @@ import java.util.List;
 public class CommonUtil {
 
 
-    public static final String LOG_TAG = "COMMON_TAG";
+    public static final String LOG_TAG = "COMMON_TAG_G";
 
     public static final String LOG_TAG_S = "COMMON_TAG_S";
 
