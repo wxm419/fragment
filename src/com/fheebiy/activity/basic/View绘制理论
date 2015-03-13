@@ -1,0 +1,134 @@
+View的绘制流程，三步: onMeasure(), onLayout(), onDraw()
+
+首先从onMeasure()说起:
+    我们可以从(View的)onMeasure()--->measure()--->(ViewRootImpl)performTraversals()(再底层的不看了)
+
+    在performTraversals()方法中我们看了老半天发现这样一句代码
+        performMeasure(childWidthMeasureSpec, childHeightMeasureSpec)；注释 // Ask host how big it wants to be
+
+        private void performMeasure(int childWidthMeasureSpec, int childHeightMeasureSpec) {
+             Trace.traceBegin(Trace.TRACE_TAG_VIEW, "measure");
+             try {
+                 mView.measure(childWidthMeasureSpec, childHeightMeasureSpec);
+             } finally {
+                 Trace.traceEnd(Trace.TRACE_TAG_VIEW);
+             }
+         }
+    两个参数的来源:
+            int childWidthMeasureSpec = getRootMeasureSpec(mWidth, lp.width);
+            int childHeightMeasureSpec = getRootMeasureSpec(mHeight, lp.height);
+    getRootMeasureSpec两个参数的来源，
+            mWidth = frame.width();
+            mHeight = frame.height();
+    frame的来源:
+            Rect frame = mWinFrame;
+    mWinFrame的来源:
+           mWinFrame = new Rect();(ViewRootImpl构造器中构造)，其为一个矩形，个人猜测mWinFrame是指整个窗口(或者说其上一层布局对应的矩形).
+    第二个参数lp
+         WindowManager.LayoutParams lp = mWindowAttributes;
+         final WindowManager.LayoutParams mWindowAttributes = new WindowManager.LayoutParams();
+
+        看整个方法:
+
+
+    /**
+     * Figures out the measure spec for the root view in a window based on it's
+     * layout params.
+     * 通过root view的Layout params计算出root view在window中的尺寸
+     *
+     * @param windowSize
+     *            The available width or height of the window
+     * window的大小
+     *
+     * @param rootDimension
+     *            The layout params for one dimension (width or height) of the
+     *            window.
+     * root view 在window 中的layout params
+     *
+     * @return The measure spec to use to measure the root view.
+     */
+
+        private static int getRootMeasureSpec(int windowSize, int rootDimension) {
+            int measureSpec;
+            switch (rootDimension) {
+
+            case ViewGroup.LayoutParams.MATCH_PARENT:
+                // Window can't resize. Force root view to be windowSize.如果是MATCH_PARENT的话，我们不能设定view的大小，而是让view的size和window保持一致
+                measureSpec = MeasureSpec.makeMeasureSpec(windowSize, MeasureSpec.EXACTLY);
+                break;
+            case ViewGroup.LayoutParams.WRAP_CONTENT:
+                // Window can resize. Set max size for root view. 我们可以改变大小，我们设定view的最大尺寸(最大尺寸就是windowSize)
+                measureSpec = MeasureSpec.makeMeasureSpec(windowSize, MeasureSpec.AT_MOST);
+                break;
+            default:
+                // Window wants to be an exact size. Force root view to be that size. 默认，我们给出的是view指定的尺寸(如 50dp这种)
+                measureSpec = MeasureSpec.makeMeasureSpec(rootDimension, MeasureSpec.EXACTLY);
+                break;
+            }
+            return measureSpec;
+        }
+
+        再看,我的理解，整个简单的相加，只是一种手段，希望两个值共同决定一个熟悉，但是又不想传两个参数，就做个组合参数，到时候还需要解析出size和mode，这并不是什么高深的理论
+
+         //Creates a measure specification based on the supplied size and mode.通过提供的size和mode来创建一个尺寸规格
+         public static int makeMeasureSpec(int size, int mode) {
+                 return size + mode;
+         }
+
+         至此，我们回到performMeasure(childWidthMeasureSpec, childHeightMeasureSpec)中的 mView.measure(childWidthMeasureSpec, childHeightMeasureSpec);
+         我们终于进入View中的measure(childWidthMeasureSpec, childHeightMeasureSpec)
+         public final void measure(int widthMeasureSpec, int heightMeasureSpec){
+                ......
+              // measure ourselves, this should set the measured dimension flag back
+               onMeasure(widthMeasureSpec, heightMeasureSpec);
+                ......
+         }
+
+         方法具体就不贴了，可以看到measure(int,int)是不让我们重写的，这里面有一行关键代码
+         终于看到onMeasure()方法了，其中两个参数，原封不动的从ViewRootImpl中传进来了
+
+         protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+             setMeasuredDimension(getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec),
+                     getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec));
+         }
+
+         再看
+            /**
+                 * Utility(功用，功效) to return a default size. Uses the supplied size if the
+                 * MeasureSpec imposed no constraints. Will get larger if allowed
+                 * by the MeasureSpec.
+                 * 返回一个默认大小的功用。如果MeasureSpec没有强加限制的话，就使用提供的的尺寸。如果
+                 * MeasureSpec允许的话，我们将会获取一个更大的值
+                 *
+                 *
+                 *
+                 * @param size Default size for this view 默认尺寸(不受父View限制的)
+                 * @param measureSpec Constraints imposed by the parent 由父View设定的尺寸限制
+                 * @return The size this view should be. view应有的尺寸
+                 */
+                public static int getDefaultSize(int size, int measureSpec) {
+                    int result = size;
+                    int specMode = MeasureSpec.getMode(measureSpec);        //解析mode
+                    int specSize = MeasureSpec.getSize(measureSpec);        //解析size
+
+                    switch (specMode) {
+                    case MeasureSpec.UNSPECIFIED:  adj. 未指明的，未加规定的 ; 未特别指定（规定）的 ; 未详细说明的 ; 基本不用
+                        result = size;
+                        break;
+                    case MeasureSpec.AT_MOST:               //使用父View限制的size
+                    case MeasureSpec.EXACTLY:
+                        result = specSize;
+                        break;
+                    }
+                    return result;
+                }
+
+
+
+               //再看这个,设定View的宽度和高度
+               protected final void setMeasuredDimension(int measuredWidth, int measuredHeight) {
+                    mMeasuredWidth = measuredWidth;
+                    mMeasuredHeight = measuredHeight;
+
+                    mPrivateFlags |= PFLAG_MEASURED_DIMENSION_SET;
+                }
