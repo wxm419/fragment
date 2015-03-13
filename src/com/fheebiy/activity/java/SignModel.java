@@ -1,4 +1,4 @@
-package com.fheebiy.activity.basic;
+package com.fheebiy.activity.java;
 
 /**
  * Created by Lenovo on 15-3-5.

@@ -1,0 +1,8 @@
+1.如何注册BroadCastReceiver让其只接受本应用程序内的广播?(注册广播)
+    动态广播 : 使用LocalBroadcastManager来注册
+    静态广播 : xml中指定exported = "false"
+
+2.如何确保发送的广播只被本应用程序中的BroadCastReceiver接收到?(发送广播)
+    使用LocalBroadcastManager来发送
+
+请看本项目中.broadcast.SmsBroadcastReceiver 在xml中的配置，广播的发送在RemoteClient项目中

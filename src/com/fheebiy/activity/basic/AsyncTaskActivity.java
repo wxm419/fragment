@@ -12,6 +12,8 @@ import com.fheebiy.http.Http;
 
 /**
  * Created by bob zhou on 15-2-10.
+ * AsyncTask，在doInBackground中发送HTTP请求，在onPostExecute中处理返回结果
+ * 需要继承AsyncTask，实现里面的abstract方法
  */
 public class AsyncTaskActivity extends Activity {
 

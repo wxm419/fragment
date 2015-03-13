@@ -16,6 +16,9 @@ import com.fheebiy.R;
  * Created by bob zhou on 15-2-9.
  *
  * 自定义view,非常简单
+ * 用到的attrs.xml里面定义的属性
+ * 还有一个API TypedArray， TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TitleView);
+ *
  */
 public class TitleView extends FrameLayout implements View.OnClickListener {
 

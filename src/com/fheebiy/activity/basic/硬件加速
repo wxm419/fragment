@@ -1,0 +1,5 @@
+硬件加速的作用是为了充分利用GPU的性能，加速View绘制和渲染，让View的绘制和渲染更加平滑.但是会使用更多的内存。
+四个级别： Application,Activity,Window(不支持Window级别的关闭硬件加速),View(目前不支持View级别的开启硬件加速，但是支持关闭)
+
+
+

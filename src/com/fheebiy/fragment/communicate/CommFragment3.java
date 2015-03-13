@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ public class CommFragment3 extends Fragment implements View.OnClickListener {
 
     private Context context;
 
+    private LocalBroadcastManager mLocalBroadcastManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class CommFragment3 extends Fragment implements View.OnClickListener {
         changeTextBtn = (Button) view.findViewById(R.id.change_text_btn);
         switchBtn = (Button) view.findViewById(R.id.switch_frag_btn);
         context = getActivity();
+        mLocalBroadcastManager = LocalBroadcastManager.getInstance(context);
     }
 
     private void bindListener() {
@@ -85,7 +88,7 @@ public class CommFragment3 extends Fragment implements View.OnClickListener {
         Intent intent = new Intent();
         intent.setAction(action);
         intent.putExtra("data", hero);
-        context.sendBroadcast(intent);
+        mLocalBroadcastManager.sendBroadcast(intent);
     }
 
 
@@ -93,7 +96,7 @@ public class CommFragment3 extends Fragment implements View.OnClickListener {
         Intent intent = new Intent();
         intent.setAction(action);
         intent.putExtra("data", data);
-        context.sendBroadcast(intent);
+        mLocalBroadcastManager.sendBroadcast(intent);
     }
 
 }

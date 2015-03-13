@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import com.fheebiy.R;
 import com.fheebiy.adapter.ViewPagerAdapter;
@@ -43,6 +44,8 @@ public class Communicate3Activity extends FragmentActivity {
     private CommFragment2 commFragment2;
 
     private MyBroadCastReceiver receiver;
+
+    private LocalBroadcastManager mLocalBroadcastManager;
 
     public static final String ACTION_SUB = "ACTION_SUB";
     public static final String ACTION_ADD = "ACTION_ADD";
@@ -83,7 +86,7 @@ public class Communicate3Activity extends FragmentActivity {
         filter.addAction(ACTION_CHANGE);
         filter.addAction(ACTION_SWITCH);
         receiver = new MyBroadCastReceiver();
-        registerReceiver(receiver, filter);
+        mLocalBroadcastManager.registerReceiver(receiver, filter);
     }
 
     @Override

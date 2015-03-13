@@ -13,6 +13,7 @@ import com.fheebiy.activity.animation.TweenAnimationActivity;
 import com.fheebiy.activity.aquery.AQueryActivity;
 import com.fheebiy.activity.async.AsyncActivity;
 import com.fheebiy.activity.basic.*;
+import com.fheebiy.activity.broadcast.BroadcastActivity;
 import com.fheebiy.activity.communicate.Communicate2Activity;
 import com.fheebiy.activity.communicate.Communicate3Activity;
 import com.fheebiy.activity.communicate.CommunicateActivity;
@@ -67,6 +68,7 @@ public class IndexActivity extends FragmentActivity {
 
     public List<UIModel> getUIList() {
         List<UIModel> list = new ArrayList<UIModel>();
+        list.add(new UIModel("to broadcast activity", BroadcastActivity.class));
         list.add(new UIModel("to handler activity", HandlerActivity.class));
         list.add(new UIModel("to dir and path activity", DirPathActivity.class));
         list.add(new UIModel("to webview activity", WebViewActivity.class));

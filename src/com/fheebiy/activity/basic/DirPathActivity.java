@@ -34,8 +34,8 @@ public class DirPathActivity extends Activity {
         String path1 = getFilesDir().getPath();
         String path2 = getCacheDir().getPath();
 
-        Log.d(CommonUtil.LOG_TAG, "internal file dir" + path1);   //--->/data/data/com.fheebiy/files
-        Log.d(CommonUtil.LOG_TAG, "internal cache dir" + path2);  //--->/data/data/com.fheebiy/cache
+        Log.d(CommonUtil.LOG_TAG, "internal file dir" + path1);   //--->/data/data/com.fheebiy/files 没有root看不到此文件夹
+        Log.d(CommonUtil.LOG_TAG, "internal cache dir" + path2);  //--->/data/data/com.fheebiy/cache 没有root看不到此文件夹
 
         String path3 = getExternalCacheDir().getPath();
         String path4 = getExternalFilesDir(null).getPath();

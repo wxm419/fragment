@@ -1,0 +1,5 @@
+问题: Android 中跨进程通信的方法？
+答案: 有四种，正好对应Android四大组件，分别是Activity, BroadcastReceiver, Service(remote, AIDL), ContentProvider
+
+
+
