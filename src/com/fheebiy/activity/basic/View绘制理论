@@ -28,9 +28,7 @@ View的绘制流程，三步: onMeasure(), onLayout(), onDraw()
          WindowManager.LayoutParams lp = mWindowAttributes;
          final WindowManager.LayoutParams mWindowAttributes = new WindowManager.LayoutParams();
 
-        看整个方法:
-
-
+    看整个方法:
     /**
      * Figures out the measure spec for the root view in a window based on it's
      * layout params.
@@ -51,24 +49,23 @@ View的绘制流程，三步: onMeasure(), onLayout(), onDraw()
         private static int getRootMeasureSpec(int windowSize, int rootDimension) {
             int measureSpec;
             switch (rootDimension) {
-
-            case ViewGroup.LayoutParams.MATCH_PARENT:
-                // Window can't resize. Force root view to be windowSize.如果是MATCH_PARENT的话，我们不能设定view的大小，而是让view的size和window保持一致
-                measureSpec = MeasureSpec.makeMeasureSpec(windowSize, MeasureSpec.EXACTLY);
-                break;
-            case ViewGroup.LayoutParams.WRAP_CONTENT:
-                // Window can resize. Set max size for root view. 我们可以改变大小，我们设定view的最大尺寸(最大尺寸就是windowSize)
-                measureSpec = MeasureSpec.makeMeasureSpec(windowSize, MeasureSpec.AT_MOST);
-                break;
-            default:
-                // Window wants to be an exact size. Force root view to be that size. 默认，我们给出的是view指定的尺寸(如 50dp这种)
-                measureSpec = MeasureSpec.makeMeasureSpec(rootDimension, MeasureSpec.EXACTLY);
-                break;
+                case ViewGroup.LayoutParams.MATCH_PARENT:
+                    // Window can't resize. Force root view to be windowSize.如果是MATCH_PARENT的话，我们不能设定view的大小，而是让view的size和window保持一致
+                    measureSpec = MeasureSpec.makeMeasureSpec(windowSize, MeasureSpec.EXACTLY);
+                    break;
+                case ViewGroup.LayoutParams.WRAP_CONTENT:
+                    // Window can resize. Set max size for root view. 我们可以改变大小，我们设定view的最大尺寸(最大尺寸就是windowSize)
+                    measureSpec = MeasureSpec.makeMeasureSpec(windowSize, MeasureSpec.AT_MOST);
+                    break;
+                default:
+                    // Window wants to be an exact size. Force root view to be that size. 默认,我们需要一个确切的size，我们给出的是view指定的尺寸(如 50dp这种)
+                    measureSpec = MeasureSpec.makeMeasureSpec(rootDimension, MeasureSpec.EXACTLY);
+                    break;
             }
             return measureSpec;
         }
 
-        再看,我的理解，整个简单的相加，只是一种手段，希望两个值共同决定一个熟悉，但是又不想传两个参数，就做个组合参数，到时候还需要解析出size和mode，这并不是什么高深的理论
+        再看,我的理解，整个简单的相加，只是一种手段，希望两个值共同决定一个属性，但是又不想传两个参数，就做个组合参数，到时候还需要解析出size和mode，这并不是什么高深的理论
 
          //Creates a measure specification based on the supplied size and mode.通过提供的size和mode来创建一个尺寸规格
          public static int makeMeasureSpec(int size, int mode) {
@@ -125,10 +122,22 @@ View的绘制流程，三步: onMeasure(), onLayout(), onDraw()
 
 
 
-               //再看这个,设定View的宽度和高度
-               protected final void setMeasuredDimension(int measuredWidth, int measuredHeight) {
-                    mMeasuredWidth = measuredWidth;
-                    mMeasuredHeight = measuredHeight;
+         //再看这个,设定View的宽度和高度
+         protected final void setMeasuredDimension(int measuredWidth, int measuredHeight) {
+             mMeasuredWidth = measuredWidth;
+             mMeasuredHeight = measuredHeight;
 
-                    mPrivateFlags |= PFLAG_MEASURED_DIMENSION_SET;
-                }
+             mPrivateFlags |= PFLAG_MEASURED_DIMENSION_SET;
+         }
+
+
+ 我们可以清楚的看到某个View在父View(上面用window标识)中的测量过程，绝大对数情况下，即march_parent，wrap_content时和设定
+ 具体的值的时候，其高度和宽度是在ViewRoot中已经测量好的，如果你设定的march_parent的话，那么其尺寸就由父View决定(View不能修改尺寸)，
+ mode为EXACTLY,如果设定为wrap_content的话，那么尺寸就是伸缩的，可以自由设定，但是其有一个最大值就是父容器的尺寸，mode为
+ AT_MOST。如果为具体的值，则也是设定好的，View自主值，与父View尺寸没有必然联系，不能更改,其mode为EXACTLY。
+
+
+march_parent，wrap_content,都直接受到父View的限制，确切值(如50dp)，则并无非常明显的父View限制.
+
+需要注意的是，measure(int,int)是final的不让重写，但是onMeasure(int,int)方法重写率却是非常高的,如TextView,ImageView,LinearLayout等，
+可见各个View的测量方法是不尽相同的.

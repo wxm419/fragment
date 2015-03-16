@@ -44,15 +44,10 @@ public class RoundImageView extends ImageView {
 	}
 
 	private void setCustomAttributes(AttributeSet attrs) {
-		TypedArray a = mContext.obtainStyledAttributes(attrs,
-				R.styleable.RoundImageView);
-		mBorderThickness = a.getDimensionPixelSize(
-				R.styleable.RoundImageView_border_thickness, 0);
-		mBorderOutsideColor = a
-				.getColor(R.styleable.RoundImageView_border_outside_color,
-						defaultColor);
-		mBorderInsideColor = a.getColor(
-				R.styleable.RoundImageView_border_inside_color, defaultColor);
+		TypedArray a = mContext.obtainStyledAttributes(attrs, R.styleable.RoundImageView);
+		mBorderThickness = a.getDimensionPixelSize(R.styleable.RoundImageView_border_thickness, 0);
+		mBorderOutsideColor = a.getColor(R.styleable.RoundImageView_border_outside_color, defaultColor);
+        mBorderInsideColor = a.getColor(R.styleable.RoundImageView_border_inside_color, defaultColor);
 	}
 
 	@Override
@@ -69,7 +64,7 @@ public class RoundImageView extends ImageView {
 		if (drawable.getClass() == NinePatchDrawable.class)
 			return;
 		Bitmap b = ((BitmapDrawable) drawable).getBitmap();
-		Bitmap bitmap = b.copy(Bitmap.Config.ARGB_8888, true);
+		Bitmap bitmap = b.copy(Bitmap.Config.ARGB_8888, true);      //不是很明确，为什么要copy一份
 		if (defaultWidth == 0) {
 			defaultWidth = getWidth();
 
@@ -83,39 +78,33 @@ public class RoundImageView extends ImageView {
 		// defaultWidth, defaultHeight);
 		// setLayoutParams(params);
 		// }
-		int radius = 0;
-		if (mBorderInsideColor != defaultColor
-				&& mBorderOutsideColor != defaultColor) {// 定义画两个边框，分别为外圆边框和内圆边框
-			radius = (defaultWidth < defaultHeight ? defaultWidth
-					: defaultHeight) / 2 - 2 * mBorderThickness;
-			// 画内圆
-			drawCircleBorder(canvas, radius + mBorderThickness / 2,
-					mBorderInsideColor);
-			// 画外圆
-			drawCircleBorder(canvas, radius + mBorderThickness
-					+ mBorderThickness / 2, mBorderOutsideColor);
-		} else if (mBorderInsideColor != defaultColor
-				&& mBorderOutsideColor == defaultColor) {// 定义画一个边框
-			radius = (defaultWidth < defaultHeight ? defaultWidth
-					: defaultHeight) / 2 - mBorderThickness;
-			drawCircleBorder(canvas, radius + mBorderThickness / 2,
-					mBorderInsideColor);
-		} else if (mBorderInsideColor == defaultColor
-				&& mBorderOutsideColor != defaultColor) {// 定义画一个边框
-			radius = (defaultWidth < defaultHeight ? defaultWidth
-					: defaultHeight) / 2 - mBorderThickness;
-			drawCircleBorder(canvas, radius + mBorderThickness / 2,
-					mBorderOutsideColor);
-		} else {// 没有边框
-			radius = (defaultWidth < defaultHeight ? defaultWidth
-					: defaultHeight) / 2;
-		}
+        int radius = getRadius(canvas);
 		Bitmap roundBitmap = getCroppedRoundBitmap(bitmap, radius);
 		canvas.drawBitmap(roundBitmap, defaultWidth / 2 - radius, defaultHeight
 				/ 2 - radius, null);
 	}
 
-	/**
+    private int getRadius(Canvas canvas) {
+        int radius = 0;
+        if (mBorderInsideColor != defaultColor && mBorderOutsideColor != defaultColor) {// 定义画两个边框，分别为外圆边框和内圆边框
+            radius = (defaultWidth < defaultHeight ? defaultWidth : defaultHeight) / 2 - 2 * mBorderThickness;
+            // 画内圆
+            drawCircleBorder(canvas, radius + mBorderThickness / 2, mBorderInsideColor);
+            // 画外圆
+            drawCircleBorder(canvas, radius + mBorderThickness + mBorderThickness / 2, mBorderOutsideColor);
+        } else if (mBorderInsideColor != defaultColor && mBorderOutsideColor == defaultColor) {// 定义画一个边框
+            radius = (defaultWidth < defaultHeight ? defaultWidth : defaultHeight) / 2 - mBorderThickness;
+            drawCircleBorder(canvas, radius + mBorderThickness / 2, mBorderInsideColor);
+        } else if (mBorderInsideColor == defaultColor && mBorderOutsideColor != defaultColor) {// 定义画一个边框
+            radius = (defaultWidth < defaultHeight ? defaultWidth : defaultHeight) / 2 - mBorderThickness;
+            drawCircleBorder(canvas, radius + mBorderThickness / 2, mBorderOutsideColor);
+        } else {// 没有边框
+            radius = (defaultWidth < defaultHeight ? defaultWidth : defaultHeight) / 2;
+        }
+        return radius;
+    }
+
+    /**
 	 * 获取裁剪后的圆形图片
 	 * 
 	 * @param radius
@@ -128,51 +117,51 @@ public class RoundImageView extends ImageView {
 		// 为了防止宽高不相等，造成圆形图片变形，因此截取长方形中处于中间位置最大的正方形图片
 		int bmpWidth = bmp.getWidth();
 		int bmpHeight = bmp.getHeight();
+
 		int squareWidth = 0, squareHeight = 0;
 		int x = 0, y = 0;
 		Bitmap squareBitmap;
-		if (bmpHeight > bmpWidth) {// 高大于宽
+
+        //为了得到一个正方形的Bitmap，即声明的局部变量squareBitmap
+		if (bmpHeight > bmpWidth) {     // 高大于宽
 			squareWidth = squareHeight = bmpWidth;
 			x = 0;
 			y = (bmpHeight - bmpWidth) / 2;
-			// 截取正方形图片
-			squareBitmap = Bitmap.createBitmap(bmp, x, y, squareWidth,
-					squareHeight);
-		} else if (bmpHeight < bmpWidth) {// 宽大于高
+			squareBitmap = Bitmap.createBitmap(bmp, x, y, squareWidth, squareHeight);
+		} else if (bmpHeight < bmpWidth) {  // 宽大于高
 			squareWidth = squareHeight = bmpHeight;
 			x = (bmpWidth - bmpHeight) / 2;
 			y = 0;
-			squareBitmap = Bitmap.createBitmap(bmp, x, y, squareWidth,
-					squareHeight);
+			squareBitmap = Bitmap.createBitmap(bmp, x, y, squareWidth, squareHeight);
 		} else {
 			squareBitmap = bmp;
 		}
 
-		if (squareBitmap.getWidth() != diameter
-				|| squareBitmap.getHeight() != diameter) {
-			scaledSrcBmp = Bitmap.createScaledBitmap(squareBitmap, diameter,
-					diameter, true);
-
-		} else {
+        //获取一个边长等于园直径的正方形
+		if (squareBitmap.getWidth() != diameter || squareBitmap.getHeight() != diameter) {
+			scaledSrcBmp = Bitmap.createScaledBitmap(squareBitmap, diameter, diameter, true);
+        } else {
 			scaledSrcBmp = squareBitmap;
 		}
-		Bitmap output = Bitmap.createBitmap(scaledSrcBmp.getWidth(),
-				scaledSrcBmp.getHeight(), Bitmap.Config.ARGB_8888);
+
+        //这是要做什么了？
+		Bitmap output = Bitmap.createBitmap(scaledSrcBmp.getWidth(), scaledSrcBmp.getHeight(), Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(output);
+		Rect rect = new Rect(0, 0, scaledSrcBmp.getWidth(), scaledSrcBmp.getHeight());
 
-		Paint paint = new Paint();
-		Rect rect = new Rect(0, 0, scaledSrcBmp.getWidth(),
-				scaledSrcBmp.getHeight());
+        Paint paint = new Paint();
+        //以下三个都优化图像显示效果的
+        paint.setAntiAlias(true);       //设置抗锯齿
+		paint.setFilterBitmap(true);    //对图像滤波处理(Filtering affects the sampling of bitmaps when they are transformed.位图采用转换过程中过滤一些影响)
+		paint.setDither(true);          //对颜色的抖动进行处理的(主要是颜色的精确度高于屏幕的时候)
 
-		paint.setAntiAlias(true);
-		paint.setFilterBitmap(true);
-		paint.setDither(true);
-		canvas.drawARGB(0, 0, 0, 0);
-		canvas.drawCircle(scaledSrcBmp.getWidth() / 2,
-				scaledSrcBmp.getHeight() / 2, scaledSrcBmp.getWidth() / 2,
-				paint);
+		canvas.drawARGB(0, 0, 0, 0);  //分别是透明度，rgb颜色
+
+        //画圆，需要圆心和半径，第一个参数是圆心的x-coordinate坐标，第二个参数是圆心的y-coordinate,第三个参数是半径
+		canvas.drawCircle(scaledSrcBmp.getWidth() / 2, scaledSrcBmp.getHeight() / 2, scaledSrcBmp.getWidth() / 2, paint);
+
 		paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-		canvas.drawBitmap(scaledSrcBmp, rect, rect, paint);
+		canvas.drawBitmap(scaledSrcBmp, rect, rect, paint); //这是干嘛的?
 		// bitmap回收(recycle导致在布局文件XML看不到效果)
 		// bmp.recycle();
 		// squareBitmap.recycle();
