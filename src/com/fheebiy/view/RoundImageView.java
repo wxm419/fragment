@@ -80,8 +80,8 @@ public class RoundImageView extends ImageView {
 		// }
         int radius = getRadius(canvas);
 		Bitmap roundBitmap = getCroppedRoundBitmap(bitmap, radius);
-		canvas.drawBitmap(roundBitmap, defaultWidth / 2 - radius, defaultHeight
-				/ 2 - radius, null);
+        //这个地方有一个小算法的问题，注意截取的时候取的是正中间的圆，所以这样写，不能将left和top写成0,0
+		canvas.drawBitmap(roundBitmap, defaultWidth / 2 - radius, defaultHeight / 2 - radius, null);
 	}
 
     private int getRadius(Canvas canvas) {
@@ -123,7 +123,7 @@ public class RoundImageView extends ImageView {
 		Bitmap squareBitmap;
 
         //为了得到一个正方形的Bitmap，即声明的局部变量squareBitmap
-		if (bmpHeight > bmpWidth) {     // 高大于宽
+		if (bmpHeight > bmpWidth) {     // 高大于宽,这个地方有个小算法，其实也蛮简单的，就是截取中间的矩形，可以画图分析即可得出，当然图片有一部分被裁掉就是这里的原因
 			squareWidth = squareHeight = bmpWidth;
 			x = 0;
 			y = (bmpHeight - bmpWidth) / 2;
@@ -144,10 +144,10 @@ public class RoundImageView extends ImageView {
 			scaledSrcBmp = squareBitmap;
 		}
 
-        //这是要做什么了？
+        //这是要做什么了？做一个空的Bitmap，往里面填充值的
 		Bitmap output = Bitmap.createBitmap(scaledSrcBmp.getWidth(), scaledSrcBmp.getHeight(), Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(output);
-		Rect rect = new Rect(0, 0, scaledSrcBmp.getWidth(), scaledSrcBmp.getHeight());
+		Rect rect = new Rect(0, 0, scaledSrcBmp.getWidth(), scaledSrcBmp.getHeight());  //经过测试这个Rect rect貌似没有任何作用，只是
 
         Paint paint = new Paint();
         //以下三个都优化图像显示效果的
@@ -155,13 +155,17 @@ public class RoundImageView extends ImageView {
 		paint.setFilterBitmap(true);    //对图像滤波处理(Filtering affects the sampling of bitmaps when they are transformed.位图采用转换过程中过滤一些影响)
 		paint.setDither(true);          //对颜色的抖动进行处理的(主要是颜色的精确度高于屏幕的时候)
 
-		canvas.drawARGB(0, 0, 0, 0);  //分别是透明度，rgb颜色
+        //分别是透明度，rgb颜色,透明度从0到255，0为完全透明，255为不透明。这个地方，透明度是有用的(设为255可以看到不同的效果)，但是颜色可以随便设置
+		canvas.drawARGB(0, 123, 45, 210);
 
         //画圆，需要圆心和半径，第一个参数是圆心的x-coordinate坐标，第二个参数是圆心的y-coordinate,第三个参数是半径
 		canvas.drawCircle(scaledSrcBmp.getWidth() / 2, scaledSrcBmp.getHeight() / 2, scaledSrcBmp.getWidth() / 2, paint);
 
-		paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-		canvas.drawBitmap(scaledSrcBmp, rect, rect, paint); //这是干嘛的?
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN)); //这个很关键，两个图片覆盖方式的设定
+        //paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OUT)); //做个测试，用这个，你会看到不同的结果
+        //paint.setXfermode(null); //做个测试，用这个,或者不设置Xfermode，你又会看到不同的结果
+		canvas.drawBitmap(scaledSrcBmp, rect, rect, paint);    //这是干嘛的?两个图片覆盖，设置覆盖方式的看博客:http://blog.csdn.net/hiyohu/article/details/12509731
+        //canvas.drawBitmap(scaledSrcBmp, 0f, 0f, paint);     //经过测试改成这样，没有任何影响
 		// bitmap回收(recycle导致在布局文件XML看不到效果)
 		// bmp.recycle();
 		// squareBitmap.recycle();

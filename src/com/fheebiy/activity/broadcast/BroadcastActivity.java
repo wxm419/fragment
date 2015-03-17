@@ -8,6 +8,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
 import android.widget.Button;
 import com.fheebiy.R;
+import com.fheebiy.activity.basic.RightSlideBackActivity;
 import com.fheebiy.broadcast.SmsBroadcastReceiver;
 
 /**
@@ -15,7 +16,7 @@ import com.fheebiy.broadcast.SmsBroadcastReceiver;
  * LocalBroadcastManager所发送的广播action，只能与注册到LocalBroadcastManager中BroadcastReceiver产生互动。
  * LocalBroadcastManager只适用于代码间的注册和发送，在xml中配置的广播接收器是收不到LocalBroadcastManager发送的广播的
  */
-public class BroadcastActivity extends Activity implements View.OnClickListener{
+public class BroadcastActivity extends RightSlideBackActivity implements View.OnClickListener{
 
     private LocalBroadcastManager localBroadcastManager;
 
@@ -26,7 +27,7 @@ public class BroadcastActivity extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.broadcast);
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
-
+        setCanClose(true);
         btn = (Button)findViewById(R.id.sendBtn);
         btn1 = (Button)findViewById(R.id.sendBtn1);
 

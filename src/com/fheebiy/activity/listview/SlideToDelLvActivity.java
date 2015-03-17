@@ -1,4 +1,4 @@
-package com.fheebiy.activity.other;
+package com.fheebiy.activity.listview;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;

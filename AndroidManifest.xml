@@ -41,7 +41,7 @@
         <activity android:name=".activity.vp.VpComplexActivity"/>
         <activity android:name=".activity.other.ThemeStyleActivity"/>
         <activity android:name=".activity.vp.VpAnimationActivity"/>
-        <activity android:name=".activity.other.SlideToDelLvActivity"/>
+        <activity android:name=".activity.listview.SlideToDelLvActivity"/>
         <activity android:name=".activity.main.MainActivity"/>
         <activity android:name=".activity.vp.VpStripActivity"/>
         <activity android:name=".activity.main.Main2Activity"/>
@@ -59,7 +59,7 @@
              </intent-filter>-->
         </activity>
         <activity android:name=".activity.overscroll.ScrollTestActivity"/>
-        <activity android:name=".activity.other.SwipeRefreshLayoutActivity"/>
+        <activity android:name=".activity.listview.SwipeRefreshLayoutActivity"/>
 
         <activity android:name=".activity.pulltorefresh.PullMainActivity"/>
         <activity android:name=".activity.pulltorefresh.PullToRefreshExpandableListActivity"/>
@@ -97,6 +97,8 @@
         <activity android:name=".activity.webview.WebViewActivity"/>
         <activity android:name=".activity.basic.DirPathActivity"/>
         <activity android:name=".activity.broadcast.BroadcastActivity"/>
+        <activity android:name=".activity.basic.RightSlideBackActivity"/>
+        <activity android:name=".activity.listview.PullToRefreshActivity"/>
 
         <service android:name=".service.MyService"/>
         <service
