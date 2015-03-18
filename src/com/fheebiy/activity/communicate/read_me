@@ -1,0 +1,18 @@
+Fragment之间的通信
+Activity和Fragment的生命周期
+activity: onCreate onStart onResume onPause onStop onDestroy onRestart
+fragment: onAttach onCreate onCreateView onActivityCreated onStart onResume onPause onStop onDestroyView onDestroy onDetach
+
+Activity四种启动模式:
+    standard: 启动的时候创建一个新的Activity实例，放到返回栈的顶端
+
+    singleTop: 启动的时候如果发现返回栈顶端的Activity正好是要启动的Activity则，不创建新的实例，而是调用onNewIntent()方法
+
+    singleTask: 设置这个，是针对的启动另外一个应用程序的Activity，如果该应用程序没有启动，则创建一个新的任务，创建一个新的Activity放入该任务的栈底
+    ，如果另外一个应用程序已经启动，返回栈中有该Activity实例，则调用onNewIntent(),如果返回栈中没有，则创建一个Activity实例，放入栈顶.如果是同一个任务，则不会创建新的任务，
+    如果当然任务有该Activity的实例，则调用onNewIntent(),如果没有则创建，并放入栈顶.不论哪种情况，都是一个任务只有一个Activity实例.
+
+    singleInstance:这种启动模式和"singleTask"有点相似，只不过系统不会向声明成"singleInstance"的Activity所在的任务当中再添加其它Activity。
+    也就是说，这种Activity所在的任务中始终只会有一个Activity，通过这个Activity再打开的其它Activity也会被放入到别的任务当中。
+
+
