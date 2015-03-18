@@ -9,7 +9,9 @@ import com.fheebiy.util.CommonUtil;
 import com.fheebiy.view.RefreshableView;
 
 /**
- * Created by Lenovo on 15-3-17.
+ * Created by bob zhou on 15-3-17.
+ *
+ * 比较完美的pull to refresh list view
  */
 public class PullToRefreshActivity extends Activity { 
 
