@@ -99,6 +99,7 @@
         <activity android:name=".activity.broadcast.BroadcastActivity"/>
         <activity android:name=".activity.basic.RightSlideBackActivity"/>
         <activity android:name=".activity.listview.PullToRefreshActivity"/>
+        <activity android:name=".activity.test.PullToRefreshTestActivity"/>
 
         <service android:name=".service.MyService"/>
         <service

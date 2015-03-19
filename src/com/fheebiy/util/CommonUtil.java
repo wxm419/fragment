@@ -78,7 +78,7 @@ public class CommonUtil {
     public static List<Hero> getHeroListData() {
         List<Hero> heros = new ArrayList<Hero>();
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 20; i++) {
             Hero hero = new Hero();
             hero.setName("杨过" + i);
             hero.setSkill("黯然销魂掌");

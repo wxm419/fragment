@@ -29,6 +29,7 @@ import com.fheebiy.activity.overscroll.ScrollTestActivity;
 import com.fheebiy.activity.pulltorefresh.PullMainActivity;
 import com.fheebiy.activity.service.RemoteServiceActivity;
 import com.fheebiy.activity.service.ServiceMainActivity;
+import com.fheebiy.activity.test.PullToRefreshTestActivity;
 import com.fheebiy.activity.vp.VpActivity;
 import com.fheebiy.activity.vp.VpAnimationActivity;
 import com.fheebiy.activity.vp.VpComplexActivity;
@@ -87,6 +88,7 @@ public class IndexActivity extends FragmentActivity {
         list.add(new UIModel("to lite http", LiteHttpActivity.class));
         list.add(new UIModel("to OverScrollView", ScrollTestActivity.class));
         list.add(new UIModel("to pull to refresh list view by guolin", PullToRefreshActivity.class));
+        list.add(new UIModel("to pull to refresh list view by myself", PullToRefreshTestActivity.class));
         list.add(new UIModel("to SwipeRefreshLayout", SwipeRefreshLayoutActivity.class));
         list.add(new UIModel("to window", PopupWindowActivity.class));
         list.add(new UIModel("to del list view", SlideToDelLvActivity.class));
