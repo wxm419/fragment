@@ -17,6 +17,7 @@ import com.fheebiy.activity.broadcast.BroadcastActivity;
 import com.fheebiy.activity.communicate.Communicate2Activity;
 import com.fheebiy.activity.communicate.Communicate3Activity;
 import com.fheebiy.activity.communicate.CommunicateActivity;
+import com.fheebiy.activity.listview.LoadMoreListViewActivity;
 import com.fheebiy.activity.listview.PullToRefreshActivity;
 import com.fheebiy.activity.lite.LiteHttpActivity;
 import com.fheebiy.activity.listview.SwipeRefreshLayoutActivity;
@@ -89,6 +90,7 @@ public class IndexActivity extends FragmentActivity {
         list.add(new UIModel("to OverScrollView", ScrollTestActivity.class));
         list.add(new UIModel("to pull to refresh list view by guolin", PullToRefreshActivity.class));
         list.add(new UIModel("to pull to refresh list view by myself", PullToRefreshTestActivity.class));
+        list.add(new UIModel("ListView 不能自动扩展测试", LoadMoreListViewActivity.class));
         list.add(new UIModel("to SwipeRefreshLayout", SwipeRefreshLayoutActivity.class));
         list.add(new UIModel("to window", PopupWindowActivity.class));
         list.add(new UIModel("to del list view", SlideToDelLvActivity.class));

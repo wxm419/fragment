@@ -30,4 +30,11 @@
             android:layout_height="wrap_content"
             android:text="Unbind Service"/>
 
+
+    <Button
+            android:id="@+id/socket_connect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="socket connect"/>
+
 </LinearLayout>

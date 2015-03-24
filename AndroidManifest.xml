@@ -27,7 +27,8 @@
     <application
             android:label="@string/app_name"
             android:theme="@style/AppTheme"
-            android:icon="@drawable/logo_f">
+            android:icon="@drawable/logo_f"
+            android:name=".activity.main.MainApplication">
         <activity
                 android:name=".activity.IndexActivity"
                 android:launchMode="singleTop"
@@ -100,6 +101,7 @@
         <activity android:name=".activity.basic.RightSlideBackActivity"/>
         <activity android:name=".activity.listview.PullToRefreshActivity"/>
         <activity android:name=".activity.test.PullToRefreshTestActivity"/>
+        <activity android:name=".activity.listview.LoadMoreListViewActivity"/>
 
         <service android:name=".service.MyService"/>
         <service
@@ -109,6 +111,7 @@
                 <action android:name="com.fheebiy.service.MyRemoteService"/>
             </intent-filter>
         </service>
+        <service android:name=".service.PushService"/>
 
         <receiver
                 android:name=".broadcast.SmsBroadcastReceiver"

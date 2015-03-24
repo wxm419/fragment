@@ -10,6 +10,13 @@ import android.view.View;
 import com.androidquery.AQuery;
 import com.fheebiy.R;
 import com.fheebiy.service.MyService;
+import com.fheebiy.util.CommonUtil;
+import com.fheebiy.util.Log;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Socket;
 
 /**
  *Created by bob zhou on 15-1-5.
@@ -72,6 +79,7 @@ public class ServiceMainActivity extends Activity implements View.OnClickListene
         aq.id(R.id.stop_service).clicked(this);
         aq.id(R.id.bind_service).clicked(this);
         aq.id(R.id.unbind_service).clicked(this);
+        aq.id(R.id.socket_connect).clicked(this);
     }
 
     @Override
@@ -92,7 +100,30 @@ public class ServiceMainActivity extends Activity implements View.OnClickListene
             case R.id.unbind_service:
                 unbindService(connection);
                 break;
+            case R.id.socket_connect:
+                new MyThread().start();
+                break;
+        }
+    }
 
+
+
+    class MyThread extends Thread{
+
+        @Override
+        public void run() {
+            try {
+                Socket socket = new Socket("192.168.31.94", 9998);
+                socket.setSoTimeout(5000);
+                Log.d(CommonUtil.LOG_TAG, "MyThread run");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                String str = reader.readLine();
+                Log.d(CommonUtil.LOG_TAG, "str=" + str);
+                reader.close();
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
