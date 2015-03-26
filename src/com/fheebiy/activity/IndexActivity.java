@@ -79,6 +79,7 @@ public class IndexActivity extends FragmentActivity {
         list.add(new UIModel("to async task activity", AsyncTaskActivity.class));
         list.add(new UIModel("to combination view", CombinationViewActivity.class));
         list.add(new UIModel("to self draw view", SelfDrawViewActivity.class));
+        list.add(new UIModel("to property animation", SelfDrawViewActivity.class));
         list.add(new UIModel("to tween animation", TweenAnimationActivity.class));
         list.add(new UIModel("to frame animation", FrameAnimationActivity.class));
         list.add(new UIModel("to event dispatcher", EventDispatcherActivity.class));

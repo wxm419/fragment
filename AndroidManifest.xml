@@ -5,7 +5,7 @@
           android:versionName="1.0">
 
     <uses-sdk
-            android:minSdkVersion="10"
+            android:minSdkVersion="15"
             android:targetSdkVersion="16"/>
 
 
@@ -102,6 +102,7 @@
         <activity android:name=".activity.listview.PullToRefreshActivity"/>
         <activity android:name=".activity.test.PullToRefreshTestActivity"/>
         <activity android:name=".activity.listview.LoadMoreListViewActivity"/>
+        <activity android:name=".activity.animation.PropertyAnimationActivity"/>
 
         <service android:name=".service.MyService"/>
         <service

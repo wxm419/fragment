@@ -141,3 +141,155 @@ march_parent，wrap_content,都直接受到父View的限制，确切值(如50dp)
 
 需要注意的是，measure(int,int)是final的不让重写，但是onMeasure(int,int)方法重写率却是非常高的,如TextView,ImageView,LinearLayout等，
 可见各个View的测量方法是不尽相同的.
+
+
+
+
+
+注意ViewGroup中的以下代码,这三个方法，告诉了，你子View的绘制流程:
+       /**
+         * Ask all of the children of this view to measure themselves, taking into
+         * account both the MeasureSpec requirements for this view and its padding.
+         * We skip children that are in the GONE state The heavy lifting is done in
+         * getChildMeasureSpec.
+         *
+         * @param widthMeasureSpec The width requirements for this view
+         * @param heightMeasureSpec The height requirements for this view
+         */
+        protected void measureChildren(int widthMeasureSpec, int heightMeasureSpec) {
+            final int size = mChildrenCount;
+            final View[] children = mChildren;
+            for (int i = 0; i < size; ++i) {
+                final View child = children[i];
+                if ((child.mViewFlags & VISIBILITY_MASK) != GONE) {
+                    measureChild(child, widthMeasureSpec, heightMeasureSpec);
+                }
+            }
+        }
+
+        /**
+         * Ask one of the children of this view to measure itself, taking into
+         * account both the MeasureSpec requirements for this view and its padding.
+         * The heavy lifting is done in getChildMeasureSpec.
+         *
+         * @param child The child to measure
+         * @param parentWidthMeasureSpec The width requirements for this view
+         * @param parentHeightMeasureSpec The height requirements for this view
+         */
+        protected void measureChild(View child, int parentWidthMeasureSpec,
+                int parentHeightMeasureSpec) {
+            final LayoutParams lp = child.getLayoutParams();
+
+            final int childWidthMeasureSpec = getChildMeasureSpec(parentWidthMeasureSpec,
+                    mPaddingLeft + mPaddingRight, lp.width);
+            final int childHeightMeasureSpec = getChildMeasureSpec(parentHeightMeasureSpec,
+                    mPaddingTop + mPaddingBottom, lp.height);
+
+            child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
+        }
+
+
+
+        /**
+             * Does the hard part of measureChildren: figuring out the MeasureSpec to
+             * pass to a particular child. This method figures out the right MeasureSpec
+             * for one dimension (height or width) of one child view.
+             *
+             * The goal is to combine information from our MeasureSpec with the
+             * LayoutParams of the child to get the best possible results. For example,
+             * if the this view knows its size (because its MeasureSpec has a mode of
+             * EXACTLY), and the child has indicated in its LayoutParams that it wants
+             * to be the same size as the parent, the parent should ask the child to
+             * layout given an exact size.
+             *
+             * @param spec The requirements for this view
+             * @param padding The padding of this view for the current dimension and
+             *        margins, if applicable
+             * @param childDimension How big the child wants to be in the current
+             *        dimension
+             * @return a MeasureSpec integer for the child
+             */
+            public static int getChildMeasureSpec(int spec, int padding, int childDimension) {
+                int specMode = MeasureSpec.getMode(spec);
+                int specSize = MeasureSpec.getSize(spec);
+
+                int size = Math.max(0, specSize - padding);
+
+                int resultSize = 0;
+                int resultMode = 0;
+
+                switch (specMode) {
+                // Parent has imposed an exact size on us
+                case MeasureSpec.EXACTLY:
+                    if (childDimension >= 0) {
+                        resultSize = childDimension;
+                        resultMode = MeasureSpec.EXACTLY;
+                    } else if (childDimension == LayoutParams.MATCH_PARENT) {
+                        // Child wants to be our size. So be it.
+                        resultSize = size;
+                        resultMode = MeasureSpec.EXACTLY;
+                    } else if (childDimension == LayoutParams.WRAP_CONTENT) {
+                        // Child wants to determine its own size. It can't be
+                        // bigger than us.
+                        resultSize = size;
+                        resultMode = MeasureSpec.AT_MOST;
+                    }
+                    break;
+
+                // Parent has imposed a maximum size on us
+                case MeasureSpec.AT_MOST:
+                    if (childDimension >= 0) {
+                        // Child wants a specific size... so be it
+                        resultSize = childDimension;
+                        resultMode = MeasureSpec.EXACTLY;
+                    } else if (childDimension == LayoutParams.MATCH_PARENT) {
+                        // Child wants to be our size, but our size is not fixed.
+                        // Constrain child to not be bigger than us.
+                        resultSize = size;
+                        resultMode = MeasureSpec.AT_MOST;
+                    } else if (childDimension == LayoutParams.WRAP_CONTENT) {
+                        // Child wants to determine its own size. It can't be
+                        // bigger than us.
+                        resultSize = size;
+                        resultMode = MeasureSpec.AT_MOST;
+                    }
+                    break;
+
+                // Parent asked to see how big we want to be
+                case MeasureSpec.UNSPECIFIED:
+                    if (childDimension >= 0) {
+                        // Child wants a specific size... let him have it
+                        resultSize = childDimension;
+                        resultMode = MeasureSpec.EXACTLY;
+                    } else if (childDimension == LayoutParams.MATCH_PARENT) {
+                        // Child wants to be our size... find out how big it should
+                        // be
+                        resultSize = 0;
+                        resultMode = MeasureSpec.UNSPECIFIED;
+                    } else if (childDimension == LayoutParams.WRAP_CONTENT) {
+                        // Child wants to determine its own size.... find out how
+                        // big it should be
+                        resultSize = 0;
+                        resultMode = MeasureSpec.UNSPECIFIED;
+                    }
+                    break;
+                }
+                return MeasureSpec.makeMeasureSpec(resultSize, resultMode);
+            }
+
+
+RootView的大小都是占满整个窗口的(WindowSize的，unspecified不考虑，要么就是match_parent要么就是wrap_content的)，
+match_parent对应的是specMode是EXACTLY,wrap_content对应的是AT_MOST
+
+再看ViewGroup中，measureChild，其计算child的widthMeasureSpec的方法getChildMeasureSpec()，他其中会传三个值，
+    一个是父view的widthMeasureSpec(或者heightMeasureSpec),一个是padding值,一个是child.getLayoutParams.width或者child.getLayoutParams.height
+    解析父View的specMode，根据情况设定子view的size
+
+通过分析View的代码，我们发现，其实View的尺寸计算，都是在ViewGroup中进行的，当你执行到View中其实没有太多的计算(如果你不改写onMeasure()方法的话)，但是
+像我们熟悉的TextView，ImageView,LinearLayout是都进行了改写，需要单独研究。
+
+
+
+
+
+
