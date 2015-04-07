@@ -7,6 +7,8 @@ import android.widget.BaseAdapter;
 import com.androidquery.AQuery;
 import com.fheebiy.R;
 import com.fheebiy.model.UIModel;
+import com.fheebiy.util.CommonUtil;
+import com.fheebiy.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +47,7 @@ public class IndexAdapter extends BaseAdapter {
             convertView = View.inflate(ctx, R.layout.index_item, null);
         }
         AQuery aq = new AQuery(convertView);
+        Log.d(CommonUtil.LOG_TAG, "getView");
         aq.id(R.id.index_item_name).text(list.get(position).getName());
         convertView.setBackgroundResource(R.drawable.list_item_selector);
         return convertView;

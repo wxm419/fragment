@@ -9,6 +9,7 @@ import android.widget.ListView;
 import com.androidquery.AQuery;
 import com.fheebiy.R;
 import com.fheebiy.activity.animation.FrameAnimationActivity;
+import com.fheebiy.activity.animation.PropertyAnimationActivity;
 import com.fheebiy.activity.animation.TweenAnimationActivity;
 import com.fheebiy.activity.aquery.AQueryActivity;
 import com.fheebiy.activity.async.AsyncActivity;
@@ -79,7 +80,7 @@ public class IndexActivity extends FragmentActivity {
         list.add(new UIModel("to async task activity", AsyncTaskActivity.class));
         list.add(new UIModel("to combination view", CombinationViewActivity.class));
         list.add(new UIModel("to self draw view", SelfDrawViewActivity.class));
-        list.add(new UIModel("to property animation", SelfDrawViewActivity.class));
+        list.add(new UIModel("to property animation", PropertyAnimationActivity.class));
         list.add(new UIModel("to tween animation", TweenAnimationActivity.class));
         list.add(new UIModel("to frame animation", FrameAnimationActivity.class));
         list.add(new UIModel("to event dispatcher", EventDispatcherActivity.class));
