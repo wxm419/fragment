@@ -103,6 +103,9 @@
         <activity android:name=".activity.test.PullToRefreshTestActivity"/>
         <activity android:name=".activity.listview.LoadMoreListViewActivity"/>
         <activity android:name=".activity.animation.PropertyAnimationActivity"/>
+        <activity android:name=".activity.overscroll.ImageScaleActivity"/>
+        <activity android:name=".activity.bitmap.BitmapCompressActivity"/>
+        <activity android:name=".activity.PullToScaleImg.PullToScaleImgActivity"/>
 
         <service android:name=".service.MyService"/>
         <service

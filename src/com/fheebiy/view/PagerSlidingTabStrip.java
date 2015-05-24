@@ -240,7 +240,6 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
     }
 
     private void addTextTab(final int position, String title) {
-
         TextView tab = new TextView(getContext());
         tab.setText(title);
         tab.setGravity(Gravity.CENTER);
@@ -354,8 +353,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
         // draw underline
 
         rectPaint.setColor(underlineColor);
-        canvas.drawRect(0, height - underlineHeight, tabsContainer.getWidth(), height, rectPaint);
-
+       // canvas.drawRect(0, height - underlineHeight, tabsContainer.getWidth(), height, rectPaint);
+        Log.d(TAG, "onDraw() execute");
         // draw divider
 
         dividerPaint.setColor(dividerColor);

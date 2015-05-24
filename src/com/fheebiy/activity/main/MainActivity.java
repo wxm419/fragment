@@ -10,10 +10,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import com.fheebiy.R;
-import com.fheebiy.fragment.TabFiveFragment;
-import com.fheebiy.fragment.TabFourFragment;
-import com.fheebiy.fragment.TabThreeFragment;
-import com.fheebiy.fragment.TabTwoFragment;
+import com.fheebiy.fragment.*;
 
 /**
  * Created by bob zhou on 14-8-12.
@@ -27,7 +24,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private FragmentTransaction fragmentTransaction;
     private FragmentManager fragmentManager;
 
-    private TabTwoFragment twoFragment;
+    private TabSixFragment twoFragment;
     private TabThreeFragment threeFragment;
     private TabFourFragment fourFragment;
     private TabFiveFragment fiveFragment;
@@ -67,7 +64,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     public void init(){
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        twoFragment = new TabTwoFragment();
+        twoFragment = new TabSixFragment();
         threeFragment  = new TabThreeFragment();
         fourFragment = new TabFourFragment();
         fiveFragment = new TabFiveFragment();

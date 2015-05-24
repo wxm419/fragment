@@ -14,13 +14,13 @@
             android:background="@drawable/background_tabs" />
 
 
-    <android.support.v4.view.ViewPager
+    <com.fheebiy.adapter.LoopViewPager
             android:id="@+id/vpstrip_vp"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="9">
 
-    </android.support.v4.view.ViewPager>
+    </com.fheebiy.adapter.LoopViewPager>
 
 
 

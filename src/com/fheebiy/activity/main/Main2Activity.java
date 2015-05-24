@@ -8,10 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.fheebiy.R;
-import com.fheebiy.fragment.TabFiveFragment;
-import com.fheebiy.fragment.TabFourFragment;
-import com.fheebiy.fragment.TabThreeFragment;
-import com.fheebiy.fragment.TabTwoFragment;
+import com.fheebiy.fragment.*;
 import android.widget.TabHost.TabSpec;
 
 /**
@@ -40,10 +37,10 @@ public class Main2Activity extends FragmentActivity {
         TabSpec disTabSpec = mTabHost.newTabSpec("discovery").setIndicator(getIndicatorView(2));
         TabSpec myTabSpec = mTabHost.newTabSpec("my").setIndicator(getIndicatorView(3));
 
-        mTabHost.addTab(syTabSpec, TabTwoFragment.class, null);
+        mTabHost.addTab(syTabSpec, TabSixFragment.class, null);
         mTabHost.addTab(msgTabSpec, TabThreeFragment.class, null);
         mTabHost.addTab(disTabSpec, TabFourFragment.class, null);
-        mTabHost.addTab(myTabSpec, TabFiveFragment.class, null);
+        mTabHost.addTab(myTabSpec, TabTwoFragment.class, null);
 
     }
 

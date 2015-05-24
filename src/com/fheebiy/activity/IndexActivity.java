@@ -8,12 +8,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import com.androidquery.AQuery;
 import com.fheebiy.R;
+import com.fheebiy.activity.PullToScaleImg.PullToScaleImgActivity;
 import com.fheebiy.activity.animation.FrameAnimationActivity;
 import com.fheebiy.activity.animation.PropertyAnimationActivity;
 import com.fheebiy.activity.animation.TweenAnimationActivity;
 import com.fheebiy.activity.aquery.AQueryActivity;
 import com.fheebiy.activity.async.AsyncActivity;
 import com.fheebiy.activity.basic.*;
+import com.fheebiy.activity.bitmap.BitmapCompressActivity;
 import com.fheebiy.activity.broadcast.BroadcastActivity;
 import com.fheebiy.activity.communicate.Communicate2Activity;
 import com.fheebiy.activity.communicate.Communicate3Activity;
@@ -27,6 +29,7 @@ import com.fheebiy.activity.main.Main3Activity;
 import com.fheebiy.activity.main.MainActivity;
 import com.fheebiy.activity.listview.SlideToDelLvActivity;
 import com.fheebiy.activity.other.ThemeStyleActivity;
+import com.fheebiy.activity.overscroll.ImageScaleActivity;
 import com.fheebiy.activity.overscroll.ScrollTestActivity;
 import com.fheebiy.activity.pulltorefresh.PullMainActivity;
 import com.fheebiy.activity.service.RemoteServiceActivity;
@@ -72,6 +75,8 @@ public class IndexActivity extends FragmentActivity {
 
     public List<UIModel> getUIList() {
         List<UIModel> list = new ArrayList<UIModel>();
+        list.add(new UIModel("to 图片压缩 activity", BitmapCompressActivity.class));
+        list.add(new UIModel("to 图片拖动缩放 activity", PullToScaleImgActivity.class));
         list.add(new UIModel("to broadcast activity", BroadcastActivity.class));
         list.add(new UIModel("to handler activity", HandlerActivity.class));
         list.add(new UIModel("to dir and path activity", DirPathActivity.class));
@@ -90,6 +95,7 @@ public class IndexActivity extends FragmentActivity {
         list.add(new UIModel("to aquery", AQueryActivity.class));
         list.add(new UIModel("to lite http", LiteHttpActivity.class));
         list.add(new UIModel("to OverScrollView", ScrollTestActivity.class));
+        list.add(new UIModel("to img scale test", ImageScaleActivity.class));
         list.add(new UIModel("to pull to refresh list view by guolin", PullToRefreshActivity.class));
         list.add(new UIModel("to pull to refresh list view by myself", PullToRefreshTestActivity.class));
         list.add(new UIModel("ListView 不能自动扩展测试", LoadMoreListViewActivity.class));

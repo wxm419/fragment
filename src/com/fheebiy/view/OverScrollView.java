@@ -1612,7 +1612,7 @@ public class OverScrollView extends FrameLayout implements OnTouchListener
     @Override
     public void scrollTo(int x, int y)
     {
-        super.scrollTo(x, y);
+        //super.scrollTo(x, y);
         // we rely on the fact the View.scrollBy calls scrollTo.
         if (getChildCount() > 0)
         {
@@ -1621,7 +1621,13 @@ public class OverScrollView extends FrameLayout implements OnTouchListener
             y = clamp(y, getHeight() - getPaddingBottom() - getPaddingTop(), child.getHeight());
             if (x != getScrollX() || y != getScrollY())
             {
-                super.scrollTo(x, y);
+                int dis = y - 1500;
+                int top = child.getTop();
+                if(dis >= top){
+
+                    super.scrollTo(x, y);
+                }
+                //super.scrollTo(x, y);
             }
         }
 

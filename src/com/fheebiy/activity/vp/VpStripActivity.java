@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import com.fheebiy.R;
 import com.fheebiy.adapter.ComplexVpAdapter;
+import com.fheebiy.adapter.LoopViewPager;
 import com.fheebiy.fragment.TabFourFragment;
 import com.fheebiy.fragment.TabThreeFragment;
 import com.fheebiy.fragment.TabTwoFragment;
@@ -26,7 +27,7 @@ import java.util.List;
 public class VpStripActivity extends FragmentActivity{
     static final String TAG = "VpStripActivity";
 
-    private ViewPager viewPager;
+    private LoopViewPager viewPager;
 
     private PagerSlidingTabStrip pagerSlidingTabStrip;
 
@@ -36,7 +37,7 @@ public class VpStripActivity extends FragmentActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vpstrip);
-        viewPager = (ViewPager)findViewById(R.id.vpstrip_vp);
+        viewPager = (LoopViewPager)findViewById(R.id.vpstrip_vp);
         pagerSlidingTabStrip = (PagerSlidingTabStrip)findViewById(R.id.vpstrips_strips);
         pagerSlidingTabStrip.setIndicatorColorResource(R.color.strip_color);
         pagerSlidingTabStrip.setTextSize(40);
@@ -126,7 +127,8 @@ public class VpStripActivity extends FragmentActivity{
 
         @Override
         public Fragment getItem(int position) {
-            return list.get(position);
+            position = LoopViewPager.toRealPosition(position, getCount());
+            return new TabThreeFragment();
         }
 
     }

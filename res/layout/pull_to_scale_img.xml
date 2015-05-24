@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <ImageView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="matrix"
+            android:src="@drawable/backgound_test"/>
+
+    <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#F2F2F2">
+    </View>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:background="@color/orange"
+            android:text="下拉即可下移，图片放大"/>
+
+</LinearLayout>

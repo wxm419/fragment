@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.List;
 
@@ -31,4 +33,13 @@ public class ComplexVpAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return list.size();
     }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        if(position >4){
+            super.destroyItem(container, position, object);
+        }
+    }
+
+
 }

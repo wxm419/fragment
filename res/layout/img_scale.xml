@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res/com.fheebiy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+        <com.fheebiy.view.OverScrollView
+                android:id="@+id/scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="0dp"
+                    android:layout_height="wrap_content">
+
+                <include layout="@layout/percenter_headerview"/>
+
+               <!-- <com.fheebiy.view.ExpandLinearLayout
+                        android:id="@+id/listview_layout"
+                        android:orientation="vertical"
+                        app:divideHeight="1dp"
+                        app:divider="@color/orange"
+                        app:itemSelector="@drawable/list_item_selector2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                </com.fheebiy.view.ExpandLinearLayout>-->
+
+               <!-- <include layout="@layout/ent_refresh_footer"/>-->
+            </LinearLayout>
+        </com.fheebiy.view.OverScrollView>
+
+    </LinearLayout>
+
+    <ImageButton
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:scaleType="center"
+            android:src="@drawable/btn_percenter_back_normal"/>
+
+
+
+    <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@null"
+            android:scaleType="center"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/btn_percenter_refresh_bg"/>
+
+    <ImageView
+            android:id="@+id/percenter_refresh_img"
+            android:layout_width="wrap_content"
+            android:scaleType="matrix"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16.5dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/btn_percenter_refresh"/>
+
+</RelativeLayout>
