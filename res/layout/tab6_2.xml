@@ -6,17 +6,17 @@
         android:layout_width="match_parent"
         android:id="@+id/main_container"
         android:clipChildren="true"
-        android:layout_height="800dp">
+        android:layout_height="702dp">
 
 
-<!--
+
     <com.fheebiy.view.AutoScrollViewPager
             android:id="@+id/asvierpager"
             android:layout_width="match_parent"
             android:layout_height="180dp">
 
     </com.fheebiy.view.AutoScrollViewPager>
--->
+
 
 
     <LinearLayout

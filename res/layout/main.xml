@@ -44,10 +44,10 @@
 
     <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="0dp"
+            android:layout_height="50dp"
             android:background="#486285"
             android:orientation="horizontal"
-            android:layout_weight="1">
+            >
 
         <TextView
                 android:id="@+id/main_btn1"

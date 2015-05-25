@@ -12,10 +12,12 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import com.fheebiy.R;
 import com.fheebiy.adapter.ComplexVpAdapter;
 import com.fheebiy.adapter.ImagePagerAdapter;
+import com.fheebiy.util.CommonUtil;
 import com.fheebiy.util.Log;
 import com.fheebiy.view.AutoScrollViewPager;
 import com.fheebiy.view.FaceLinearLayout;
@@ -79,6 +81,8 @@ public class TabSixFragment extends Fragment implements View.OnClickListener, Fa
 
     private int initHeight;
 
+    private boolean isTitleHide;
+
     /** 屏幕密度 */
     private float mDensity;
    // private ScrollableLinearLayout mTotalLayout;
@@ -87,7 +91,7 @@ public class TabSixFragment extends Fragment implements View.OnClickListener, Fa
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView");
-        return inflater.inflate(R.layout.tab6_2, container, false);
+        return inflater.inflate(R.layout.tab6, container, false);
     }
 
     @Override
@@ -104,7 +108,7 @@ public class TabSixFragment extends Fragment implements View.OnClickListener, Fa
     }
 
     private void initRecycleView() {
-         final View view  =LayoutInflater.from(getActivity()).inflate(R.layout.tab6_banner,null);
+        final View view = LayoutInflater.from(getActivity()).inflate(R.layout.tab6_banner, null);
         autoScrollViewPager = (AutoScrollViewPager) view.findViewById(R.id.asvierpager);
         imageIdList = new ArrayList<Integer>();
         imageIdList.add(R.drawable.banner1);
@@ -124,8 +128,12 @@ public class TabSixFragment extends Fragment implements View.OnClickListener, Fa
             public void run() {
 
             }
-        },10);
+        }, 10);
         mTotalLayout.addView(view, 0);
+        int screenHeight = CommonUtil.getScreenHeight(getActivity());
+        Log.d(TAG, screenHeight);
+        int xx = CommonUtil.px2dip(getActivity(), screenHeight+540);
+        Log.d(TAG, "xx="+xx);
     }
 
 
@@ -316,7 +324,7 @@ public class TabSixFragment extends Fragment implements View.OnClickListener, Fa
         if (mOffsety < -mTitleHeight) {
             mOffsety = -mTitleHeight;
             isScroll = false;
-        } else if (mOffsety > 0) {
+        } else if (mOffsety > 0&& mOffsety !=540) {
             mOffsety = 0;
             isScroll = false;
         } else {
@@ -331,7 +339,38 @@ public class TabSixFragment extends Fragment implements View.OnClickListener, Fa
 
 
     protected void scrollToPosition(float position){
-        mTotalLayout.scrollTo(0, -(int)(position));
+       // boolean b = faceShouldScroll();
+        //Log.d(TAG, "bfff="+b);
+        if(position == -mTitleHeight){
+            isTitleHide = true;
+        }
+
+        if(position == 0){
+            isTitleHide = false;
+        }
+
+        /*Log.d(TAG, "postion="+position);
+        if(should()){
+            mOffsety = 540;
+            return;
+        }*/
+
+
+
+        mTotalLayout.scrollTo(0, -(int) (position));
+
+
+
+
+
+        /*if(should()){
+
+        }*/
+        /*if(position <0){
+            mTotalLayout.requestDisallowInterceptTouchEvent(true);
+        }*/
+        /*if(b){
+        }*/
         float persent = (float) (position) / mTitleHeight;
         int sh =0;
         //ViewGroup.LayoutParams layoutParams = mTotalLayout.getLayoutParams();
@@ -345,29 +384,33 @@ public class TabSixFragment extends Fragment implements View.OnClickListener, Fa
 //            caculateViewPageHeight(sh);
 //        }
     }
-   /* @Override
-    public boolean canScrollUp() {
+
+    private boolean should(){
+        if(mTotalLayout.getScrollY() == 540&&faceShouldScroll()){
+            return true;
+        }
+
         return false;
     }
 
-    @Override
-    public boolean canScrollDown() {
+
+    private boolean faceShouldScroll(){
+        int pos = viewPager.getCurrentItem();
+        Fragment fragment = adapter.getItem(pos);
+        if(fragment instanceof TabSevenFragment){
+            TabSevenFragment f = (TabSevenFragment)fragment;
+            ListView listView = f.getListView();
+            View view = listView.getChildAt(0);
+            int fpos = listView.getFirstVisiblePosition();
+            if(view != null){
+                if(view.getTop() < 0|| fpos != 0){
+                    return true;
+                }
+            }
+
+        }
+
+
         return false;
     }
-
-    @Override
-    public ListView getListView() {
-       // return sevenFragment.getListView();
-        return sevenFragment.getListView();
-    }
-
-    @Override
-    public ViewPager getViewPager() {
-        return viewPager;
-    }
-
-    @Override
-    public void onScrollChanged(int scrollY) {
-
-    }*/
 }

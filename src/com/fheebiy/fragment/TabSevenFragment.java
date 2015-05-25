@@ -31,6 +31,7 @@ public class TabSevenFragment extends Fragment {
         adapter = new HeroLvAdapter(getActivity());
         listView.setAdapter(adapter);
         adapter.setList(CommonUtil.getHeroListData());
+        //listView.requestDisallowInterceptTouchEvent(true);
     }
 
     public ListView getListView() {

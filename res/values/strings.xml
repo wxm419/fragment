@@ -17,4 +17,10 @@
     <string name="updated_just_now">刚刚更新</string>
     <string name="time_error">时间有问题</string>
 
+
+    <string name="tab_souyue">搜悦</string>
+    <string name="tab_msg">消息</string>
+    <string name="tab_disvover">发现</string>
+    <string name="tab_my">我的</string>
+
 </resources>

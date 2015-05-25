@@ -43,6 +43,14 @@ public class CommonUtil {
 
 
     /**
+     * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
+     */
+    public static int px2dip(Context context, float pxValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
+    }
+
+    /**
      * 获取状态栏高度
      * @param cx
      * @return 返回数值单位为px
@@ -149,5 +157,30 @@ public class CommonUtil {
         return false;
     }
 
+    /**
+     * get Screen Width
+     *
+     * @param context
+     * @return
+     */
+    public static int getScreenWidth(Context context) {
+        DisplayMetrics dm = new DisplayMetrics();
+        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(
+                dm);
+        return dm.widthPixels;
+    }
 
+
+    /**
+     * get Screen height
+     *
+     * @param context
+     * @return
+     */
+    public static int getScreenHeight(Context context) {
+        DisplayMetrics dm = new DisplayMetrics();
+        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(
+                dm);
+        return dm.heightPixels;
+    }
 }

@@ -106,6 +106,7 @@
         <activity android:name=".activity.overscroll.ImageScaleActivity"/>
         <activity android:name=".activity.bitmap.BitmapCompressActivity"/>
         <activity android:name=".activity.PullToScaleImg.PullToScaleImgActivity"/>
+        <activity android:name=".activity.main.Main4Activity"/>
 
         <service android:name=".service.MyService"/>
         <service

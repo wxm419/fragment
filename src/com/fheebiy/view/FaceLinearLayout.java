@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import com.fheebiy.util.Log;
 
 /**
  * Created by lvqiang on 14-10-14.
@@ -38,6 +39,7 @@ public class FaceLinearLayout extends LinearLayout {
     private int mMoveOffset;
     private int mActivePointerId = INVALID_POINTER;
     private onTitleLensiter mTitle;
+    public static final String TAG = "FaceLinearLayout";
 
     public FaceLinearLayout(Context context) {
         super(context);
@@ -107,10 +109,15 @@ public class FaceLinearLayout extends LinearLayout {
                             mState = STATE_MOVE_X;
                         }
                     }
+
                     if (mState == STATE_MOVE_Y) {
                         offset = (int) (mCurScrollY - mPreScroll);
                         mIsCanScroll = mTitle.scrollTo(offset, ACTION_TITLE_MOVE);
                         mPreScroll = mCurScrollY;
+                    }
+                    Log.d(TAG, "getScrollY="+getScrollY());
+                    if(getScrollY()> 0&&getScrollY() < 540 && mState == STATE_MOVE_Y){
+                        return false;
                     }
                     break;
                 case MotionEvent.ACTION_UP:

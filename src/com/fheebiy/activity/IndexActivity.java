@@ -26,6 +26,7 @@ import com.fheebiy.activity.lite.LiteHttpActivity;
 import com.fheebiy.activity.listview.SwipeRefreshLayoutActivity;
 import com.fheebiy.activity.main.Main2Activity;
 import com.fheebiy.activity.main.Main3Activity;
+import com.fheebiy.activity.main.Main4Activity;
 import com.fheebiy.activity.main.MainActivity;
 import com.fheebiy.activity.listview.SlideToDelLvActivity;
 import com.fheebiy.activity.other.ThemeStyleActivity;
@@ -105,6 +106,7 @@ public class IndexActivity extends FragmentActivity {
         list.add(new UIModel("to communicate3", Communicate3Activity.class));
         list.add(new UIModel("to communicate2", Communicate2Activity.class));
         list.add(new UIModel("to communicate1", CommunicateActivity.class));
+        list.add(new UIModel("to main4", Main4Activity.class));
         list.add(new UIModel("to main3", Main3Activity.class));
         list.add(new UIModel("to main2", Main2Activity.class));
         list.add(new UIModel("to main1", MainActivity.class));
